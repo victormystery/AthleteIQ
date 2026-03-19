@@ -38,7 +38,7 @@ const initials = computed(() => {
     .join('')
 })
 
-const palette = ['#4f46e5', '#0891b2', '#16a34a', '#d97706', '#dc2626', '#9333ea', '#db2777', '#0d9488']
+const palette = ['#ea580c', '#c2410c', '#16a34a', '#d97706', '#dc2626', '#9333ea', '#db2777', '#0d9488']
 
 const avatarStyle = computed(() => {
   if (props.src) return {}

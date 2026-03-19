@@ -19,7 +19,7 @@
 
     <!-- Graphic panel -->
     <div class="hidden lg:flex flex-1 bg-gradient-to-br from-primary-950 via-primary-800 to-primary-600 items-center justify-center p-12">
-      <div class="max-w-md text-indigo-100">
+      <div class="max-w-md text-primary-100">
         <h2 class="text-4xl font-bold text-white leading-tight mb-4">
           Track, analyze,<br />and improve your<br />performance.
         </h2>

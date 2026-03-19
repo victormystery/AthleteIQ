@@ -4,6 +4,11 @@ import { useAuthStore } from '@/stores/authStore'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    name: 'Landing',
+    component: () => import('@/pages/LandingPage.vue')
+  },
+  {
+    path: '/app',
     component: () => import('@/layouts/DefaultLayout.vue'),
     meta: { requiresAuth: true },
     children: [
@@ -49,11 +54,19 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore()
+
+  // Redirect authenticated users away from landing / auth pages to dashboard
+  if ((to.name === 'Landing' || to.path.startsWith('/auth')) && authStore.isAuthenticated) {
+    next({ name: 'Dashboard' })
+    return
+  }
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'Login' })
-  } else {
-    next()
+    return
   }
+
+  next()
 })
 
 export default router

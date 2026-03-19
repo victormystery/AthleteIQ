@@ -9,9 +9,9 @@
 
     <!-- Stats grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <StatCard label="Workouts this week" value="6" :change="20" icon-bg="#ede9fe">
+      <StatCard label="Workouts this week" value="6" :change="20" icon-bg="#ffedd5">
         <template #icon>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" class="w-5.5 h-5.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" class="w-5.5 h-5.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
         </template>
       </StatCard>
       <StatCard label="Total distance (km)" value="42.5" :change="8" icon-bg="#dcfce7">
@@ -105,7 +105,7 @@ const recentActivity = [
   { id: 1, name: 'Morning Run',       date: 'Today',     duration: '42 min',  type: 'Cardio',    emoji: '🏃', bg: '#ede9fe' },
   { id: 2, name: 'Cycling',           date: 'Yesterday', duration: '1h 15m',  type: 'Endurance', emoji: '🚴', bg: '#dcfce7' },
   { id: 3, name: 'Strength Training', date: 'Mar 17',    duration: '55 min',  type: 'Strength',  emoji: '🏋️', bg: '#fef3c7' },
-  { id: 4, name: 'Swimming',          date: 'Mar 16',    duration: '30 min',  type: 'Cardio',    emoji: '🏊', bg: '#e0f2fe' },
+  { id: 4, name: 'Swimming',          date: 'Mar 16',    duration: '30 min',  type: 'Cardio',    emoji: '🏊', bg: '#ffedd5' },
   { id: 5, name: 'Yoga',             date: 'Mar 15',    duration: '45 min',  type: 'Recovery',  emoji: '🧘', bg: '#fce7f3' }
 ]
 

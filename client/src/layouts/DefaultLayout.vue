@@ -23,7 +23,7 @@
         <p class="text-[10px] font-bold uppercase tracking-widest text-slate-600 px-3 py-2 mt-1">Main</p>
 
         <router-link
-          to="/"
+          to="/app"
           class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-400 hover:bg-white/5 hover:text-slate-100"
           exact-active-class="!bg-primary-500/20 !text-primary-300"
         >
@@ -35,7 +35,7 @@
         </router-link>
 
         <router-link
-          to="/profile"
+          to="/app/profile"
           class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-slate-400 hover:bg-white/5 hover:text-slate-100"
           active-class="!bg-primary-500/20 !text-primary-300"
         >
