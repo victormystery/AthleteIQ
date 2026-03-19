@@ -52,7 +52,7 @@
 
         <!-- Mobile menu button -->
         <button
-          class="md:hidden flex items-center justify-center w-9 h-9 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
+          class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl text-slate-600 hover:bg-slate-100 transition-colors"
           :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
           @click="mobileOpen = !mobileOpen"
         >

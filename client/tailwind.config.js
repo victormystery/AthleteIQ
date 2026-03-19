@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '480px'
+      },
       fontFamily: {
         sans: ['"Darker Grotesque"', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },

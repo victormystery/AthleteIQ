@@ -8,7 +8,6 @@ export interface Feature {
   description: string
   icon: string
   iconBg: string
-  iconColor: string
 }
 
 export interface Step {
@@ -91,25 +90,22 @@ export const features: Feature[] = [
     title: 'AI-Powered Matching',
     description:
       'Our ML model analyses 14 dimensions of your athletic profile to surface the career pathways where you are most likely to succeed.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>',
-    iconBg: 'bg-primary-50',
-    iconColor: 'text-primary-600'
+    icon: '🧠',
+    iconBg: 'bg-gradient-to-br from-primary-100 to-orange-50 shadow-lg shadow-primary-100/60 ring-1 ring-primary-200/50'
   },
   {
     title: 'Personalised Roadmaps',
     description:
       'Get step-by-step milestone roadmaps with certifications, estimated costs, and curated resources for each recommended pathway.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>',
-    iconBg: 'bg-emerald-50',
-    iconColor: 'text-emerald-600'
+    icon: '🗺️',
+    iconBg: 'bg-gradient-to-br from-emerald-100 to-teal-50 shadow-lg shadow-emerald-100/60 ring-1 ring-emerald-200/50'
   },
   {
     title: 'Progress Tracking',
     description:
       'Track your journey through each milestone, update your status, and see your overall progress percentage as you advance.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8v8m-8-5v5M8 3v1m8-1v1M3 9h1m16 0h1m-3.5-4.5l-.707.707M6.207 5.207l-.707-.707M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
-    iconBg: 'bg-amber-50',
-    iconColor: 'text-amber-600'
+    icon: '📈',
+    iconBg: 'bg-gradient-to-br from-amber-100 to-yellow-50 shadow-lg shadow-amber-100/60 ring-1 ring-amber-200/50'
   }
 ]
 
@@ -117,22 +113,22 @@ export const steps: Step[] = [
   {
     title: 'Create your account',
     description: 'Sign up in under a minute with just your name, email, and sport.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>'
+    icon: '🔑'
   },
   {
     title: 'Complete the questionnaire',
     description: 'Answer 14 questions covering your sport, academics, leadership, and career motivation.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>'
+    icon: '📝'
   },
   {
     title: 'Get your recommendations',
     description: 'Our ML model processes your profile and returns ranked career pathways with confidence scores.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>'
+    icon: '🏆'
   },
   {
     title: 'Follow your roadmap',
     description: 'Access detailed milestone roadmaps, resources, and track your progress toward your new career.',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'
+    icon: '🚀'
   }
 ]
 
