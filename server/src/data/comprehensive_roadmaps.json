@@ -1,0 +1,809 @@
+{
+  "version": "1.0.0",
+  "pathways": {
+    "coaching-development": {
+      "title": "Coaching & Development",
+      "timeToEntry": "6–18 months",
+      "milestones": [
+        {
+          "id": "cd-1",
+          "title": "Obtain Entry-Level Coaching Certification",
+          "description": "Complete a recognised Level 1 or equivalent national coaching certification in your sport. This is the minimum requirement to coach independently.",
+          "type": "certification",
+          "duration": "1–3 months",
+          "estimatedCost": "$150–$400",
+          "resources": [
+            { "name": "National Coaching Foundation", "url": "https://www.ukcoaching.org" },
+            { "name": "NSCA CSCS Guide", "url": "https://www.nsca.com/certification/cscs/" }
+          ]
+        },
+        {
+          "id": "cd-2",
+          "title": "Gain Practical Coaching Experience (Volunteer)",
+          "description": "Log at least 100 hours of supervised coaching experience with a club, school, or community programme. Document sessions and seek feedback.",
+          "type": "experience",
+          "duration": "3–6 months",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "VolunteerMatch — Sport Opportunities", "url": "https://www.volunteermatch.org" }
+          ]
+        },
+        {
+          "id": "cd-3",
+          "title": "First Aid & Safeguarding Training",
+          "description": "Complete an approved First Aid certificate and a safeguarding/child protection course. Mandatory for working with athletes of all ages.",
+          "type": "certification",
+          "duration": "1–2 weeks",
+          "estimatedCost": "$50–$150",
+          "resources": [
+            { "name": "Red Cross First Aid", "url": "https://www.redcross.org/take-a-class" }
+          ]
+        },
+        {
+          "id": "cd-4",
+          "title": "Enrol in a Sports Science / Coaching Degree Programme",
+          "description": "Pursue a Bachelor's degree in Sports Science, Kinesiology, or Coaching to build your theoretical foundation and expand career opportunities.",
+          "type": "education",
+          "duration": "3–4 years",
+          "estimatedCost": "$15,000–$60,000",
+          "resources": [
+            { "name": "UCAS Sports Science Courses", "url": "https://www.ucas.com" },
+            { "name": "Coursera — Sport & Society", "url": "https://www.coursera.org" }
+          ]
+        },
+        {
+          "id": "cd-5",
+          "title": "Obtain Advanced Coaching Licence",
+          "description": "Advance to Level 2/3 or equivalent. Specialise in a sport-specific coaching pathway (e.g., UEFA B Licence, NCSA Level 3).",
+          "type": "certification",
+          "duration": "6–12 months",
+          "estimatedCost": "$500–$2,500",
+          "resources": [
+            { "name": "FA Coaching Licences", "url": "https://www.thefa.com/my-football/coaches" }
+          ]
+        },
+        {
+          "id": "cd-6",
+          "title": "Build a Coaching Portfolio & Network",
+          "description": "Document your coaching philosophy, session plans, and athlete outcomes. Attend coaching conferences and join national coaching associations.",
+          "type": "networking",
+          "duration": "Ongoing",
+          "estimatedCost": "$100–$500/year",
+          "resources": [
+            { "name": "International Council for Coaching Excellence", "url": "https://www.icce.ws" }
+          ]
+        }
+      ]
+    },
+    "sports-management": {
+      "title": "Sports Management",
+      "timeToEntry": "12–24 months",
+      "milestones": [
+        {
+          "id": "sm-1",
+          "title": "Earn a Business or Sports Management Degree",
+          "description": "Complete a Bachelor's in Sports Management, Business Administration, or a related field. This provides the foundational business knowledge required.",
+          "type": "education",
+          "duration": "3–4 years",
+          "estimatedCost": "$20,000–$70,000",
+          "resources": [
+            { "name": "NASSM — Sport Management Programmes", "url": "https://www.nassm.com" }
+          ]
+        },
+        {
+          "id": "sm-2",
+          "title": "Complete an Internship with a Sports Organisation",
+          "description": "Secure a placement with a club, sports governing body, events company, or sports marketing agency. Gain hands-on experience in operations, marketing, or partnerships.",
+          "type": "experience",
+          "duration": "3–6 months",
+          "estimatedCost": "$0 (stipend possible)",
+          "resources": [
+            { "name": "TeamWork Online — Sport Internships", "url": "https://www.teamworkonline.com" }
+          ]
+        },
+        {
+          "id": "sm-3",
+          "title": "Develop Core Business Skills",
+          "description": "Build proficiency in project management, budgeting, sponsorship, and event logistics. Consider a PMP certification or relevant online courses.",
+          "type": "skill",
+          "duration": "3–6 months",
+          "estimatedCost": "$200–$1,500",
+          "resources": [
+            { "name": "Coursera — Google Project Management", "url": "https://www.coursera.org/professional-certificates/google-project-management" },
+            { "name": "LinkedIn Learning — Sports Business", "url": "https://www.linkedin.com/learning" }
+          ]
+        },
+        {
+          "id": "sm-4",
+          "title": "Obtain Sports Management Certification",
+          "description": "Pursue the SMWW (Sports Management World Wide) Certificate or a similar credential to validate your specialist knowledge.",
+          "type": "certification",
+          "duration": "2–4 months",
+          "estimatedCost": "$500–$2,000",
+          "resources": [
+            { "name": "SMWW — Sports Management Worldwide", "url": "https://www.smww.com" }
+          ]
+        },
+        {
+          "id": "sm-5",
+          "title": "Build a Sports Industry Network",
+          "description": "Attend major sports business conferences (Leaders Week, Sportel, etc.), join sport business networks, and grow your LinkedIn presence.",
+          "type": "networking",
+          "duration": "Ongoing",
+          "estimatedCost": "$200–$1,000/year",
+          "resources": [
+            { "name": "Sports Business Journal", "url": "https://www.sportsbusinessjournal.com" }
+          ]
+        },
+        {
+          "id": "sm-6",
+          "title": "Pursue an MBA or Specialist Master's",
+          "description": "For senior leadership roles, consider an MBA with sports management focus or a Master's in Sport Business at an accredited institution.",
+          "type": "education",
+          "duration": "1–2 years",
+          "estimatedCost": "$25,000–$80,000",
+          "resources": [
+            { "name": "Birkbeck — MSc Sport Management", "url": "https://www.bbk.ac.uk" }
+          ]
+        }
+      ]
+    },
+    "high-performance-sport": {
+      "title": "High Performance Sport",
+      "timeToEntry": "18–36 months",
+      "milestones": [
+        {
+          "id": "hps-1",
+          "title": "Complete an Accredited Sport Science Degree",
+          "description": "Earn a Bachelor's in Sport Science, Exercise Physiology, or Strength & Conditioning. Choose a programme with strong placement links to elite sport.",
+          "type": "education",
+          "duration": "3–4 years",
+          "estimatedCost": "$20,000–$65,000",
+          "resources": [
+            { "name": "BASES Accredited Programmes", "url": "https://www.bases.org.uk" }
+          ]
+        },
+        {
+          "id": "hps-2",
+          "title": "Gain CSCS Certification",
+          "description": "Pass the NSCA CSCS examination to validate your strength & conditioning knowledge. Widely recognised in elite sport globally.",
+          "type": "certification",
+          "duration": "3–6 months prep",
+          "estimatedCost": "$300–$700",
+          "resources": [
+            { "name": "NSCA CSCS Exam", "url": "https://www.nsca.com/certification/cscs/" }
+          ]
+        },
+        {
+          "id": "hps-3",
+          "title": "Placement at a Performance Centre",
+          "description": "Secure a placement or internship with a professional club, national institute of sport, or Olympic / Paralympic programme.",
+          "type": "experience",
+          "duration": "6–12 months",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "UK Sport Career Opportunities", "url": "https://www.uksport.gov.uk" }
+          ]
+        },
+        {
+          "id": "hps-4",
+          "title": "Complete a Master's in High Performance Sport",
+          "description": "A Master's degree (e.g., MSc Strength & Conditioning, MSc Performance Analysis) significantly accelerates access to elite roles.",
+          "type": "education",
+          "duration": "1–2 years",
+          "estimatedCost": "$12,000–$35,000",
+          "resources": [
+            { "name": "St Mary's University — MSc S&C", "url": "https://www.stmarys.ac.uk" },
+            { "name": "Middlesex — MSc Performance Analysis", "url": "https://www.mdx.ac.uk" }
+          ]
+        },
+        {
+          "id": "hps-5",
+          "title": "Earn BASES Accreditation",
+          "description": "Complete the BASES supervised experience scheme to gain full accreditation as a Sport & Exercise Scientist. Required for many elite positions in the UK.",
+          "type": "certification",
+          "duration": "2–3 years",
+          "estimatedCost": "$500–$1,500",
+          "resources": [
+            { "name": "BASES Supervised Experience Scheme", "url": "https://www.bases.org.uk" }
+          ]
+        },
+        {
+          "id": "hps-6",
+          "title": "Publish Research or Present at Conferences",
+          "description": "Contribute to the evidence base by publishing applied research or presenting case studies at sport science conferences (BASES, NSCA, ACSM).",
+          "type": "skill",
+          "duration": "Ongoing",
+          "estimatedCost": "$200–$1,000/year",
+          "resources": [
+            { "name": "BASES Annual Conference", "url": "https://www.bases.org.uk/sig-conferences.html" }
+          ]
+        }
+      ]
+    },
+    "sports-science-medicine": {
+      "title": "Sports Science / Medicine",
+      "timeToEntry": "24–60 months (depending on medical track)",
+      "milestones": [
+        {
+          "id": "ssm-1",
+          "title": "Complete Undergraduate Degree in Science or Medicine",
+          "description": "Earn a Bachelor's in Sport Science, Exercise Physiology, Physiotherapy, or a medical degree (MBBS/MBBCh). This is the required foundation for all specialist pathways.",
+          "type": "education",
+          "duration": "3–6 years",
+          "estimatedCost": "$30,000–$120,000",
+          "resources": [
+            { "name": "Physiopedia Learning Resources", "url": "https://www.physio-pedia.com" }
+          ]
+        },
+        {
+          "id": "ssm-2",
+          "title": "Obtain Professional Registration",
+          "description": "Register with the relevant professional body: HCPC for physiotherapists/sport therapists, GMC for sport physicians. This is legally required for practice.",
+          "type": "certification",
+          "duration": "Awarded on graduation + clinical hours",
+          "estimatedCost": "$200–$600/year",
+          "resources": [
+            { "name": "HCPC Registration", "url": "https://www.hcpc-uk.org" }
+          ]
+        },
+        {
+          "id": "ssm-3",
+          "title": "Complete Clinical Placements",
+          "description": "Log mandatory supervised clinical hours across relevant settings (hospital, sport clinic, elite sport). Essential for developing practical competence.",
+          "type": "experience",
+          "duration": "12–24 months",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "BASES Supervised Experience", "url": "https://www.bases.org.uk" }
+          ]
+        },
+        {
+          "id": "ssm-4",
+          "title": "Specialise in Sport Science or Sport Medicine",
+          "description": "Pursue a Master's or clinical specialisation in a specific domain: biomechanics, physiology, nutrition, or sport medicine.",
+          "type": "education",
+          "duration": "1–2 years",
+          "estimatedCost": "$10,000–$35,000",
+          "resources": [
+            { "name": "ACSM Certifications", "url": "https://www.acsm.org/get-stay-certified" }
+          ]
+        },
+        {
+          "id": "ssm-5",
+          "title": "Work in a Sport or Clinical Environment",
+          "description": "Gain paid experience in sport clubs, physiotherapy clinics, hospital sport departments, or national sports institutions.",
+          "type": "experience",
+          "duration": "1–3 years",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "BASRaT Job Board", "url": "https://www.basrat.org" }
+          ]
+        },
+        {
+          "id": "ssm-6",
+          "title": "Publish Research & Build CPD Record",
+          "description": "Maintain Continuing Professional Development (CPD) log. Publish applied or clinical research to establish credibility and advance your career.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "estimatedCost": "$200–$800/year",
+          "resources": [
+            { "name": "ACSM Annual Meeting", "url": "https://www.acsm.org/annual-meeting" }
+          ]
+        }
+      ]
+    },
+    "recreational-fitness-industry": {
+      "title": "Recreational / Fitness Industry",
+      "timeToEntry": "1–6 months",
+      "milestones": [
+        {
+          "id": "rfi-1",
+          "title": "Obtain Level 2 Fitness Instructor Qualification",
+          "description": "Complete an accredited Level 2 Gym Instructor / Fitness Instructor qualification. This is the entry-level requirement to work unsupervised in a gym.",
+          "type": "certification",
+          "duration": "1–3 months",
+          "estimatedCost": "$300–$800",
+          "resources": [
+            { "name": "ACE Personal Trainer Certification", "url": "https://www.acefitness.org/fitness-certifications/personal-trainer-certification" },
+            { "name": "NASM CPT Certification", "url": "https://www.nasm.org/certified-personal-trainer" }
+          ]
+        },
+        {
+          "id": "rfi-2",
+          "title": "Obtain Level 3 Personal Trainer Certification",
+          "description": "Upgrade to a Personal Training certification to legally deliver 1-to-1 training sessions, design bespoke programmes, and conduct fitness assessments.",
+          "type": "certification",
+          "duration": "2–4 months",
+          "estimatedCost": "$600–$1,500",
+          "resources": [
+            { "name": "NSCA CPT Guide", "url": "https://www.nsca.com/certification/nsca-cpt/" }
+          ]
+        },
+        {
+          "id": "rfi-3",
+          "title": "Gain First Aid Certification",
+          "description": "Complete an approved Emergency First Aid at Work (EFAW) or equivalent certificate. Required by most employers and insurance providers.",
+          "type": "certification",
+          "duration": "1 day",
+          "estimatedCost": "$50–$150",
+          "resources": [
+            { "name": "British Red Cross First Aid", "url": "https://www.redcross.org.uk/first-aid" }
+          ]
+        },
+        {
+          "id": "rfi-4",
+          "title": "Build a Client Base (first 10 clients)",
+          "description": "Start training clients through referrals, social media, or gym floor opportunities. Focus on delivering results and collecting testimonials.",
+          "type": "experience",
+          "duration": "3–6 months",
+          "estimatedCost": "$100–$500 (marketing)",
+          "resources": [
+            { "name": "Trainerize — PT Software", "url": "https://www.trainerize.com" }
+          ]
+        },
+        {
+          "id": "rfi-5",
+          "title": "Develop a Specialisation",
+          "description": "Choose a niche: weight management, strength training, pre/postnatal fitness, sport-specific conditioning, or senior fitness. Specialised trainers command higher rates.",
+          "type": "skill",
+          "duration": "2–6 months",
+          "estimatedCost": "$200–$800",
+          "resources": [
+            { "name": "Precision Nutrition Certification", "url": "https://www.precisionnutrition.com/nutrition-certification" }
+          ]
+        },
+        {
+          "id": "rfi-6",
+          "title": "Establish Online / Hybrid Training Business",
+          "description": "Expand beyond in-person sessions by offering online coaching, digital products, or hybrid programmes. This scales your income beyond hourly limitations.",
+          "type": "skill",
+          "duration": "3–12 months",
+          "estimatedCost": "$200–$1,000 (platform & tools)",
+          "resources": [
+            { "name": "True Coach Platform", "url": "https://truecoach.co" }
+          ]
+        }
+      ]
+    },
+    "sports-media-journalism": {
+      "title": "Sports Media & Journalism",
+      "timeToEntry": "6–24 months",
+      "milestones": [
+        {
+          "id": "smj-1",
+          "title": "Earn Journalism / Media Degree or Diploma",
+          "description": "Complete a Bachelor's in Journalism, Media Studies, or Communications. An NCTJ Diploma is widely respected in the UK as an alternative route.",
+          "type": "education",
+          "duration": "1–3 years",
+          "estimatedCost": "$8,000–$50,000",
+          "resources": [
+            { "name": "NCTJ Diploma in Journalism", "url": "https://www.nctj.com" }
+          ]
+        },
+        {
+          "id": "smj-2",
+          "title": "Build a Content Portfolio",
+          "description": "Start a sports blog, podcast, or YouTube channel. Contribute to student newspapers, local outlets, or online sports publications to build a body of work.",
+          "type": "skill",
+          "duration": "3–12 months",
+          "estimatedCost": "$0–$500",
+          "resources": [
+            { "name": "Medium — Sports Writing", "url": "https://www.medium.com" }
+          ]
+        },
+        {
+          "id": "smj-3",
+          "title": "Complete Journalism Work Experience",
+          "description": "Shadow journalists at local newspapers, radio stations, or sports websites. Even a week's placement can open doors and provide bylines.",
+          "type": "experience",
+          "duration": "1–4 weeks",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "BBC Journalism Work Experience", "url": "https://www.bbc.co.uk/careers/trainee-schemes-and-apprenticeships" }
+          ]
+        },
+        {
+          "id": "smj-4",
+          "title": "Develop Digital & Social Media Skills",
+          "description": "Learn SEO writing, video editing, social media strategy, and podcast production. Digital-first skills are essential in modern sports media.",
+          "type": "skill",
+          "duration": "2–4 months",
+          "estimatedCost": "$0–$300",
+          "resources": [
+            { "name": "Google Digital Garage", "url": "https://learndigital.withgoogle.com" },
+            { "name": "Descript — Audio/Video Editing", "url": "https://www.descript.com" }
+          ]
+        },
+        {
+          "id": "smj-5",
+          "title": "Land First Paid Media Role",
+          "description": "Apply for junior reporter, sports desk assistant, or content writer positions at newspapers, sports websites, broadcasting companies, or sports brands.",
+          "type": "experience",
+          "duration": "6–18 months to secure",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "Journalism Jobs UK", "url": "https://www.journalism.co.uk/jobs" }
+          ]
+        },
+        {
+          "id": "smj-6",
+          "title": "Build Personal Brand & Niche Authority",
+          "description": "Establish yourself as the go-to voice on a specific sport, team, or topic. Grow your social following and pitch to larger publications and broadcasters.",
+          "type": "networking",
+          "duration": "Ongoing",
+          "estimatedCost": "$0–$500/year",
+          "resources": [
+            { "name": "Sports Journalists Association", "url": "https://www.sportsjournalists.co.uk" }
+          ]
+        }
+      ]
+    },
+    "sports-analytics": {
+      "title": "Sports Analytics",
+      "timeToEntry": "12–24 months",
+      "milestones": [
+        {
+          "id": "sa-1",
+          "title": "Build Programming & Statistics Foundation",
+          "description": "Learn Python and/or R to proficiency, and master fundamental statistics. These are non-negotiable skills for any analytics role.",
+          "type": "skill",
+          "duration": "3–6 months",
+          "estimatedCost": "$0–$300",
+          "resources": [
+            { "name": "Kaggle — Python & ML Courses", "url": "https://www.kaggle.com/learn" },
+            { "name": "R for Data Science (free book)", "url": "https://r4ds.hadley.nz" }
+          ]
+        },
+        {
+          "id": "sa-2",
+          "title": "Earn a Data or Analytics Degree / Certification",
+          "description": "Complete a degree in Statistics, Computer Science, Mathematics, or a relevant Google/Coursera Data Analytics certificate.",
+          "type": "education",
+          "duration": "3 months – 4 years",
+          "estimatedCost": "$300–$60,000",
+          "resources": [
+            { "name": "Google Data Analytics Certificate", "url": "https://www.coursera.org/professional-certificates/google-data-analytics" }
+          ]
+        },
+        {
+          "id": "sa-3",
+          "title": "Complete a Sports Analytics Project",
+          "description": "Build a public portfolio project using real sports data (e.g., Statsbomb, NBA API). Create visualisations and publish on GitHub or a blog.",
+          "type": "skill",
+          "duration": "1–3 months",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "StatsBomb Open Data", "url": "https://github.com/statsbomb/open-data" },
+            { "name": "NBA Stats API", "url": "https://www.nba.com/stats" }
+          ]
+        },
+        {
+          "id": "sa-4",
+          "title": "Learn Video & Performance Analysis Software",
+          "description": "Gain proficiency in Hudl, SportsCode, Wyscout, or similar platforms used in professional sport environments.",
+          "type": "skill",
+          "duration": "1–3 months",
+          "estimatedCost": "$0–$500",
+          "resources": [
+            { "name": "Hudl Sportscode Training", "url": "https://www.hudl.com" }
+          ]
+        },
+        {
+          "id": "sa-5",
+          "title": "Participate in Sports Analytics Competitions",
+          "description": "Enter competitions like the MIT Sloan Sports Analytics Conference research paper contest, Kaggle sports challenges, or Big Data Bowl.",
+          "type": "skill",
+          "duration": "1–3 months",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "MIT Sloan Sports Analytics Conference", "url": "https://www.sloansportsconference.com" },
+            { "name": "NFL Big Data Bowl", "url": "https://www.kaggle.com/competitions/nfl-big-data-bowl-2024" }
+          ]
+        },
+        {
+          "id": "sa-6",
+          "title": "Land an Analytics Role in Sport",
+          "description": "Target entry-level analyst roles at clubs, sports data companies (Opta, StatsBomb, Second Spectrum), betting/media firms, or national governing bodies.",
+          "type": "experience",
+          "duration": "Ongoing search",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "Sports Analytics Jobs (Twitter/LinkedIn)", "url": "https://www.linkedin.com/jobs/sports-analytics-jobs" }
+          ]
+        }
+      ]
+    },
+    "sports-nutrition": {
+      "title": "Sports Nutrition",
+      "timeToEntry": "12–36 months",
+      "milestones": [
+        {
+          "id": "sn-1",
+          "title": "Earn Nutrition or Dietetics Degree",
+          "description": "Complete a Bachelor's in Nutrition & Dietetics, Nutritional Science, or Sport Science with a nutrition focus. This is required for SENr registration.",
+          "type": "education",
+          "duration": "3–4 years",
+          "estimatedCost": "$20,000–$60,000",
+          "resources": [
+            { "name": "SENr Accredited Courses", "url": "https://www.senr.org.uk/accreditation" }
+          ]
+        },
+        {
+          "id": "sn-2",
+          "title": "Obtain SENr or Precision Nutrition Certification",
+          "description": "Register with the Sport and Exercise Nutrition Register (SENr) in the UK or complete Precision Nutrition Level 1 & 2 for an internationally recognised credential.",
+          "type": "certification",
+          "duration": "2–4 months",
+          "estimatedCost": "$700–$2,500",
+          "resources": [
+            { "name": "Precision Nutrition Certification", "url": "https://www.precisionnutrition.com/nutrition-certification" },
+            { "name": "SENr Registration", "url": "https://www.senr.org.uk" }
+          ]
+        },
+        {
+          "id": "sn-3",
+          "title": "Complete Supervised Placement in Sport",
+          "description": "Undertake a supervised placement with a sport club, national team, or sport nutrition practice. Document cases and receive mentorship.",
+          "type": "experience",
+          "duration": "3–12 months",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "SENr Mentoring Programme", "url": "https://www.senr.org.uk/development" }
+          ]
+        },
+        {
+          "id": "sn-4",
+          "title": "Learn Body Composition Assessment (ISAK)",
+          "description": "Complete ISAK Level 1 accreditation to be able to conduct body composition measurements — a core competency in elite sport nutrition.",
+          "type": "certification",
+          "duration": "2–3 days (Level 1)",
+          "estimatedCost": "$400–$800",
+          "resources": [
+            { "name": "ISAK Accreditation", "url": "https://www.isak.global" }
+          ]
+        },
+        {
+          "id": "sn-5",
+          "title": "Build Supplement & Doping Regulation Knowledge",
+          "description": "Develop in-depth knowledge of the WADA prohibited list and supplement risk management to advise athletes safely at elite level.",
+          "type": "skill",
+          "duration": "1–2 months",
+          "estimatedCost": "$0–$200",
+          "resources": [
+            { "name": "WADA Anti-Doping Resources", "url": "https://www.wada-ama.org/en/resources" },
+            { "name": "Informed Sport Database", "url": "https://www.informed.sport" }
+          ]
+        },
+        {
+          "id": "sn-6",
+          "title": "Build a Client / Team Portfolio",
+          "description": "Document your successful interventions with athletes and teams. Seek referrals, contribute to athlete education, and begin publishing applied practice articles.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "estimatedCost": "$0–$300/year",
+          "resources": [
+            { "name": "Journal of the International Society of Sports Nutrition", "url": "https://jissn.biomedcentral.com" }
+          ]
+        }
+      ]
+    },
+    "physical-education-teaching": {
+      "title": "Physical Education & Teaching",
+      "timeToEntry": "12–24 months (for QTS)",
+      "milestones": [
+        {
+          "id": "pet-1",
+          "title": "Complete a PE or Sport Science Degree",
+          "description": "Earn a Bachelor's in Physical Education, Sport Science, or a related degree. This is the foundation for all teaching qualification routes.",
+          "type": "education",
+          "duration": "3–4 years",
+          "estimatedCost": "$15,000–$55,000",
+          "resources": [
+            { "name": "UCAS Teacher Training", "url": "https://www.ucas.com/postgraduate/teacher-training" }
+          ]
+        },
+        {
+          "id": "pet-2",
+          "title": "Complete a PGCE or School-Based Training Route",
+          "description": "Earn Qualified Teacher Status (QTS) through a PGCE, School Direct, or Teach First programme. This is mandatory to teach in maintained schools.",
+          "type": "education",
+          "duration": "1 year",
+          "estimatedCost": "$0–$15,000 (grants available)",
+          "resources": [
+            { "name": "Find Teacher Training (UK)", "url": "https://find-teacher-training-courses.service.gov.uk" }
+          ]
+        },
+        {
+          "id": "pet-3",
+          "title": "Complete Safeguarding & DBS Checks",
+          "description": "Obtain Enhanced DBS (Disclosure and Barring Service) clearance and complete mandatory safeguarding training. Required before working with young people.",
+          "type": "certification",
+          "duration": "2–4 weeks",
+          "estimatedCost": "$50–$100",
+          "resources": [
+            { "name": "DBS Check Application", "url": "https://www.gov.uk/government/organisations/disclosure-and-barring-service" }
+          ]
+        },
+        {
+          "id": "pet-4",
+          "title": "Complete Newly Qualified Teacher (NQT) Induction",
+          "description": "Successfully complete the NQT (now Early Career Teacher) two-year induction period with professional support and structured mentoring.",
+          "type": "experience",
+          "duration": "2 years",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "Education Support — ECT Resources", "url": "https://www.educationsupport.org.uk" }
+          ]
+        },
+        {
+          "id": "pet-5",
+          "title": "Lead Extra-Curricular Sport Programme",
+          "description": "Run school sports teams, fixtures, and events. Taking on additional responsibilities demonstrates leadership and boosts progression to Head of PE.",
+          "type": "experience",
+          "duration": "Ongoing",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "Youth Sport Trust", "url": "https://www.youthsporttrust.org" }
+          ]
+        },
+        {
+          "id": "pet-6",
+          "title": "Pursue Continuous Professional Development",
+          "description": "Complete CPD in inclusive education, coaching qualifications, assessment innovation, or leadership. Required for progression to senior roles.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "estimatedCost": "$200–$1,000/year",
+          "resources": [
+            { "name": "afPE — Association for Physical Education", "url": "https://www.afpe.org.uk" }
+          ]
+        }
+      ]
+    },
+    "sports-psychology": {
+      "title": "Sports Psychology",
+      "timeToEntry": "48–84 months (due to training requirements)",
+      "milestones": [
+        {
+          "id": "sp-1",
+          "title": "Complete Psychology Undergraduate Degree (BPS Accredited)",
+          "description": "Earn a BPS-accredited Bachelor's in Psychology. This is the required entry point for all professional sport psychology pathways in the UK.",
+          "type": "education",
+          "duration": "3 years",
+          "estimatedCost": "$20,000–$45,000",
+          "resources": [
+            { "name": "BPS Accredited Courses", "url": "https://www.bps.org.uk/psychologist-and-accredited-courses" }
+          ]
+        },
+        {
+          "id": "sp-2",
+          "title": "Earn a Master's in Sport Psychology",
+          "description": "Complete an MSc in Sport & Exercise Psychology from a BASES or BPS-accredited programme. This is required for HCPC registration and BASES accreditation routes.",
+          "type": "education",
+          "duration": "1–2 years",
+          "estimatedCost": "$10,000–$30,000",
+          "resources": [
+            { "name": "Loughborough University — MSc Sports Psychology", "url": "https://www.lboro.ac.uk" }
+          ]
+        },
+        {
+          "id": "sp-3",
+          "title": "Complete BASES Supervised Experience Scheme",
+          "description": "Log a minimum of 500 hours of supervised applied practice to gain BASES Sport & Exercise Scientist accreditation in the psychology division.",
+          "type": "experience",
+          "duration": "2–4 years",
+          "estimatedCost": "$500–$2,000",
+          "resources": [
+            { "name": "BASES Accreditation Guide", "url": "https://www.bases.org.uk/page-accreditation.html" }
+          ]
+        },
+        {
+          "id": "sp-4",
+          "title": "Develop Core Mental Performance Tools",
+          "description": "Master key psychological techniques: goal-setting, imagery, attentional control, pre-performance routines, confidence building, and team cohesion strategies.",
+          "type": "skill",
+          "duration": "Concurrent with placements",
+          "estimatedCost": "$200–$800 (books & CPD)",
+          "resources": [
+            { "name": "Journal of Sport & Exercise Psychology", "url": "https://journals.humankinetics.com/view/journals/jsep/jsep-overview.xml" }
+          ]
+        },
+        {
+          "id": "sp-5",
+          "title": "Gain Experience with Athletic Populations",
+          "description": "Work with sport clubs, schools, or performance centres to gain supervised applied experience with real athletes across different competitive levels.",
+          "type": "experience",
+          "duration": "1–3 years",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "AASP Career Centre", "url": "https://www.appliedsportpsych.org/careers" }
+          ]
+        },
+        {
+          "id": "sp-6",
+          "title": "Obtain Chartered Status or CMPC Credential",
+          "description": "Pursue BPS Chartered Psychologist status or the AASP Certified Mental Performance Consultant (CMPC) credential for full professional recognition.",
+          "type": "certification",
+          "duration": "1–2 years additional",
+          "estimatedCost": "$500–$2,500",
+          "resources": [
+            { "name": "AASP CMPC Certification", "url": "https://www.appliedsportpsych.org/certification" }
+          ]
+        }
+      ]
+    },
+    "sports-law-ethics": {
+      "title": "Sports Law & Ethics",
+      "timeToEntry": "48–72 months",
+      "milestones": [
+        {
+          "id": "sle-1",
+          "title": "Earn an LLB Law Degree or Graduate Diploma in Law",
+          "description": "Complete a law undergraduate degree or the GDL (Graduate Diploma in Law) as a conversion route. This is the foundational requirement for all legal pathways.",
+          "type": "education",
+          "duration": "3–4 years (LLB) or 1 year (GDL)",
+          "estimatedCost": "$20,000–$60,000",
+          "resources": [
+            { "name": "UCAS Law Courses", "url": "https://www.ucas.com" }
+          ]
+        },
+        {
+          "id": "sle-2",
+          "title": "Complete Legal Practice Course (LPC) or Bar Course (BPTC)",
+          "description": "Depending on solicitor or barrister track, complete the LPC (now SQE) or Bar Professional Training Course. These lead to qualification to practise.",
+          "type": "education",
+          "duration": "1 year",
+          "estimatedCost": "$15,000–$25,000",
+          "resources": [
+            { "name": "SRA — Solicitor Qualifying Exam", "url": "https://www.sra.org.uk/become-solicitor/sqe" }
+          ]
+        },
+        {
+          "id": "sle-3",
+          "title": "Specialise in Sports Law via LLM or CPD",
+          "description": "Pursue an LLM in Sports Law or complete targeted CPD in sports contracts, doping regulation, CAS arbitration, and governing body rules.",
+          "type": "education",
+          "duration": "1 year",
+          "estimatedCost": "$8,000–$25,000",
+          "resources": [
+            { "name": "Sports Law Centre — De Montfort", "url": "https://www.dmu.ac.uk" }
+          ]
+        },
+        {
+          "id": "sle-4",
+          "title": "Gain Experience at a Sports Law Firm or Governing Body",
+          "description": "Secure a training contract or internship with a sports law firm, sports governing body (FIFA, FA, World Athletics), or sports agency.",
+          "type": "experience",
+          "duration": "2 years (training contract)",
+          "estimatedCost": "$0",
+          "resources": [
+            { "name": "Sports Law Association", "url": "https://www.britishsportslawassociation.org" }
+          ]
+        },
+        {
+          "id": "sle-5",
+          "title": "Study WADA & Anti-Doping Regulations",
+          "description": "Develop detailed knowledge of the World Anti-Doping Code, WADA prohibited list, therapeutic use exemptions, and CAS jurisprudence.",
+          "type": "skill",
+          "duration": "2–3 months",
+          "estimatedCost": "$0–$300",
+          "resources": [
+            { "name": "WADA — World Anti-Doping Agency", "url": "https://www.wada-ama.org" },
+            { "name": "CAS — Court of Arbitration for Sport", "url": "https://www.tas-cas.org" }
+          ]
+        },
+        {
+          "id": "sle-6",
+          "title": "Build Profile Through Sports Law Networks",
+          "description": "Join the British Association for Sport and Law (BASL), attend sports law conferences, publish articles in sport law journals, and cultivate relationships across the sports industry.",
+          "type": "networking",
+          "duration": "Ongoing",
+          "estimatedCost": "$200–$1,000/year",
+          "resources": [
+            { "name": "BASL — British Association for Sport and Law", "url": "https://www.britishsportslawassociation.org" }
+          ]
+        }
+      ]
+    }
+  }
+}
