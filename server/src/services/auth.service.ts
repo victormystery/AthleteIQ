@@ -30,8 +30,6 @@ export async function login(email: string, password: string): Promise<AuthResult
     throw new UnauthorizedError('Invalid email or password')
   }
   const token = signToken(user._id.toString())
-  // Remove password from response
-  const userObj = user.toObject() as Record<string, unknown>
-  delete userObj.password
+  // password is excluded by toJSON() on the User model
   return { token, user }
 }
