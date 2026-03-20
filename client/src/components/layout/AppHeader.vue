@@ -109,6 +109,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollToPlugin)
 
 const scrolled = ref(false)
 const mobileOpen = ref(false)
@@ -122,7 +126,9 @@ const navLinks = [
 
 function scrollTo(href: string) {
   const el = document.querySelector(href)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (el) {
+    gsap.to(window, { scrollTo: { y: el, offsetY: 80 }, duration: 0.9, ease: 'power2.inOut' })
+  }
   mobileOpen.value = false
 }
 

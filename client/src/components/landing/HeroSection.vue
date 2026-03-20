@@ -11,10 +11,14 @@
 
       <!-- Left: copy -->
       <div>
-       
+        <!-- Eyebrow badge -->
+        <div ref="badgeRef" class="mb-5 sm:mb-6 inline-flex items-center gap-2 bg-primary-50 border border-primary-200 text-primary-700 text-xs font-semibold px-4 py-1.5 rounded-full">
+          <span ref="pulseDotRef" class="w-1.5 h-1.5 rounded-full bg-primary-500" />
+          AI-Powered Career Guidance for Athletes
+        </div>
 
         <!-- Headline -->
-        <h1 class="text-4xl xs:text-5xl sm:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
+        <h1 ref="headlineRef" class="text-4xl xs:text-5xl sm:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
           Turn your athletic
           <span class="relative inline-block">
             <span class="relative z-10 text-primary-600">journey</span>
@@ -23,13 +27,13 @@
           <br />into a career
         </h1>
 
-        <p class="mt-5 sm:mt-6 text-base sm:text-lg text-slate-500 max-w-lg leading-relaxed">
+        <p ref="subtitleRef" class="mt-5 sm:mt-6 text-base sm:text-lg text-slate-500 max-w-lg leading-relaxed">
           AthleteIQ uses machine learning to map your sports background, skills, and goals
           to the career pathways where athletes like you succeed.
         </p>
 
         <!-- CTAs -->
-        <div class="mt-8 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-start gap-3">
+        <div ref="ctasRef" class="mt-8 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-start gap-3">
           <router-link
             to="/auth/register"
             class="group inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-2xl shadow-lg shadow-primary-200 transition-all duration-200 no-underline hover:-translate-y-0.5"
@@ -49,7 +53,7 @@
         </div>
 
         <!-- Stats strip -->
-        <div class="mt-8 sm:mt-12 flex items-center gap-4 sm:gap-8">
+        <div ref="statsRef" class="mt-8 sm:mt-12 flex items-center gap-4 sm:gap-8">
           <div v-for="(stat, i) in stats" :key="stat.label" class="flex items-center gap-3">
             <div v-if="i > 0" class="w-px h-8 bg-slate-200" />
             <div>
@@ -61,7 +65,7 @@
       </div>
 
       <!-- Right: dashboard preview mockup -->
-      <div class="relative w-full pb-6 lg:pb-0 mt-4 lg:mt-0">
+      <div ref="mockupRef" class="relative w-full pb-6 lg:pb-0 mt-4 lg:mt-0">
         <!-- Glow behind mockup -->
         <div class="absolute inset-0 bg-gradient-to-br from-primary-300/30 to-amber-300/20 rounded-3xl blur-2xl scale-95" />
 
@@ -79,7 +83,7 @@
 
           <!-- Dashboard content -->
           <div class="flex h-[300px] sm:h-[400px]">
-            <!-- Mini sidebar — hidden on small screens -->
+            <!-- Mini sidebar -->
             <div class="hidden sm:flex w-36 lg:w-40 bg-slate-900 flex-col shrink-0 p-3 gap-1">
               <div class="flex items-center gap-2 px-2 py-3 mb-2">
                 <span class="w-5 h-5 rounded-md bg-primary-500 flex items-center justify-center">
@@ -102,13 +106,11 @@
 
             <!-- Main dashboard area -->
             <div class="flex-1 bg-slate-50 p-3 sm:p-4 overflow-hidden">
-              <!-- Welcome bar -->
               <div class="mb-3 sm:mb-4">
                 <p class="text-xs font-bold text-slate-800">Your Career Recommendations</p>
                 <p class="text-[10px] text-slate-400">Based on your athletic profile · 3 top matches</p>
               </div>
 
-              <!-- Recommendation cards -->
               <div class="space-y-2 sm:space-y-2.5">
                 <div
                   v-for="rec in dashboardRecs"
@@ -122,17 +124,13 @@
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-2">
                       <p class="text-[11px] font-bold text-slate-800 truncate">{{ rec.title }}</p>
-                      <span
-                        class="text-[10px] font-bold shrink-0"
-                        :class="rec.featured ? 'text-primary-600' : 'text-slate-400'"
-                      >
+                      <span class="text-[10px] font-bold shrink-0" :class="rec.featured ? 'text-primary-600' : 'text-slate-400'">
                         {{ rec.score }}%
                       </span>
                     </div>
-                    <!-- Confidence bar -->
                     <div class="mt-1.5 h-1.5 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        class="h-full rounded-full transition-all"
+                        class="h-full rounded-full"
                         :class="rec.featured ? 'bg-primary-500' : 'bg-slate-300'"
                         :style="{ width: rec.score + '%' }"
                       />
@@ -146,7 +144,6 @@
                 </div>
               </div>
 
-              <!-- Roadmap progress teaser -->
               <div class="mt-2.5 sm:mt-3 bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 flex items-center justify-between">
                 <div>
                   <p class="text-[10px] font-bold text-slate-700">Roadmap progress</p>
@@ -178,10 +175,48 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { stats, sidebarItems, dashboardRecs } from '@/data/landingData'
+
+gsap.registerPlugin(ScrollToPlugin)
+
+const badgeRef    = ref<HTMLElement | null>(null)
+const pulseDotRef = ref<HTMLElement | null>(null)
+const headlineRef = ref<HTMLElement | null>(null)
+const subtitleRef = ref<HTMLElement | null>(null)
+const ctasRef     = ref<HTMLElement | null>(null)
+const statsRef    = ref<HTMLElement | null>(null)
+const mockupRef   = ref<HTMLElement | null>(null)
 
 function scrollToSection(href: string) {
   const el = document.querySelector(href)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (el) {
+    gsap.to(window, { scrollTo: { y: el, offsetY: 80 }, duration: 0.9, ease: 'power2.inOut' })
+  }
 }
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+  tl.from(badgeRef.value as Element, { opacity: 0, y: -14, duration: 0.5 })
+    .from(headlineRef.value as Element, { opacity: 0, y: 36, duration: 0.75 }, '-=0.25')
+    .from(subtitleRef.value as Element, { opacity: 0, y: 22, duration: 0.6 }, '-=0.45')
+    .from(ctasRef.value as Element, { opacity: 0, y: 18, duration: 0.55 }, '-=0.4')
+    .from(statsRef.value as Element, { opacity: 0, y: 14, duration: 0.5 }, '-=0.35')
+    .from(mockupRef.value as Element, { opacity: 0, y: 48, duration: 0.9, ease: 'power2.out' }, '-=0.75')
+
+  // Repeating pulse on the indicator dot
+  gsap.to(pulseDotRef.value as Element, {
+    scale: 1.6,
+    opacity: 0.3,
+    duration: 0.9,
+    ease: 'power1.inOut',
+    yoyo: true,
+    repeat: -1
+  })
+})
 </script>
