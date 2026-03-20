@@ -13,6 +13,7 @@ router.use(authenticate)
  * /profile/me:
  *   get:
  *     summary: Get current user profile
+ *     description: "Access: Authenticated users (regular users)."
  *     tags: [Profile]
  *     security:
  *       - bearerAuth: []
@@ -27,6 +28,7 @@ router.get('/me', getMyProfile as any)
  * /profile/me:
  *   put:
  *     summary: Update current user profile
+ *     description: "Access: Authenticated users (regular users)."
  *     tags: [Profile]
  *     security:
  *       - bearerAuth: []

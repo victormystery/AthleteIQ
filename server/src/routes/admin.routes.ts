@@ -18,9 +18,13 @@ router.use(authenticate, adminOnly)
  * /admin/stats:
  *   get:
  *     summary: Get admin dashboard statistics
+ *     description: "Access: Admin users only."
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       403:
+ *         description: Forbidden (admin role required)
  */
 router.get('/stats', getDashboardStats)
 
@@ -29,6 +33,7 @@ router.get('/stats', getDashboardStats)
  * /admin/users:
  *   get:
  *     summary: List all users (paginated)
+ *     description: "Access: Admin users only."
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
@@ -41,6 +46,9 @@ router.get('/stats', getDashboardStats)
  *         name: limit
  *         schema:
  *           type: integer
+ *     responses:
+ *       403:
+ *         description: Forbidden (admin role required)
  */
 router.get('/users', listUsers)
 
@@ -49,9 +57,13 @@ router.get('/users', listUsers)
  * /admin/assessments:
  *   get:
  *     summary: Get recent assessments across all users
+ *     description: "Access: Admin users only."
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       403:
+ *         description: Forbidden (admin role required)
  */
 router.get('/assessments', getRecentAssessments)
 
@@ -60,6 +72,7 @@ router.get('/assessments', getRecentAssessments)
  * /admin/users/{id}:
  *   delete:
  *     summary: Delete a user by ID
+ *     description: "Access: Admin users only."
  *     tags: [Admin]
  *     security:
  *       - bearerAuth: []
@@ -69,6 +82,9 @@ router.get('/assessments', getRecentAssessments)
  *         required: true
  *         schema:
  *           type: string
+ *     responses:
+ *       403:
+ *         description: Forbidden (admin role required)
  */
 router.delete('/users/:id', deleteUser)
 

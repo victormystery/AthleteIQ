@@ -44,7 +44,7 @@ const router = Router()
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/AuthSuccessResponse'
+ *               $ref: '#/components/schemas/RegisterSuccessResponse'
  *       400:
  *         description: Invalid request payload
  *         content:

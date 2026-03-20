@@ -9,19 +9,22 @@ interface AuthResult {
   user: IUser
 }
 
+interface RegisterResult {
+  user: IUser
+}
+
 function signToken(userId: string): string {
   return jwt.sign({ sub: userId }, env.jwtSecret, {
     expiresIn: env.jwtExpiresIn as jwt.SignOptions['expiresIn']
   })
 }
 
-export async function register(name: string, email: string, password: string): Promise<AuthResult> {
+export async function register(name: string, email: string, password: string): Promise<RegisterResult> {
   const existing = await User.findOne({ email })
   if (existing) throw new AppError('Email already in use', 409)
 
   const user = await User.create({ name, email, password })
-  const token = signToken(user._id.toString())
-  return { token, user }
+  return { user }
 }
 
 export async function login(email: string, password: string): Promise<AuthResult> {

@@ -13,9 +13,13 @@ router.use(authenticate, advisorOrAdmin)
  * /feedback-loop/insights:
  *   get:
  *     summary: Get aggregated feedback insights (advisor/admin)
+ *     description: "Access: Career advisor or admin users."
  *     tags: [Feedback Loop]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       403:
+ *         description: Forbidden (advisor/admin role required)
  */
 router.get('/insights', getInsights)
 
@@ -24,9 +28,13 @@ router.get('/insights', getInsights)
  * /feedback-loop/pathway/{slug}:
  *   get:
  *     summary: Get feedback breakdown for a specific pathway (advisor/admin)
+ *     description: "Access: Career advisor or admin users."
  *     tags: [Feedback Loop]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       403:
+ *         description: Forbidden (advisor/admin role required)
  */
 router.get('/pathway/:slug', getPathwayBreakdown)
 

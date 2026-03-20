@@ -45,6 +45,13 @@ const options: swaggerJsdoc.Options = {
             user: { $ref: '#/components/schemas/UserSummary' }
           }
         },
+        RegisterData: {
+          type: 'object',
+          required: ['user'],
+          properties: {
+            user: { $ref: '#/components/schemas/UserSummary' }
+          }
+        },
         AuthSuccessResponse: {
           type: 'object',
           required: ['success', 'message', 'data'],
@@ -52,6 +59,15 @@ const options: swaggerJsdoc.Options = {
             success: { type: 'boolean', example: true },
             message: { type: 'string', example: 'Logged in successfully' },
             data: { $ref: '#/components/schemas/AuthData' }
+          }
+        },
+        RegisterSuccessResponse: {
+          type: 'object',
+          required: ['success', 'message', 'data'],
+          properties: {
+            success: { type: 'boolean', example: true },
+            message: { type: 'string', example: 'Account created successfully' },
+            data: { $ref: '#/components/schemas/RegisterData' }
           }
         },
         ApiSuccessResponse: {
@@ -85,12 +101,12 @@ const options: swaggerJsdoc.Options = {
     security: [{ bearerAuth: [] }],
     tags: [
       { name: 'Auth', description: 'Authentication — register and login' },
-      { name: 'Profile', description: 'User profile management' },
+      { name: 'Profile', description: 'User profile management (authenticated regular users)' },
       { name: 'Career', description: 'Career pathways and recommendations' },
       { name: 'Questionnaire', description: 'Assessment questionnaire submission' },
       { name: 'Roadmap', description: 'Personalised career roadmaps' },
       { name: 'Feedback', description: 'Recommendation feedback' },
-      { name: 'Feedback Loop', description: 'Aggregated feedback insights (advisor/admin)' },
+      { name: 'Feedback Loop', description: 'Aggregated feedback insights (career_advisor/admin only)' },
       { name: 'Progress', description: 'Milestone progress tracking' },
       { name: 'Admin', description: 'Admin dashboard (admin role only)' }
     ]

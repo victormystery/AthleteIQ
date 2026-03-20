@@ -113,7 +113,7 @@ async function handleRegister() {
   error.value = ''
   try {
     await authStore.register(form)
-    await router.push({ name: 'Dashboard' })
+    await router.push({ name: 'Login' })
   } catch (err: unknown) {
     const axiosErr = err as { response?: { data?: { message?: string } } }
     error.value = axiosErr.response?.data?.message ?? 'Registration failed. Please try again.'
