@@ -16,6 +16,7 @@
           v-for="pathway in pathways"
           :key="pathway.title"
           class="pathway-card group bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 hover:border-primary-300 hover:shadow-lg hover:shadow-slate-100 transition-all duration-300 cursor-pointer"
+          @click="router.push('/auth/register')"
         >
           <div class="flex items-center gap-3 sm:gap-4 mb-4">
             <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl shrink-0" :class="pathway.bg">
@@ -56,11 +57,14 @@
 
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { pathways } from '@/data/landingData'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const router = useRouter()
 
 const sectionRef = ref<HTMLElement | null>(null)
 const headerRef  = ref<HTMLElement | null>(null)
