@@ -3,13 +3,8 @@
     <!-- Left branding panel (desktop only) -->
     <div class="branding-panel hidden lg:flex lg:w-[44%] xl:w-[40%] flex-col p-8 bg-white">
       <!-- Logo -->
-      <router-link to="/" class="flex items-center gap-2.5 no-underline group">
-        <span class="logo-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </span>
-        <span class="text-xl font-bold text-slate-800 tracking-tight group-hover:text-primary-600 transition-colors">AthleteIQ</span>
+      <router-link to="/" class="flex items-center no-underline group">
+        <img src="/athleteiqLogo.svg" alt="AthleteIQ" class="h-9 w-auto" />
       </router-link>
 
       <!-- Hero image area -->
@@ -67,13 +62,8 @@
     <div class="form-panel flex-1 bg-[#f5f0e8] flex flex-col min-h-screen lg:min-h-0">
       <!-- Mobile logo header -->
       <div class="flex lg:hidden items-center gap-2.5 px-6 py-5 bg-white border-b border-[#e8e1d8]">
-        <router-link to="/" class="flex items-center gap-2.5 no-underline">
-          <span class="logo-icon-sm">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </span>
-          <span class="text-lg font-bold text-slate-800 tracking-tight">AthleteIQ</span>
+        <router-link to="/" class="flex items-center no-underline">
+          <img src="/athleteiqLogo.svg" alt="AthleteIQ" class="h-7 w-auto" />
         </router-link>
       </div>
 
@@ -132,35 +122,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Logo icon */
-.logo-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
-}
-
-.logo-icon-sm {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.logo-icon-sm svg {
-  width: 14px;
-  height: 14px;
-}
-
 /* Hero visual */
 .hero-visual {
   position: relative;

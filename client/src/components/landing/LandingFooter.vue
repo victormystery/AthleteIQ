@@ -4,13 +4,8 @@
       <!-- Top row -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
         <!-- Brand -->
-        <router-link to="/" class="flex items-center gap-2.5 no-underline">
-          <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-primary-600 text-white">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </span>
-          <span class="text-sm font-bold text-slate-800">AthleteIQ</span>
+        <router-link to="/" class="flex items-center no-underline">
+          <img src="/athleteiqLogo.svg" alt="AthleteIQ" class="h-6 w-auto" />
         </router-link>
 
         <!-- Section links -->

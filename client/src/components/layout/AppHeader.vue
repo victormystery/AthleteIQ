@@ -12,13 +12,8 @@
           : 'bg-white/70 backdrop-blur-sm border border-white/60'"
       >
         <!-- Brand -->
-        <router-link to="/" class="flex items-center gap-2.5 no-underline">
-          <span class="flex items-center justify-center w-8 h-8 rounded-xl bg-primary-600 text-white">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </span>
-          <span class="text-base font-bold text-slate-900 tracking-tight">AthleteIQ</span>
+        <router-link to="/" class="flex items-center no-underline">
+          <img src="/athleteiqLogo.svg" alt="AthleteIQ" class="h-8 w-auto" />
         </router-link>
 
         <!-- Desktop nav -->

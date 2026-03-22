@@ -9,13 +9,8 @@
       ]"
     >
       <!-- Brand -->
-      <div class="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-        <span class="text-primary-400 flex">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </span>
-        <span class="text-base font-bold text-slate-100 tracking-tight">AthleteIQ</span>
+      <div class="flex items-center px-6 py-5 border-b border-white/10">
+        <img src="/athleteiqLogo.svg" alt="AthleteIQ" class="h-7 w-auto" style="filter: brightness(0) invert(1);" />
       </div>
 
       <!-- Nav -->

@@ -85,13 +85,8 @@
           <div class="flex h-[300px] sm:h-[400px]">
             <!-- Mini sidebar -->
             <div class="hidden sm:flex w-36 lg:w-40 bg-slate-900 flex-col shrink-0 p-3 gap-1">
-              <div class="flex items-center gap-2 px-2 py-3 mb-2">
-                <span class="w-5 h-5 rounded-md bg-primary-500 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" class="w-3 h-3">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                  </svg>
-                </span>
-                <span class="text-xs font-bold text-white">AthleteIQ</span>
+              <div class="flex items-center px-2 py-3 mb-2">
+                <img src="/athleteiqLogo.svg" alt="AthleteIQ" class="h-4 w-auto" style="filter: brightness(0) invert(1);" />
               </div>
               <div
                 v-for="item in sidebarItems"
