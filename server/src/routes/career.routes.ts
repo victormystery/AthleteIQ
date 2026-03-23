@@ -17,7 +17,17 @@ const router = Router()
  *     tags: [Career]
  *     responses:
  *       200:
- *         description: List of career pathways
+ *         description: List of active career pathways
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiSuccessResponse'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
  */
 router.get('/pathways', listPathways)
 
@@ -33,6 +43,26 @@ router.get('/pathways', listPathways)
  *         required: true
  *         schema:
  *           type: string
+ *         example: coaching-development
+ *     responses:
+ *       200:
+ *         description: Career pathway details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiSuccessResponse'
+ *       404:
+ *         description: Pathway not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
  */
 router.get('/pathways/:slug', getPathway)
 
@@ -47,6 +77,25 @@ router.use(authenticate)
  *     tags: [Career]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User's most recent career recommendations (up to 10)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiSuccessResponse'
+ *       401:
+ *         description: Unauthorized — missing or invalid token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
  */
 router.get('/recommendations', getRecommendations as any)
 
@@ -58,6 +107,25 @@ router.get('/recommendations', getRecommendations as any)
  *     tags: [Career]
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Full list of the user's career assessment history
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiSuccessResponse'
+ *       401:
+ *         description: Unauthorized — missing or invalid token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiErrorResponse'
  */
 router.get('/history', getHistory as any)
 

@@ -181,32 +181,43 @@ export class CareerService {
       scores[p.slug] = 0.5 // Base score
     })
 
-    // Leadership → coaching
+    // Leadership → coaching, teaching, management
     if (payload.leadership >= 4) scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.15
     if (payload.leadership >= 4) scores['sports-management'] = (scores['sports-management'] ?? 0.5) + 0.10
+    if (payload.leadership >= 4) scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.08
 
-    // Data comfort → analytics, science
+    // Data comfort → analytics, science, law
     if (payload.data_comfort >= 4) scores['sports-analytics'] = (scores['sports-analytics'] ?? 0.5) + 0.15
     if (payload.data_comfort >= 3) scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.10
+    if (payload.data_comfort >= 3) scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.05
 
-    // High fitness → high performance
+    // High fitness → high performance, nutrition, fitness industry
     if (payload.fitness_level >= 4) scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.15
+    if (payload.fitness_level >= 3) scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.10
+
+    // Academic level → psychology, law, science
+    if (payload.academic_level === 'Postgraduate' || payload.academic_level === 'Professional') {
+      scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.10
+      scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.10
+      scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.05
+    }
 
     // Motivation adjustments
     switch (payload.motivation) {
-      case 'Coaching': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.20; break
-      case 'Health': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.15; scores['recreational-fitness-industry'] = (scores['recreational-fitness-industry'] ?? 0.5) + 0.10; break
-      case 'Competition': scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.20; break
-      case 'Academic': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.20; break
-      case 'Fame': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.20; break
+      case 'Coaching': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.20; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.10; break
+      case 'Health': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.15; scores['recreational-fitness-industry'] = (scores['recreational-fitness-industry'] ?? 0.5) + 0.10; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.10; break
+      case 'Competition': scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.20; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; break
+      case 'Academic': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.20; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.10; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.05; break
+      case 'Fame': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.20; scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.05; break
     }
 
     // Work environment
     switch (payload.work_environment) {
-      case 'Field': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.05; scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.05; break
-      case 'Lab': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.10; scores['sports-analytics'] = (scores['sports-analytics'] ?? 0.5) + 0.05; break
-      case 'Office': scores['sports-management'] = (scores['sports-management'] ?? 0.5) + 0.10; break
+      case 'Field': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.05; scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.05; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.08; break
+      case 'Lab': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.10; scores['sports-analytics'] = (scores['sports-analytics'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
+      case 'Office': scores['sports-management'] = (scores['sports-management'] ?? 0.5) + 0.10; scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.10; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; break
       case 'Media': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.15; break
+      case 'Mixed': scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
     }
 
     // Sort and normalise

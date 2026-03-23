@@ -133,8 +133,8 @@ router.use(authenticate)
  *                 items:
  *                   type: string
  *     responses:
- *       200:
- *         description: Questionnaire submitted and recommendations returned
+ *       201:
+ *         description: Questionnaire submitted and recommendations generated
  *         content:
  *           application/json:
  *             schema:

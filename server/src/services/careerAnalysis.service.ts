@@ -108,6 +108,46 @@ export class CareerAnalysisService {
           )
         break
 
+      case 'sports-nutrition':
+        insights.push(
+          `Your personal experience fuelling performance in ${sport} gives you first-hand understanding of how nutrition affects training and competition outcomes.`
+        )
+        if (fitnessLevel >= 4)
+          insights.push(
+            `A high fitness awareness (${fitnessLevel}/5) means you already practice the principles you would eventually teach — an immediate advantage with athlete clients.`
+          )
+        break
+
+      case 'physical-education-teaching':
+        if (leadership >= 4)
+          insights.push(
+            `Your leadership rating (${leadership}/5) reflects the communication and motivational skills central to inspiring students in a physical education setting.`
+          )
+        insights.push(
+          `Your ${level}-level participation in ${sport} gives you the practical competence and passion to make PE meaningful for the next generation.`
+        )
+        break
+
+      case 'sports-psychology':
+        if (yearsExp === '> 5')
+          insights.push(
+            'Over 5 years of competitive experience means you have lived the psychological pressures of sport — giving you authentic empathy that textbooks cannot teach.'
+          )
+        insights.push(
+          `Your background in ${sport} at ${level} level equips you to build trust quickly with athletes, because they know you understand the demands from the inside.`
+        )
+        break
+
+      case 'sports-law-ethics':
+        if (response.data_comfort >= 4)
+          insights.push(
+            `Your comfort with data and analytical thinking (${response.data_comfort}/5) translates directly to case research, contract analysis, and evidence-based legal reasoning in sport.`
+          )
+        insights.push(
+          `Navigating the rules, governance, and disputes in ${sport} at ${level} level has given you practical insight into the legal and ethical landscape of organised sport.`
+        )
+        break
+
       default:
         insights.push(
           `Your experience in ${sport} has built transferable skills — discipline, teamwork, and resilience — that are highly valued in this career pathway.`
@@ -117,8 +157,13 @@ export class CareerAnalysisService {
     // Work environment alignment
     if (
       (pathway.slug === 'sports-science-medicine' && response.work_environment === 'Lab') ||
+      (pathway.slug === 'sports-nutrition' && response.work_environment === 'Lab') ||
       (pathway.slug === 'sports-management' && response.work_environment === 'Office') ||
-      (pathway.slug === 'coaching-development' && response.work_environment === 'Field')
+      (pathway.slug === 'sports-law-ethics' && response.work_environment === 'Office') ||
+      (pathway.slug === 'sports-psychology' && response.work_environment === 'Office') ||
+      (pathway.slug === 'coaching-development' && response.work_environment === 'Field') ||
+      (pathway.slug === 'physical-education-teaching' && response.work_environment === 'Field') ||
+      (pathway.slug === 'sports-media-journalism' && response.work_environment === 'Media')
     ) {
       insights.push(
         `Your preferred work environment (${response.work_environment}) aligns well with the typical setting for ${pathway.title} professionals.`
