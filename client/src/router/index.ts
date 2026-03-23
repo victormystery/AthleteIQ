@@ -21,6 +21,36 @@ const routes: RouteRecordRaw[] = [
         path: 'profile',
         name: 'Profile',
         component: () => import('@/pages/ProfilePage.vue')
+      },
+      {
+        path: 'questionnaire',
+        name: 'Questionnaire',
+        component: () => import('@/pages/QuestionnairePage.vue')
+      },
+      {
+        path: 'results',
+        name: 'Results',
+        component: () => import('@/pages/ResultsPage.vue')
+      },
+      {
+        path: 'pathways',
+        name: 'Pathways',
+        component: () => import('@/pages/PathwaysPage.vue')
+      },
+      {
+        path: 'pathways/:slug',
+        name: 'PathwayDetail',
+        component: () => import('@/pages/PathwayDetailPage.vue')
+      },
+      {
+        path: 'roadmap/:slug',
+        name: 'Roadmap',
+        component: () => import('@/pages/RoadmapPage.vue')
+      },
+      {
+        path: 'feedback',
+        name: 'Feedback',
+        component: () => import('@/pages/FeedbackPage.vue')
       }
     ]
   },
