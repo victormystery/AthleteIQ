@@ -9,12 +9,11 @@ interface JwtPayload {
   sub: string
 }
 
-// Extend Express Request
+// Make Express.User resolve to IUser so passport and our own middleware
+// share the same type for req.user across the entire application.
 declare global {
   namespace Express {
-    interface Request {
-      user?: IUser
-    }
+    interface User extends IUser {}
   }
 }
 
