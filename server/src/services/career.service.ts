@@ -87,7 +87,7 @@ export class CareerService {
         return {
           pathwaySlug: pathway.slug,
           pathwayName: pathway.title,
-          matchPercentage: Math.round(Math.min(pred.confidence, 0.88) * 100),
+          matchPercentage: Math.round(Math.min(pred.confidence, 0.60) * 100),
           confidence: pred.confidence,
           rank: index + 1,
           keySkillsMatch: pathway.keySkills.slice(0, 4),
@@ -232,7 +232,7 @@ export class CareerService {
 
     const predictions = sorted.map(([slug, score]) => ({
       pathway: slug,
-      confidence: 0.48 + ((score - minScore) / scoreRange) * 0.37
+      confidence: 0.40 + ((score - minScore) / scoreRange) * 0.20
     }))
 
     return { predictions, model_version: 'fallback-1.0.0' }
