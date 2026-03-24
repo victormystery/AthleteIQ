@@ -14,6 +14,9 @@ import { errorHandler, notFoundHandler } from './src/middleware/error.middleware
 
 const app: Express = express()
 
+// ── Trust Render's reverse proxy so express-rate-limit reads the correct IP ──
+app.set('trust proxy', 1)
+
 const localhostHosts = new Set(['localhost', '127.0.0.1', '::1', '[::1]'])
 
 function isAllowedDevOrigin(origin: string): boolean {
@@ -64,6 +67,11 @@ app.use(morgan('combined', { stream: morganStream }))
 
 // ── Rate limiting ───────────────────────────────────────────────────────────
 app.use('/api', apiLimiter)
+
+// ── Root ─────────────────────────────────────────────────────────────────────
+app.get('/', (_req, res) => {
+  res.json({ name: 'AthleteIQ API', docs: '/api/docs', health: '/health' })
+})
 
 // ── Health check ─────────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => {
