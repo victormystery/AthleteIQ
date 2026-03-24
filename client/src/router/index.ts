@@ -89,6 +89,11 @@ const routes: RouteRecordRaw[] = [
         path: 'register',
         name: 'Register',
         component: () => import('@/pages/RegisterPage.vue')
+      },
+      {
+        path: 'callback',
+        name: 'OAuthCallback',
+        component: () => import('@/pages/OAuthCallbackPage.vue')
       }
     ]
   },
@@ -113,7 +118,8 @@ router.beforeEach(async (to, _from, next) => {
   }
 
   // Redirect authenticated users away from landing / auth pages to dashboard
-  if ((to.name === 'Landing' || to.path.startsWith('/auth')) && authStore.isAuthenticated) {
+  // (skip the OAuth callback page — it needs to handle the token first)
+  if ((to.name === 'Landing' || to.path.startsWith('/auth')) && authStore.isAuthenticated && to.name !== 'OAuthCallback') {
     next({ name: authStore.isAdmin ? 'AdminDashboard' : 'Dashboard' })
     return
   }

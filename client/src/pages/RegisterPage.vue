@@ -310,7 +310,7 @@ async function handleRegister() {
 }
 
 function handleSocialSignup(_provider: string) {
-  // Social signup placeholder – UI only
+  window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`
 }
 
 // Entrance animation using template refs

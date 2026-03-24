@@ -54,6 +54,12 @@ export const useAuthStore = defineStore('auth', () => {
     return data.data
   }
 
+  async function loginWithToken(rawToken: string): Promise<void> {
+    user.value = null
+    setToken(rawToken)
+    await initialize()
+  }
+
   function logout() {
     setToken(null)
     user.value = null
@@ -67,6 +73,7 @@ export const useAuthStore = defineStore('auth', () => {
     isAdmin,
     initialize,
     login,
+    loginWithToken,
     register,
     logout
   }

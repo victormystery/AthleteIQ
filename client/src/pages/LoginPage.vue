@@ -224,7 +224,7 @@ async function handleLogin() {
 }
 
 function handleSocialLogin(_provider: string) {
-  // Social login placeholder – UI only
+  window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`
 }
 
 // Entrance animation using template refs
