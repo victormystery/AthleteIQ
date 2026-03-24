@@ -12,6 +12,10 @@ const schema = Joi.object({
   ML_SERVICE_URL: Joi.string().default('http://localhost:8001'),
   GOOGLE_SHEETS_CREDENTIALS_PATH: Joi.string().optional(),
   GOOGLE_SHEETS_SPREADSHEET_ID: Joi.string().optional(),
+  GOOGLE_CLIENT_ID: Joi.string().optional(),
+  GOOGLE_CLIENT_SECRET: Joi.string().optional(),
+  SERVER_URL: Joi.string().default('http://localhost:7000'),
+  CLIENT_URL: Joi.string().default('http://localhost:5173'),
   LOG_LEVEL: Joi.string().valid('error', 'warn', 'info', 'debug').default('info')
 }).unknown(true)
 
@@ -32,6 +36,10 @@ export const env = {
   mlServiceUrl: value.ML_SERVICE_URL as string,
   googleSheetsCredentialsPath: value.GOOGLE_SHEETS_CREDENTIALS_PATH as string | undefined,
   googleSheetsSpreadsheetId: value.GOOGLE_SHEETS_SPREADSHEET_ID as string | undefined,
+  googleClientId: value.GOOGLE_CLIENT_ID as string | undefined,
+  googleClientSecret: value.GOOGLE_CLIENT_SECRET as string | undefined,
+  serverUrl: value.SERVER_URL as string,
+  clientUrl: value.CLIENT_URL as string,
   logLevel: value.LOG_LEVEL as string,
   isDev: value.NODE_ENV === 'development'
 }
