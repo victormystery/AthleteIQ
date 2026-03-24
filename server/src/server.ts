@@ -2,6 +2,8 @@ import app from '../app.js'
 import { env } from './config/env.js'
 import { connectDB } from './config/db.js'
 import { logger } from './utils/logger.js'
+import { CareerPathway, User } from './models/index.js'
+import { careerPathwaysSeedData } from './data/career_pathways.js'
 
 // ── Process-level exception handlers ───────────────────────────────────────
 // These catch errors that escape Express (e.g. async code outside a route
@@ -24,9 +26,34 @@ process.on('unhandledRejection', (reason: unknown) => {
   process.exit(1)
 })
 
+// ── Auto-seed ───────────────────────────────────────────────────────────────
+async function autoSeed(): Promise<void> {
+  const count = await CareerPathway.countDocuments()
+  if (count > 0) return
+
+  logger.info('No career pathways found — seeding database...')
+  for (const pathway of careerPathwaysSeedData) {
+    await CareerPathway.updateOne({ slug: pathway.slug }, pathway, { upsert: true })
+  }
+  logger.info(`Seeded ${careerPathwaysSeedData.length} career pathways`)
+
+  const adminEmail = 'admin@athleteiq.com'
+  const adminExists = await User.findOne({ email: adminEmail })
+  if (!adminExists) {
+    await User.create({
+      name: 'AthleteIQ Admin',
+      email: adminEmail,
+      password: 'Admin@AthleteIQ2026!',
+      role: 'admin'
+    })
+    logger.info('Admin user created')
+  }
+}
+
 // ── Startup ─────────────────────────────────────────────────────────────────
 async function start(): Promise<void> {
   await connectDB()
+  await autoSeed()
 
   const server = app.listen(env.port, () => {
     logger.info(`Server running on port ${env.port}`, {
