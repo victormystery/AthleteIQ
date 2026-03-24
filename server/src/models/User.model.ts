@@ -5,7 +5,8 @@ export interface IUser extends Document {
   _id: mongoose.Types.ObjectId
   name: string
   email: string
-  password: string
+  password?: string
+  googleId?: string
   role: 'student' | 'career_advisor' | 'admin'
   createdAt: Date
   updatedAt: Date
@@ -32,9 +33,13 @@ const userSchema = new Schema<IUser>(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
       minlength: [8, 'Password must be at least 8 characters'],
       select: false
+    },
+    googleId: {
+      type: String,
+      sparse: true,
+      index: true
     },
     role: {
       type: String,
@@ -46,7 +51,7 @@ const userSchema = new Schema<IUser>(
 )
 
 userSchema.pre<IUser>('save', async function (next) {
-  if (!this.isModified('password')) return next()
+  if (!this.password || !this.isModified('password')) return next()
   this.password = await bcrypt.hash(this.password, 12)
   next()
 })
@@ -55,6 +60,7 @@ userSchema.methods.comparePassword = function (
   this: IUser,
   candidatePassword: string
 ): Promise<boolean> {
+  if (!this.password) return Promise.resolve(false)
   return bcrypt.compare(candidatePassword, this.password)
 }
 
