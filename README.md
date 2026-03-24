@@ -2,6 +2,12 @@
 
 A full-stack athlete performance tracking application built with Vue 3, TypeScript, Node.js, and Express.
 
+## Links
+
+- **Frontend:** [athlete-iq-peach.vercel.app](https://athlete-iq-peach.vercel.app/)
+- **Backend:** [athleteiq-i8od.onrender.com/api](https://athleteiq-i8od.onrender.com/api)
+- **Docs:** [athleteiq-i8od.onrender.com/api/docs](https://athleteiq-i8od.onrender.com/api/docs/)
+
 ## Tech Stack
 
 **Client**
@@ -17,14 +23,6 @@ A full-stack athlete performance tracking application built with Vue 3, TypeScri
 - JWT authentication
 - Joi validation
 - Winston logging
-
-## Project Structure
-
-```
-AthleteIQ/
-├── client/   # Vue 3 frontend (port 5173)
-└── server/   # Express API (port 3000)
-```
 
 ## Getting Started
 
@@ -54,13 +52,3 @@ Copy `server/.env.example` to `server/.env` and fill in the required values:
 MONGODB_URI=mongodb://localhost:27017/athleteiq
 JWT_SECRET=your_long_random_secret
 ```
-
-## API
-
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/api/auth/register` | — | Register a new account |
-| POST | `/api/auth/login` | — | Login |
-| GET | `/api/users/me` | ✓ | Get own profile |
-| PUT | `/api/users/me` | ✓ | Update own profile |
-| GET | `/health` | — | Health check |
