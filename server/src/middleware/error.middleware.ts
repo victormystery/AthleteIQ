@@ -41,6 +41,12 @@ export function errorHandler(
   })
 }
 
-export function notFoundHandler(req: Request, _res: Response, next: NextFunction): void {
+export function notFoundHandler(req: Request, res: Response, next: NextFunction): void {
+  // Silently discard non-API requests in development (e.g. browser tabs or HMR
+  // connections from other projects accidentally hitting this API server).
+  if (env.isDev && !req.originalUrl.startsWith('/api') && req.originalUrl !== '/health') {
+    res.status(404).json({ success: false, message: 'Not found' })
+    return
+  }
   next(new AppError(`Route not found: ${req.method} ${req.originalUrl}`, 404))
 }
