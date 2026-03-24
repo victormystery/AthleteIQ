@@ -87,7 +87,7 @@ export class CareerService {
         return {
           pathwaySlug: pathway.slug,
           pathwayName: pathway.title,
-          matchPercentage: Math.round(pred.confidence * 100),
+          matchPercentage: Math.round(Math.min(pred.confidence, 0.88) * 100),
           confidence: pred.confidence,
           rank: index + 1,
           keySkillsMatch: pathway.keySkills.slice(0, 4),
@@ -220,15 +220,19 @@ export class CareerService {
       case 'Mixed': scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
     }
 
-    // Sort and normalise
+    // Sort and scale to a realistic confidence range (0.48–0.85)
+    // so no pathway ever shows 100% and scores feel genuinely differentiated.
     const sorted = Object.entries(scores)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 5)
 
     const maxScore = sorted[0][1]
+    const minScore = sorted[sorted.length - 1][1]
+    const scoreRange = maxScore - minScore || 0.01
+
     const predictions = sorted.map(([slug, score]) => ({
       pathway: slug,
-      confidence: Math.min(score / maxScore, 1)
+      confidence: 0.48 + ((score - minScore) / scoreRange) * 0.37
     }))
 
     return { predictions, model_version: 'fallback-1.0.0' }
