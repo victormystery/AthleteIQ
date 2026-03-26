@@ -19,7 +19,7 @@ export function initBetterAuth(db: Db): void {
 
   authInstance = betterAuth({
     baseURL: env.serverUrl,
-    basePath: '/api/bauth',
+    basePath: '/api/auth',
     secret: env.betterAuthSecret,
     trustedOrigins: buildTrustedOrigins(),
     database: mongodbAdapter(db, {
