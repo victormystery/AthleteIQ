@@ -1,6 +1,6 @@
-# AthleteIQ
+# AthleteIQ  
 
-A full-stack athlete performance tracking application built with Vue 3, TypeScript, Node.js, and Express.
+A full-stack athlete performance tracking application built with Vue 3 and node
 
 ## Links
 
