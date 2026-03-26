@@ -109,6 +109,40 @@ export async function deleteUser(
   }
 }
 
+export async function suspendUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const { id } = req.params
+    const { suspended } = req.body
+
+    if (typeof suspended !== 'boolean') {
+      res.status(400).json({ success: false, message: 'suspended must be a boolean.' })
+      return
+    }
+
+    const user = await User.findById(id)
+    if (!user) {
+      res.status(404).json({ success: false, message: 'User not found.' })
+      return
+    }
+    if (user.role === 'admin') {
+      res.status(403).json({ success: false, message: 'Admin accounts cannot be suspended.' })
+      return
+    }
+
+    user.suspended = suspended
+    await user.save()
+
+    const updated = await User.findById(id).select('-password').lean()
+    success(res, { user: updated }, suspended ? 'User suspended successfully' : 'User unsuspended successfully')
+  } catch (err) {
+    next(err)
+  }
+}
+
 export async function updateUserRole(
   req: Request,
   res: Response,

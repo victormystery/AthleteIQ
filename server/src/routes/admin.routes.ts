@@ -6,6 +6,7 @@ import {
   listUsers,
   getRecentAssessments,
   deleteUser,
+  suspendUser,
   updateUserRole
 } from '../controllers/admin.controller.js'
 
@@ -287,6 +288,8 @@ router.get('/assessments', getRecentAssessments)
  *               $ref: '#/components/schemas/ApiErrorResponse'
  */
 router.delete('/users/:id', deleteUser)
+
+router.patch('/users/:id/suspend', suspendUser)
 
 router.patch('/users/:id/role', updateUserRole)
 
