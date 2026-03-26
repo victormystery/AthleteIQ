@@ -35,6 +35,7 @@ export async function authenticate(
     const decoded = jwt.verify(token, env.jwtSecret) as JwtPayload
     const user = await User.findById(decoded.sub)
     if (!user) throw new UnauthorizedError('User not found')
+    if (user.suspended) throw new UnauthorizedError('Account suspended')
     req.user = user
     next()
   } catch (err) {

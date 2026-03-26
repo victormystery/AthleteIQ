@@ -57,6 +57,9 @@ export async function login(email: string, password: string): Promise<AuthResult
   if (!user || !(await user.comparePassword(password))) {
     throw new UnauthorizedError('Invalid email or password')
   }
+  if (user.suspended) {
+    throw new AppError('Your account has been suspended. Please contact support.', 403)
+  }
   const token = signToken(user._id.toString())
   // password is excluded by toJSON() on the User model
   return { token, user }
