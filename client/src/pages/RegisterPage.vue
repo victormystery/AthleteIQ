@@ -144,29 +144,6 @@
         </div>
       </div>
 
-      <!-- Terms -->
-      <label class="flex items-start gap-2.5 cursor-pointer select-none group">
-        <div class="relative w-[18px] h-[18px] shrink-0 mt-0.5">
-          <input v-model="acceptTerms" type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer z-10" />
-          <div
-            class="w-[18px] h-[18px] rounded-[5px] border-[1.5px] flex items-center justify-center transition-all duration-200"
-            :class="acceptTerms
-              ? 'bg-gradient-to-br from-primary-600 to-primary-500 border-primary-600 shadow-sm shadow-primary-500/30'
-              : 'bg-white border-slate-300'"
-          >
-            <svg v-if="acceptTerms" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-2.5 h-2.5">
-              <polyline points="2.5 6 5 8.5 9.5 3.5"/>
-            </svg>
-          </div>
-        </div>
-        <span class="text-[13px] text-slate-500 leading-snug group-hover:text-slate-700 transition-colors">
-          I agree to the
-          <a href="#" class="text-primary-600 font-semibold hover:underline" @click.prevent>Terms of Service</a>
-          and
-          <a href="#" class="text-primary-600 font-semibold hover:underline" @click.prevent>Privacy Policy</a>
-        </span>
-      </label>
-
       <!-- Submit -->
       <button
         ref="submitRef"
@@ -200,7 +177,7 @@
 <script setup lang="ts">
 import { reactive, ref, computed, onMounted } from 'vue'
 import { useAuth } from '@/composables/useAuth'
-import { isEmail, required, minLength } from '@/utils/validators'
+import { isEmail, required, isLettersOnly, isStrongPassword } from '@/utils/validators'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseAlert from '@/components/BaseAlert.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
@@ -211,7 +188,6 @@ const { register } = useAuth()
 const loading = ref(false)
 const error = ref('')
 const showPassword = ref(false)
-const acceptTerms = ref(false)
 
 const form = reactive({ name: '', email: '', password: '' })
 const errors = reactive({ name: '', email: '', password: '' })
@@ -273,7 +249,9 @@ function getStrengthBarClass(index: number): string {
 // ─── Validation ──────────────────────────────────────
 function validateField(field: 'name' | 'email' | 'password') {
   if (field === 'name') {
-    errors.name = required(form.name) ? '' : 'Name is required'
+    if (!required(form.name)) errors.name = 'Name is required'
+    else if (!isLettersOnly(form.name)) errors.name = 'Name must contain letters only (no numbers or special characters)'
+    else errors.name = ''
   }
   if (field === 'email') {
     if (!required(form.email)) errors.email = 'Email is required'
@@ -282,7 +260,7 @@ function validateField(field: 'name' | 'email' | 'password') {
   }
   if (field === 'password') {
     if (!required(form.password)) errors.password = 'Password is required'
-    else if (!minLength(8)(form.password)) errors.password = 'At least 8 characters required'
+    else if (!isStrongPassword(form.password)) errors.password = 'Password must be at least 8 characters with an uppercase letter, a number, and a special character'
     else errors.password = ''
   }
 }
