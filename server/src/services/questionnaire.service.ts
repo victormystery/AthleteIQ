@@ -18,6 +18,7 @@ export interface QuestionnairePayload {
   biggest_challenge: string
   injury_history: string
   career_interests: string[]
+  education_training_level: string
 }
 
 export class QuestionnaireService {

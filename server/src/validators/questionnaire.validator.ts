@@ -2,7 +2,7 @@ import Joi from 'joi'
 
 export const questionnaireSchema = Joi.object({
   academic_level: Joi.string()
-    .valid('Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate', 'Professional')
+    .valid('Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate')
     .required()
     .messages({ 'any.required': 'Academic level is required' }),
 
@@ -10,12 +10,12 @@ export const questionnaireSchema = Joi.object({
     .messages({ 'any.required': 'Primary sport is required' }),
 
   participation_years: Joi.string()
-    .valid('< 1', '1-2', '3-5', '> 5')
+    .valid('Less than 1 year', '1-2 years', '3-5 years', 'More than 5 years')
     .required()
     .messages({ 'any.required': 'Participation years is required' }),
 
   participation_level: Joi.string()
-    .valid('Not active', 'Recreational', 'Club', 'Regional', 'National', 'Elite')
+    .valid('Not active', 'Recreational', 'University/School team', 'Club or academy', 'Elite/competitive pathway')
     .required()
     .messages({ 'any.required': 'Participation level is required' }),
 
@@ -32,40 +32,51 @@ export const questionnaireSchema = Joi.object({
     .messages({ 'any.required': 'Data comfort rating is required' }),
 
   motivation: Joi.string()
-    .valid('Competition', 'Health', 'Coaching', 'Academic', 'Fame')
+    .valid('Competition and performance', 'Health and fitness', 'Helping or coaching others', 'Academic or career opportunity', 'Fame, media, or recognition')
     .required()
     .messages({ 'any.required': 'Motivation is required' }),
 
   career_importance: Joi.string()
     .valid(
-      'Financial security',
-      'Passion & purpose',
-      'Work-life balance',
-      'Career progression',
-      'Social impact'
+      'Not important',
+      'Slightly important',
+      'Moderately important',
+      'Very important',
+      'My main career focus'
     )
     .required()
     .messages({ 'any.required': 'Career importance is required' }),
 
   work_environment: Joi.string()
-    .valid('Field', 'Office', 'Lab', 'Media', 'Mixed')
+    .valid('On-field / practical', 'Office / management', 'Laboratory / science / clinical', 'Media / creative', 'A mix of environments')
     .required()
     .messages({ 'any.required': 'Work environment is required' }),
 
+  education_training_level: Joi.string()
+    .valid(
+      'Short courses or certifications only',
+      'Diploma',
+      "Bachelor's degree or add-on program",
+      "Master's degree",
+      'Medical/clinical or doctoral pathway'
+    )
+    .required()
+    .messages({ 'any.required': 'Education/training level is required' }),
+
   biggest_challenge: Joi.string()
     .valid(
-      'Lack of experience',
-      'Academic pressure',
+      'Academic workload',
+      'Time management',
       'Financial constraints',
-      'Injury & health',
-      'Networking gaps',
-      'Unclear goals'
+      'Injury risk or health',
+      'Lack of facilities or coaching',
+      'Motivation'
     )
     .required()
     .messages({ 'any.required': 'Biggest challenge is required' }),
 
   injury_history: Joi.string()
-    .valid('No injuries', 'Minor injuries', 'Significant injuries', 'Career-limiting injury')
+    .valid('None', 'Minor (short recovery)', 'Moderate (missed competitions)', 'Severe (long-term impact)')
     .required()
     .messages({ 'any.required': 'Injury history is required' }),
 

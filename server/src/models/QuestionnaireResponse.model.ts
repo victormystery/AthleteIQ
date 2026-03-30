@@ -3,7 +3,7 @@ import mongoose, { Schema, type Document, type Model } from 'mongoose'
 export interface IQuestionnaireResponse extends Document {
   _id: mongoose.Types.ObjectId
   user: mongoose.Types.ObjectId
-  // 14 input features
+  // questionnaire input features
   academic_level: string
   primary_sport: string
   participation_years: string
@@ -15,6 +15,7 @@ export interface IQuestionnaireResponse extends Document {
   motivation: string
   career_importance: string
   work_environment: string
+  education_training_level: string
   biggest_challenge: string
   injury_history: string
   career_interests: string[]
@@ -32,18 +33,18 @@ const questionnaireResponseSchema = new Schema<IQuestionnaireResponse>(
     academic_level: {
       type: String,
       required: true,
-      enum: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate', 'Professional']
+      enum: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate']
     },
     primary_sport: { type: String, required: true, trim: true },
     participation_years: {
       type: String,
       required: true,
-      enum: ['< 1', '1-2', '3-5', '> 5']
+      enum: ['Less than 1 year', '1-2 years', '3-5 years', 'More than 5 years']
     },
     participation_level: {
       type: String,
       required: true,
-      enum: ['Not active', 'Recreational', 'Club', 'Regional', 'National', 'Elite']
+      enum: ['Not active', 'Recreational', 'University/School team', 'Club or academy', 'Elite/competitive pathway']
     },
     fitness_level: { type: Number, required: true, min: 1, max: 5 },
     technical_skill: { type: Number, required: true, min: 1, max: 5 },
@@ -52,40 +53,51 @@ const questionnaireResponseSchema = new Schema<IQuestionnaireResponse>(
     motivation: {
       type: String,
       required: true,
-      enum: ['Competition', 'Health', 'Coaching', 'Academic', 'Fame']
+      enum: ['Competition and performance', 'Health and fitness', 'Helping or coaching others', 'Academic or career opportunity', 'Fame, media, or recognition']
     },
     career_importance: {
       type: String,
       required: true,
       enum: [
-        'Financial security',
-        'Passion & purpose',
-        'Work-life balance',
-        'Career progression',
-        'Social impact'
+        'Not important',
+        'Slightly important',
+        'Moderately important',
+        'Very important',
+        'My main career focus'
       ]
     },
     work_environment: {
       type: String,
       required: true,
-      enum: ['Field', 'Office', 'Lab', 'Media', 'Mixed']
+      enum: ['On-field / practical', 'Office / management', 'Laboratory / science / clinical', 'Media / creative', 'A mix of environments']
+    },
+    education_training_level: {
+      type: String,
+      required: true,
+      enum: [
+        'Short courses or certifications only',
+        'Diploma',
+        "Bachelor's degree or add-on program",
+        "Master's degree",
+        'Medical/clinical or doctoral pathway'
+      ]
     },
     biggest_challenge: {
       type: String,
       required: true,
       enum: [
-        'Lack of experience',
-        'Academic pressure',
+        'Academic workload',
+        'Time management',
         'Financial constraints',
-        'Injury & health',
-        'Networking gaps',
-        'Unclear goals'
+        'Injury risk or health',
+        'Lack of facilities or coaching',
+        'Motivation'
       ]
     },
     injury_history: {
       type: String,
       required: true,
-      enum: ['No injuries', 'Minor injuries', 'Significant injuries', 'Career-limiting injury']
+      enum: ['None', 'Minor (short recovery)', 'Moderate (missed competitions)', 'Severe (long-term impact)']
     },
     career_interests: {
       type: [String],

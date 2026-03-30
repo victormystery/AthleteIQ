@@ -146,6 +146,7 @@ export class GoogleSheetsService {
         'Motivation',
         'Career Importance',
         'Work Environment',
+        'Education/Training Level',
         'Biggest Challenge',
         'Injury History',
         'Career Interests',
@@ -202,6 +203,7 @@ export class GoogleSheetsService {
         questionnaireResponse.motivation,
         questionnaireResponse.career_importance,
         questionnaireResponse.work_environment,
+        questionnaireResponse.education_training_level,
         questionnaireResponse.biggest_challenge,
         questionnaireResponse.injury_history,
         questionnaireResponse.career_interests.join(', '),
@@ -215,7 +217,7 @@ export class GoogleSheetsService {
       await this.withRetry(() =>
         sheets.spreadsheets.values.append({
           spreadsheetId: this.getSpreadsheetId(),
-          range: this.getA1Range(worksheetName, 'A1:T1'),
+          range: this.getA1Range(worksheetName, 'A1:U1'),
           valueInputOption: 'RAW',
           requestBody: { values: [row] }
         })
