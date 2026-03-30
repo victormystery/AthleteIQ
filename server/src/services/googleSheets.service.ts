@@ -134,7 +134,6 @@ export class GoogleSheetsService {
     if (!res.data.values || res.data.values.length === 0) {
       const headers = [
         'Timestamp',
-        'User ID',
         'Academic Level',
         'Primary Sport',
         'Participation Years',
@@ -188,10 +187,10 @@ export class GoogleSheetsService {
 
       await this.ensureHeadersWithClient(sheets, worksheetName)
 
+      const now = new Date()
       const topRec = recommendation.recommendations[0]
       const row = [
-        new Date().toISOString(),
-        String(questionnaireResponse.user),
+        `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`,
         questionnaireResponse.academic_level,
         questionnaireResponse.primary_sport,
         questionnaireResponse.participation_years,
@@ -217,7 +216,7 @@ export class GoogleSheetsService {
       await this.withRetry(() =>
         sheets.spreadsheets.values.append({
           spreadsheetId: this.getSpreadsheetId(),
-          range: this.getA1Range(worksheetName, 'A1:U1'),
+          range: this.getA1Range(worksheetName, 'A1:T1'),
           valueInputOption: 'RAW',
           requestBody: { values: [row] }
         })

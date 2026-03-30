@@ -24,7 +24,6 @@ import { fileURLToPath } from 'url'
 import { env } from '../config/env.js'
 import QuestionnaireResponse from '../models/QuestionnaireResponse.model.js'
 import PathwayRecommendation from '../models/PathwayRecommendation.model.js'
-import User from '../models/User.model.js'
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -75,25 +74,16 @@ function a1Range(worksheetName: string, range: string): string {
   return `'${escaped}'!${range}`
 }
 
-function formatDateTime(date: Date | string | null): string {
+function formatTimestamp(date: Date | string | null | undefined): string {
   if (!date) return ''
-  const d = typeof date === 'string' ? new Date(date) : date
-  const year = d.getFullYear()
-  const month = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
-  const hours = String(d.getHours()).padStart(2, '0')
-  const minutes = String(d.getMinutes()).padStart(2, '0')
-  const seconds = String(d.getSeconds()).padStart(2, '0')
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+  const d = new Date(date)
+  return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`
 }
 
 // ── Headers (must match googleSheets.service.ts exactly) ─────────────────────
 
 const HEADERS = [
   'Timestamp',
-  'User ID',
-  'User Name',
-  'User Email',
   'Academic Level',
   'Primary Sport',
   'Participation Years',
@@ -105,14 +95,14 @@ const HEADERS = [
   'Motivation',
   'Career Importance',
   'Work Environment',
+  'Education/Training Level',
   'Biggest Challenge',
   'Injury History',
   'Career Interests',
   'Top Recommendation',
   'Top Match %',
   'All Recommendations',
-  'Motivation Recommendation',
-  'Submitted At'
+  'Motivation Recommendation'
 ]
 
 // ── Main ─────────────────────────────────────────────────────────────────────
@@ -140,11 +130,6 @@ async function main() {
     return
   }
 
-  // Build a map of userId → user document for name/email enrichment
-  const userIds = [...new Set(responses.map((r) => String(r.user)))]
-  const users = await User.find({ _id: { $in: userIds } }).lean()
-  const userMap = new Map(users.map((u) => [String(u._id), u]))
-
   // Build a map of questionnaireResponseId → recommendation
   const responseIds = responses.map((r) => r._id)
   const recommendations = await PathwayRecommendation.find({
@@ -157,14 +142,10 @@ async function main() {
   // 4. Build rows
   const rows: (string | number)[][] = responses.map((r) => {
     const rec = recMap.get(String(r._id))
-    const user = userMap.get(String(r.user))
     const topRec = rec?.recommendations?.[0]
 
     return [
-      formatDateTime(new Date()),                                            // Timestamp (export time)
-      String(r.user),                                                        // User ID
-      user?.name ?? '',                                                      // User Name
-      user?.email ?? '',                                                     // User Email
+      formatTimestamp(r.submittedAt),
       r.academic_level,
       r.primary_sport,
       r.participation_years,
@@ -176,14 +157,14 @@ async function main() {
       r.motivation,
       r.career_importance,
       r.work_environment,
+      r.education_training_level,
       r.biggest_challenge,
       r.injury_history,
       r.career_interests.join(', '),
       topRec?.pathwayName ?? '',
       topRec?.matchPercentage ?? '',
       rec?.recommendations?.map((x) => `${x.pathwayName}(${x.matchPercentage}%)`).join(' | ') ?? '',
-      rec?.motivationRecommendation?.pathwayName ?? '',
-      formatDateTime(r.submittedAt as any)                                   // Original submit time
+      rec?.motivationRecommendation?.pathwayName ?? ''
     ]
   })
 
@@ -308,50 +289,15 @@ async function main() {
         fields: 'userEnteredFormat(alignment,borders)'
       }
     },
-    // Format Timestamp and Submitted At columns as dates
+    // Format "Top Match %" column with number format
     {
       repeatCell: {
         range: {
           sheetId,
           startRowIndex: 1,
           endRowIndex: rows.length + 1,
-          startColumnIndex: 0, // Timestamp
-          endColumnIndex: 1
-        },
-        cell: {
-          userEnteredFormat: {
-            numberFormat: { type: 'DATE_TIME', pattern: 'yyyy-mm-dd hh:mm:ss' }
-          }
-        },
-        fields: 'userEnteredFormat.numberFormat'
-      }
-    },
-    {
-      repeatCell: {
-        range: {
-          sheetId,
-          startRowIndex: 1,
-          endRowIndex: rows.length + 1,
-          startColumnIndex: 22, // Submitted At
-          endColumnIndex: 23
-        },
-        cell: {
-          userEnteredFormat: {
-            numberFormat: { type: 'DATE_TIME', pattern: 'yyyy-mm-dd hh:mm:ss' }
-          }
-        },
-        fields: 'userEnteredFormat.numberFormat'
-      }
-    },
-    // Format "Top Match %" and percentage columns with number format
-    {
-      repeatCell: {
-        range: {
-          sheetId,
-          startRowIndex: 1,
-          endRowIndex: rows.length + 1,
-          startColumnIndex: 19, // Top Match %
-          endColumnIndex: 20
+          startColumnIndex: 17, // Top Match %
+          endColumnIndex: 18
         },
         cell: {
           userEnteredFormat: {
@@ -377,28 +323,14 @@ async function main() {
         fields: 'pixelSize'
       }
     },
-    // Auto-fit specific narrow columns
+    // Narrow the Top Match % column
     {
       updateDimensionProperties: {
         range: {
           sheetId,
           dimension: 'COLUMNS',
-          startIndex: 1, // User ID
-          endIndex: 2
-        },
-        properties: {
-          pixelSize: 100
-        },
-        fields: 'pixelSize'
-      }
-    },
-    {
-      updateDimensionProperties: {
-        range: {
-          sheetId,
-          dimension: 'COLUMNS',
-          startIndex: 19, // Top Match %
-          endIndex: 20
+          startIndex: 17, // Top Match %
+          endIndex: 18
         },
         properties: {
           pixelSize: 100
