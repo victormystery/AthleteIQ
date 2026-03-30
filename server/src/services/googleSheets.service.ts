@@ -6,6 +6,7 @@ import { env } from '../config/env.js'
 import { logger } from '../utils/logger.js'
 import type { IQuestionnaireResponse } from '../models/QuestionnaireResponse.model.js'
 import type { IPathwayRecommendation } from '../models/PathwayRecommendation.model.js'
+import User from '../models/User.model.js'
 
 type SheetsClient = ReturnType<typeof google.sheets>
 
@@ -127,33 +128,39 @@ export class GoogleSheetsService {
     const res = await this.withRetry(() =>
       sheets.spreadsheets.values.get({
         spreadsheetId: this.getSpreadsheetId(),
-        range: this.getA1Range(worksheetName, 'A1:T1')
+        range: this.getA1Range(worksheetName, 'A1:U1')
       })
     )
 
-    if (!res.data.values || res.data.values.length === 0) {
-      const headers = [
-        'Timestamp',
-        'Academic Level',
-        'Primary Sport',
-        'Participation Years',
-        'Participation Level',
-        'Fitness Level',
-        'Technical Skill',
-        'Leadership',
-        'Data Comfort',
-        'Motivation',
-        'Career Importance',
-        'Work Environment',
-        'Education/Training Level',
-        'Biggest Challenge',
-        'Injury History',
-        'Career Interests',
-        'Top Recommendation',
-        'Top Match %',
-        'All Recommendations',
-        'Motivation Recommendation'
-      ]
+    const headers = [
+      'Timestamp',
+      'Academic Level',
+      'Primary Sport',
+      'Participation Years',
+      'Participation Level',
+      'Fitness Level',
+      'Technical Skill',
+      'Leadership',
+      'Data Comfort',
+      'Motivation',
+      'Career Importance',
+      'Work Environment',
+      'Education/Training Level',
+      'Biggest Challenge',
+      'Injury History',
+      'Career Interests',
+      'Top Recommendation',
+      'Top Match %',
+      'All Recommendations',
+      'Motivation Recommendation',
+      'User Email'
+    ]
+
+    const existingHeaders = res.data.values?.[0] ?? []
+    const headersMissingOrMismatched =
+      existingHeaders.length !== headers.length || headers.some((h, idx) => existingHeaders[idx] !== h)
+
+    if (!res.data.values || res.data.values.length === 0 || headersMissingOrMismatched) {
       await this.withRetry(() =>
         sheets.spreadsheets.values.update({
           spreadsheetId: this.getSpreadsheetId(),
@@ -162,7 +169,7 @@ export class GoogleSheetsService {
           requestBody: { values: [headers] }
         })
       )
-      logger.info('Google Sheets headers initialized')
+      logger.info('Google Sheets headers initialized/updated')
     }
   }
 
@@ -189,6 +196,8 @@ export class GoogleSheetsService {
 
       const now = new Date()
       const topRec = recommendation.recommendations[0]
+      const user = await User.findById(questionnaireResponse.user).select('email').lean()
+      const userEmail = user?.email ?? ''
       const row = [
         `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`,
         questionnaireResponse.academic_level,
@@ -210,13 +219,14 @@ export class GoogleSheetsService {
         topRec?.pathwayName ?? '',
         topRec?.matchPercentage ?? '',
         recommendation.recommendations.map((r) => `${r.pathwayName}(${r.matchPercentage}%)`).join(' | '),
-        recommendation.motivationRecommendation?.pathwayName ?? ''
+        recommendation.motivationRecommendation?.pathwayName ?? '',
+        userEmail
       ]
 
       await this.withRetry(() =>
         sheets.spreadsheets.values.append({
           spreadsheetId: this.getSpreadsheetId(),
-          range: this.getA1Range(worksheetName, 'A1:T1'),
+          range: this.getA1Range(worksheetName, 'A1:U1'),
           valueInputOption: 'RAW',
           requestBody: { values: [row] }
         })

@@ -24,6 +24,7 @@ import { fileURLToPath } from 'url'
 import { env } from '../config/env.js'
 import QuestionnaireResponse from '../models/QuestionnaireResponse.model.js'
 import PathwayRecommendation from '../models/PathwayRecommendation.model.js'
+import User from '../models/User.model.js'
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -102,7 +103,8 @@ const HEADERS = [
   'Top Recommendation',
   'Top Match %',
   'All Recommendations',
-  'Motivation Recommendation'
+  'Motivation Recommendation',
+  'User Email'
 ]
 
 // ── Main ─────────────────────────────────────────────────────────────────────
@@ -137,6 +139,10 @@ async function main() {
   }).lean()
   const recMap = new Map(recommendations.map((r) => [String(r.questionnaireResponse), r]))
 
+  const userIds = Array.from(new Set(responses.map((r) => String(r.user))))
+  const users = await User.find({ _id: { $in: userIds } }).select('_id email').lean()
+  const userEmailMap = new Map(users.map((u) => [String(u._id), u.email]))
+
   console.log(`    Found ${recommendations.length} recommendation(s)`)
 
   // 4. Build rows
@@ -164,7 +170,8 @@ async function main() {
       topRec?.pathwayName ?? '',
       topRec?.matchPercentage ?? '',
       rec?.recommendations?.map((x) => `${x.pathwayName}(${x.matchPercentage}%)`).join(' | ') ?? '',
-      rec?.motivationRecommendation?.pathwayName ?? ''
+      rec?.motivationRecommendation?.pathwayName ?? '',
+      userEmailMap.get(String(r.user)) ?? ''
     ]
   })
 
