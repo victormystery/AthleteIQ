@@ -307,34 +307,6 @@
             </p>
           </div>
 
-          <!-- Education/training willingness -->
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Education or Training You Can Realistically Pursue (Next 3-5 Years) <span class="text-red-500">*</span>
-            </label>
-            <div class="flex flex-col gap-2">
-              <button
-                v-for="opt in educationTrainingLevels" :key="opt"
-                type="button"
-                :class="[
-                  'relative flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all',
-                  form.education_training_level === opt
-                    ? 'border-primary-400 bg-primary-50 shadow-sm'
-                    : 'border-slate-200 hover:border-primary-200 hover:bg-slate-50'
-                ]"
-                @click="form.education_training_level = opt"
-              >
-                <span :class="['text-sm font-medium', form.education_training_level === opt ? 'text-primary-700' : 'text-slate-700']">{{ opt }}</span>
-                <span v-if="form.education_training_level === opt" class="ml-auto shrink-0 w-5 h-5 rounded-full bg-primary-500 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" class="w-3 h-3"><polyline points="20 6 9 17 4 12"/></svg>
-                </span>
-              </button>
-            </div>
-            <p v-if="errors.education_training_level" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              {{ errors.education_training_level }}
-            </p>
-          </div>
         </div>
 
         <!-- ── Step 4: Context & Interests ─────────────────────────────── -->
@@ -439,6 +411,35 @@
             <p v-if="errors.career_interests" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               {{ errors.career_interests }}
+            </p>
+          </div>
+
+          <!-- Education/training willingness -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2.5">
+              Education or Training You Can Realistically Pursue (Next 3–5 Years) <span class="text-red-500">*</span>
+            </label>
+            <div class="flex flex-col gap-2">
+              <button
+                v-for="opt in educationTrainingLevels" :key="opt"
+                type="button"
+                :class="[
+                  'relative flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all',
+                  form.education_training_level === opt
+                    ? 'border-primary-400 bg-primary-50 shadow-sm'
+                    : 'border-slate-200 hover:border-primary-200 hover:bg-slate-50'
+                ]"
+                @click="form.education_training_level = opt"
+              >
+                <span :class="['text-sm font-medium', form.education_training_level === opt ? 'text-primary-700' : 'text-slate-700']">{{ opt }}</span>
+                <span v-if="form.education_training_level === opt" class="ml-auto shrink-0 w-5 h-5 rounded-full bg-primary-500 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" class="w-3 h-3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </button>
+            </div>
+            <p v-if="errors.education_training_level" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              {{ errors.education_training_level }}
             </p>
           </div>
         </div>
@@ -723,13 +724,13 @@ function validateStep(step: number): boolean {
     if (!form.motivation) errors.motivation = 'Please select your motivation'
     if (!form.career_importance) errors.career_importance = 'Please select career importance'
     if (!form.work_environment) errors.work_environment = 'Please select a work environment'
-    if (!form.education_training_level) errors.education_training_level = 'Please select your education/training level'
   }
 
   if (step === 4) {
     if (!form.biggest_challenge) errors.biggest_challenge = 'Please select your biggest challenge'
     if (!form.injury_history) errors.injury_history = 'Please select your injury history'
     if (form.career_interests.length === 0) errors.career_interests = 'Please select at least one career interest'
+    if (!form.education_training_level) errors.education_training_level = 'Please select your education/training level'
   }
 
   return Object.keys(errors).length === 0
@@ -758,13 +759,13 @@ const reviewSections = computed(() => ({
   aspirations: [
     { label: 'Motivation', value: form.motivation },
     { label: 'Career Priority', value: form.career_importance },
-    { label: 'Work Environment', value: form.work_environment },
-    { label: 'Education/Training', value: form.education_training_level }
+    { label: 'Work Environment', value: form.work_environment }
   ],
   context: [
     { label: 'Biggest Challenge', value: form.biggest_challenge },
     { label: 'Injury History', value: form.injury_history },
-    { label: 'Interests', value: form.career_interests.join(', ') }
+    { label: 'Interests', value: form.career_interests.join(', ') },
+    { label: 'Education/Training', value: form.education_training_level }
   ]
 }))
 
