@@ -226,8 +226,9 @@ export class GoogleSheetsService {
       await this.withRetry(() =>
         sheets.spreadsheets.values.append({
           spreadsheetId: this.getSpreadsheetId(),
-          range: this.getA1Range(worksheetName, 'A1:U1'),
+          range: this.getA1Range(worksheetName, 'A:U'),
           valueInputOption: 'RAW',
+          insertDataOption: 'INSERT_ROWS',
           requestBody: { values: [row] }
         })
       )
