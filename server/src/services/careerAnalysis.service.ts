@@ -39,7 +39,7 @@ export class CareerAnalysisService {
           insights.push(
             `Your strong leadership rating (${leadership}/5) indicates you are well-suited to guiding athletes through complex development phases.`
           )
-        if (yearsExp === '> 5')
+        if (yearsExp === 'More than 5 years')
           insights.push(
             'Over 5 years of participation means you bring a depth of experiential knowledge that new coaches without your athletic background simply cannot replicate.'
           )
@@ -69,7 +69,7 @@ export class CareerAnalysisService {
       case 'sports-science-medicine':
         insights.push(
           `Your personal experience with athletic training and ${
-            response.injury_history !== 'No injuries' ? 'injury' : 'injury prevention'
+            response.injury_history !== 'None' ? 'injury' : 'injury prevention'
           } in ${sport} gives you a unique empathetic perspective as a practitioner.`
         )
         if (response.data_comfort >= 3)
@@ -79,7 +79,7 @@ export class CareerAnalysisService {
         break
 
       case 'recreational-fitness-industry':
-        if (motivation === 'Health')
+        if (motivation === 'Health and fitness')
           insights.push(
             "Your health-oriented motivation aligns perfectly with helping everyday people improve their quality of life through fitness."
           )
@@ -102,7 +102,7 @@ export class CareerAnalysisService {
         insights.push(
           `Your experience as a ${level}-level ${sport} athlete gives you genuine insider stories and technical credibility that sets you apart from non-athlete journalists.`
         )
-        if (motivation === 'Fame')
+        if (motivation === 'Fame, media, or recognition')
           insights.push(
             'Your motivation aligns with building a public profile — a media career rewards those who can communicate and connect with large audiences.'
           )
@@ -129,7 +129,7 @@ export class CareerAnalysisService {
         break
 
       case 'sports-psychology':
-        if (yearsExp === '> 5')
+        if (yearsExp === 'More than 5 years')
           insights.push(
             'Over 5 years of competitive experience means you have lived the psychological pressures of sport — giving you authentic empathy that textbooks cannot teach.'
           )
@@ -156,14 +156,14 @@ export class CareerAnalysisService {
 
     // Work environment alignment
     if (
-      (pathway.slug === 'sports-science-medicine' && response.work_environment === 'Lab') ||
-      (pathway.slug === 'sports-nutrition' && response.work_environment === 'Lab') ||
-      (pathway.slug === 'sports-management' && response.work_environment === 'Office') ||
-      (pathway.slug === 'sports-law-ethics' && response.work_environment === 'Office') ||
-      (pathway.slug === 'sports-psychology' && response.work_environment === 'Office') ||
-      (pathway.slug === 'coaching-development' && response.work_environment === 'Field') ||
-      (pathway.slug === 'physical-education-teaching' && response.work_environment === 'Field') ||
-      (pathway.slug === 'sports-media-journalism' && response.work_environment === 'Media')
+      (pathway.slug === 'sports-science-medicine' && response.work_environment === 'Laboratory / science / clinical') ||
+      (pathway.slug === 'sports-nutrition' && response.work_environment === 'Laboratory / science / clinical') ||
+      (pathway.slug === 'sports-management' && response.work_environment === 'Office / management') ||
+      (pathway.slug === 'sports-law-ethics' && response.work_environment === 'Office / management') ||
+      (pathway.slug === 'sports-psychology' && response.work_environment === 'Office / management') ||
+      (pathway.slug === 'coaching-development' && response.work_environment === 'On-field / practical') ||
+      (pathway.slug === 'physical-education-teaching' && response.work_environment === 'On-field / practical') ||
+      (pathway.slug === 'sports-media-journalism' && response.work_environment === 'Media / creative')
     ) {
       insights.push(
         `Your preferred work environment (${response.work_environment}) aligns well with the typical setting for ${pathway.title} professionals.`
@@ -181,27 +181,27 @@ export class CareerAnalysisService {
     availablePathways: Pick<ICareerPathway, 'slug' | 'title'>[]
   ): { pathwaySlug: string; pathwayName: string; reason: string } {
     const motivationMap: Record<string, { slug: string; reason: string }> = {
-      Coaching: {
+      'Helping or coaching others': {
         slug: 'coaching-development',
         reason:
           'Your primary motivation to coach aligns directly with a career in Coaching & Development, where you can have daily impact on athletes at all levels.'
       },
-      Health: {
+      'Health and fitness': {
         slug: 'sports-science-medicine',
         reason:
           'Your motivation around health and wellbeing makes Sports Science & Medicine an ideal pathway, combining scientific rigour with athlete welfare.'
       },
-      Competition: {
+      'Competition and performance': {
         slug: 'high-performance-sport',
         reason:
           'Your competitive drive makes you well-suited to high-performance environments where marginal gains and winning culture are paramount.'
       },
-      Academic: {
+      'Academic or career opportunity': {
         slug: 'sports-science-medicine',
         reason:
           'Your academic motivation aligns with research-driven roles in Sports Science & Medicine, where evidence and intellectual rigour are central.'
       },
-      Fame: {
+      'Fame, media, or recognition': {
         slug: 'sports-media-journalism',
         reason:
           'Your aspiration for visibility and public impact makes Sports Media & Journalism a natural pathway to build a recognisable personal brand.'
