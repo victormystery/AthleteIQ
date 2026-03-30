@@ -135,16 +135,16 @@
             </label>
             <div class="flex gap-2">
               <button
-                v-for="opt in participationYears" :key="opt"
+                v-for="opt in participationYearOptions" :key="opt.value"
                 type="button"
                 :class="[
                   'flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-all',
-                  form.participation_years === opt
+                  form.participation_years === opt.value
                     ? 'border-primary-400 bg-primary-500 text-white shadow-sm'
                     : 'border-slate-200 text-slate-600 hover:border-primary-200 hover:bg-slate-50'
                 ]"
-                @click="form.participation_years = opt"
-              >{{ opt }}</button>
+                @click="form.participation_years = opt.value"
+              >{{ opt.label }}</button>
             </div>
             <p v-if="errors.participation_years" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -455,7 +455,7 @@
             </div>
             <div class="bg-slate-50 rounded-xl border border-slate-100 divide-y divide-slate-100">
               <div v-for="item in reviewSections.background" :key="item.label" class="flex items-center justify-between px-4 py-2.5 gap-4">
-                <span class="text-xs font-semibold text-slate-500 w-32 shrink-0">{{ item.label }}</span>
+                <span class="text-xs font-semibold text-slate-500 w-56 shrink-0 leading-snug">{{ item.label }}</span>
                 <span class="text-sm text-slate-800 text-right font-medium">{{ item.value }}</span>
               </div>
             </div>
@@ -492,7 +492,7 @@
             </div>
             <div class="bg-slate-50 rounded-xl border border-slate-100 divide-y divide-slate-100">
               <div v-for="item in reviewSections.aspirations" :key="item.label" class="flex items-center justify-between px-4 py-2.5 gap-4">
-                <span class="text-xs font-semibold text-slate-500 w-32 shrink-0">{{ item.label }}</span>
+                <span class="text-xs font-semibold text-slate-500 w-56 shrink-0 leading-snug">{{ item.label }}</span>
                 <span class="text-sm text-slate-800 text-right font-medium">{{ item.value }}</span>
               </div>
             </div>
@@ -506,7 +506,7 @@
             </div>
             <div class="bg-slate-50 rounded-xl border border-slate-100 divide-y divide-slate-100">
               <div v-for="item in reviewSections.context" :key="item.label" class="flex items-center justify-between px-4 py-2.5 gap-4">
-                <span class="text-xs font-semibold text-slate-500 w-32 shrink-0">{{ item.label }}</span>
+                <span class="text-xs font-semibold text-slate-500 w-56 shrink-0 leading-snug">{{ item.label }}</span>
                 <span class="text-sm text-slate-800 text-right font-medium">{{ item.value }}</span>
               </div>
             </div>
@@ -624,7 +624,12 @@ const errors = reactive<Record<string, string>>({})
 // ── Options ────────────────────────────────────────────────────────────────
 const academicLevels = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate']
 const primarySportOptions = ['Football (Soccer)', 'Basketball', 'Athletics / Track & Field', 'Volleyball', 'Rugby', 'Other']
-const participationYears = ['Less than 1 year', '1-2 years', '3-5 years', 'More than 5 years']
+const participationYearOptions = [
+  { value: 'Less than 1 year', label: 'Less than 1 year' },
+  { value: '1-2 years', label: '1-2 years' },
+  { value: '3-5 years', label: '3-5 years' },
+  { value: 'More than 5 years', label: 'More than 5 years' }
+]
 const participationLevels = ['Not active', 'Recreational', 'University/School team', 'Club or academy', 'Elite/competitive pathway']
 
 const skillFields = [
@@ -651,11 +656,11 @@ const careerImportance = [
 ]
 
 const workEnvironments = [
-  { value: 'On-field / practical', label: 'On-field', icon: '⚽' },
-  { value: 'Office / management', label: 'Office', icon: '💼' },
-  { value: 'Laboratory / science / clinical', label: 'Lab/Clinical', icon: '🔬' },
-  { value: 'Media / creative', label: 'Media', icon: '🎬' },
-  { value: 'A mix of environments', label: 'Mixed', icon: '🔄' }
+  { value: 'On-field / practical', label: 'On-field / practical', icon: '⚽' },
+  { value: 'Office / management', label: 'Office / management', icon: '💼' },
+  { value: 'Laboratory / science / clinical', label: 'Laboratory / science / clinical', icon: '🔬' },
+  { value: 'Media / creative', label: 'Media / creative', icon: '🎬' },
+  { value: 'A mix of environments', label: 'A mix of environments', icon: '🔄' }
 ]
 
 const educationTrainingLevels = [
@@ -784,27 +789,27 @@ function goToStep(step: number) {
 // ── Review summary ─────────────────────────────────────────────────────────
 const reviewSections = computed(() => ({
   background: [
-    { label: 'Sport', value: form.primary_sport === 'Other' ? otherSport.value : form.primary_sport },
-    { label: 'Academic Level', value: form.academic_level },
-    { label: 'Years Active', value: form.participation_years },
-    { label: 'Level', value: form.participation_level }
+    { label: 'What is your primary sport of interest?', value: form.primary_sport === 'Other' ? otherSport.value : form.primary_sport },
+    { label: 'What is your current academic level?', value: form.academic_level },
+    { label: 'How long have you actively participated in this sport?', value: form.participation_years },
+    { label: 'What best describes your current participation level?', value: form.participation_level }
   ],
   skills: [
-    { label: 'Fitness', value: `${form.fitness_level}/5`, numValue: form.fitness_level },
-    { label: 'Technical Skill', value: `${form.technical_skill}/5`, numValue: form.technical_skill },
-    { label: 'Leadership', value: `${form.leadership}/5`, numValue: form.leadership },
-    { label: 'Data Comfort', value: `${form.data_comfort}/5`, numValue: form.data_comfort }
+    { label: 'Rate your physical fitness and conditioning level (1 = Very Low, 5 = Very High)', value: `${form.fitness_level}/5`, numValue: form.fitness_level },
+    { label: 'Rate your technical skill in your chosen sport (1 = Very Low, 5 = Very High)', value: `${form.technical_skill}/5`, numValue: form.technical_skill },
+    { label: 'Rate your leadership and teamwork ability (1 = Very Low, 5 = Very High)', value: `${form.leadership}/5`, numValue: form.leadership },
+    { label: 'Rate your comfort with data, analysis, or statistics (1 = Very Low, 5 = Very High)', value: `${form.data_comfort}/5`, numValue: form.data_comfort }
   ],
   aspirations: [
-    { label: 'Motivation', value: form.motivation },
-    { label: 'Career Priority', value: form.career_importance },
-    { label: 'Work Environment', value: form.work_environment }
+    { label: 'What is your PRIMARY motivation for participating in sport?', value: form.motivation },
+    { label: 'How important is sport to your future career plans?', value: form.career_importance },
+    { label: 'Which work environment do you prefer most?', value: form.work_environment }
   ],
   context: [
-    { label: 'Biggest Challenge', value: form.biggest_challenge },
-    { label: 'Injury History', value: form.injury_history },
-    { label: 'Interests', value: form.career_interests.join(', ') },
-    { label: 'Education/Training', value: form.education_training_level }
+    { label: 'What is your BIGGEST challenge in pursuing sport seriously?', value: form.biggest_challenge },
+    { label: 'Have you experienced any significant sports-related injury in the past 2 years?', value: form.injury_history },
+    { label: 'Which THREE sports career paths interest you the most? (Select up to three)', value: form.career_interests.join(', ') },
+    { label: 'What level of education or training are you realistically willing to pursue in the next 3-5 years?', value: form.education_training_level }
   ]
 }))
 
