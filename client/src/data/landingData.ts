@@ -117,7 +117,7 @@ export const steps: Step[] = [
   },
   {
     title: 'Complete the questionnaire',
-    description: 'Answer 14 questions covering your sport, academics, leadership, and career motivation.',
+    description: 'Answer 15 questions covering your sport, academics, leadership, and career motivation.',
     icon: '📝'
   },
   {
@@ -185,7 +185,7 @@ export const pathways: Pathway[] = [
 
 export const metrics: Metric[] = [
   { value: '11', label: 'Career pathways mapped' },
-  { value: '14', label: 'Profile dimensions' },
+  { value: '15', label: 'Profile dimensions' },
   { value: '6', label: 'Milestones per pathway' },
   { value: '3', label: 'User roles supported' }
 ]

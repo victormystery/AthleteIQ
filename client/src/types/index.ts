@@ -79,6 +79,7 @@ export interface QuestionnaireResponseData {
   biggest_challenge?: string
   injury_history?: string
   career_interests?: string[]
+  education_training_level?: string
   createdAt?: string
 }
 
