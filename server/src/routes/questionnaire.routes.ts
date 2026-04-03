@@ -37,6 +37,7 @@ router.use(authenticate)
  *               - motivation
  *               - career_importance
  *               - work_environment
+ *               - education_training_level
  *               - biggest_challenge
  *               - injury_history
  *               - career_interests
@@ -49,7 +50,6 @@ router.use(authenticate)
  *                   - Year 3
  *                   - Year 4
  *                   - Postgraduate
- *                   - Professional
  *               primary_sport:
  *                 type: string
  *                 minLength: 2
@@ -57,19 +57,18 @@ router.use(authenticate)
  *               participation_years:
  *                 type: string
  *                 enum:
- *                   - "< 1"
- *                   - 1-2
- *                   - 3-5
- *                   - "> 5"
+ *                   - Less than 1 year
+ *                   - 1-2 years
+ *                   - 3-5 years
+ *                   - More than 5 years
  *               participation_level:
  *                 type: string
  *                 enum:
  *                   - Not active
  *                   - Recreational
- *                   - Club
- *                   - Regional
- *                   - National
- *                   - Elite
+ *                   - University/School team
+ *                   - Club or academy
+ *                   - Elite/competitive pathway
  *               fitness_level:
  *                 type: integer
  *                 minimum: 1
@@ -89,43 +88,51 @@ router.use(authenticate)
  *               motivation:
  *                 type: string
  *                 enum:
- *                   - Competition
- *                   - Health
- *                   - Coaching
- *                   - Academic
- *                   - Fame
+ *                   - Competition and performance
+ *                   - Health and fitness
+ *                   - Helping or coaching others
+ *                   - Academic or career opportunity
+ *                   - Fame, media, or recognition
  *               career_importance:
  *                 type: string
  *                 enum:
- *                   - Financial security
- *                   - "Passion & purpose"
- *                   - Work-life balance
- *                   - Career progression
- *                   - Social impact
+ *                   - Not important
+ *                   - Slightly important
+ *                   - Moderately important
+ *                   - Very important
+ *                   - My main career focus
  *               work_environment:
  *                 type: string
  *                 enum:
- *                   - Field
- *                   - Office
- *                   - Lab
- *                   - Media
- *                   - Mixed
+ *                   - On-field / practical
+ *                   - Office / management
+ *                   - Laboratory / science / clinical
+ *                   - Media / creative
+ *                   - A mix of environments
+ *               education_training_level:
+ *                 type: string
+ *                 enum:
+ *                   - Short courses or certifications only
+ *                   - Diploma
+ *                   - Bachelor's degree or add-on program
+ *                   - Master's degree
+ *                   - Medical/clinical or doctoral pathway
  *               biggest_challenge:
  *                 type: string
  *                 enum:
- *                   - Lack of experience
- *                   - Academic pressure
+ *                   - Academic workload
+ *                   - Time management
  *                   - Financial constraints
- *                   - "Injury & health"
- *                   - Networking gaps
- *                   - Unclear goals
+ *                   - Injury risk or health
+ *                   - Lack of facilities or coaching
+ *                   - Motivation
  *               injury_history:
  *                 type: string
  *                 enum:
- *                   - No injuries
- *                   - Minor injuries
- *                   - Significant injuries
- *                   - Career-limiting injury
+ *                   - None
+ *                   - Minor (short recovery)
+ *                   - Moderate (missed competitions)
+ *                   - Severe (long-term impact)
  *               career_interests:
  *                 type: array
  *                 minItems: 1
@@ -294,19 +301,19 @@ router.post('/', validate(questionnaireSchema), submitQuestionnaire as any)
  *                             example: 65f7a6f5d2a8f8b6b85f0001
  *                           academic_level:
  *                             type: string
- *                             enum: [Year 1, Year 2, Year 3, Year 4, Postgraduate, Professional]
+ *                             enum: [Year 1, Year 2, Year 3, Year 4, Postgraduate]
  *                             example: Year 3
  *                           primary_sport:
  *                             type: string
  *                             example: Football
  *                           participation_years:
  *                             type: string
- *                             enum: ["< 1", "1-2", "3-5", "> 5"]
- *                             example: 3-5
+ *                             enum: [Less than 1 year, 1-2 years, 3-5 years, More than 5 years]
+ *                             example: 3-5 years
  *                           participation_level:
  *                             type: string
- *                             enum: [Not active, Recreational, Club, Regional, National, Elite]
- *                             example: Regional
+ *                             enum: [Not active, Recreational, University/School team, Club or academy, Elite/competitive pathway]
+ *                             example: University/School team
  *                           fitness_level:
  *                             type: integer
  *                             minimum: 1
@@ -329,24 +336,28 @@ router.post('/', validate(questionnaireSchema), submitQuestionnaire as any)
  *                             example: 2
  *                           motivation:
  *                             type: string
- *                             enum: [Competition, Health, Coaching, Academic, Fame]
- *                             example: Coaching
+ *                             enum: [Competition and performance, Health and fitness, Helping or coaching others, Academic or career opportunity, "Fame, media, or recognition"]
+ *                             example: Helping or coaching others
  *                           career_importance:
  *                             type: string
- *                             enum: [Financial security, "Passion & purpose", Work-life balance, Career progression, Social impact]
- *                             example: Passion & purpose
+ *                             enum: [Not important, Slightly important, Moderately important, Very important, My main career focus]
+ *                             example: Very important
  *                           work_environment:
  *                             type: string
- *                             enum: [Field, Office, Lab, Media, Mixed]
- *                             example: Field
+ *                             enum: ["On-field / practical", "Office / management", "Laboratory / science / clinical", "Media / creative", "A mix of environments"]
+ *                             example: On-field / practical
+ *                           education_training_level:
+ *                             type: string
+ *                             enum: [Short courses or certifications only, Diploma, "Bachelor's degree or add-on program", "Master's degree", Medical/clinical or doctoral pathway]
+ *                             example: Bachelor's degree or add-on program
  *                           biggest_challenge:
  *                             type: string
- *                             enum: [Lack of experience, Academic pressure, Financial constraints, "Injury & health", Networking gaps, Unclear goals]
- *                             example: Networking gaps
+ *                             enum: [Academic workload, Time management, Financial constraints, Injury risk or health, Lack of facilities or coaching, Motivation]
+ *                             example: Time management
  *                           injury_history:
  *                             type: string
- *                             enum: [No injuries, Minor injuries, Significant injuries, Career-limiting injury]
- *                             example: Minor injuries
+ *                             enum: [None, Minor (short recovery), Moderate (missed competitions), Severe (long-term impact)]
+ *                             example: Minor (short recovery)
  *                           career_interests:
  *                             type: array
  *                             items:

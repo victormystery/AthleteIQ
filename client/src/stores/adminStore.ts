@@ -88,6 +88,23 @@ export const useAdminStore = defineStore('admin', () => {
     }
   }
 
+  async function suspendUser(id: string, suspended: boolean): Promise<void> {
+    error.value = null
+    try {
+      const { data } = await adminService.suspendUser(id, suspended)
+      const updated = (data.data as { user: User }).user as User
+      const updateInList = (list: User[]) => {
+        const idx = list.findIndex(u => u._id === id)
+        if (idx > -1) list[idx] = { ...list[idx], suspended: updated.suspended }
+      }
+      updateInList(users.value)
+      updateInList(recentUsers.value)
+    } catch (err) {
+      error.value = extractError(err)
+      throw err
+    }
+  }
+
   async function updateUserRole(id: string, role: 'student' | 'career_advisor'): Promise<void> {
     error.value = null
     try {
@@ -130,6 +147,7 @@ export const useAdminStore = defineStore('admin', () => {
     fetchUsers,
     fetchAssessments,
     deleteUser,
+    suspendUser,
     updateUserRole,
     $reset
   }

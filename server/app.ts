@@ -3,13 +3,12 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import mongoSanitize from 'express-mongo-sanitize'
-import passport from 'passport'
 import swaggerUi from 'swagger-ui-express'
 import { env } from './src/config/env.js'
 import { swaggerSpec } from './src/config/swagger.js'
 import { morganStream } from './src/utils/logger.js'
 import { requestId } from './src/middleware/requestId.middleware.js'
-import { initPassport } from './src/config/passport.js'
+import { betterAuthHandler } from './src/config/betterAuth.js'
 import routes from './src/routes/index.js'
 import { apiLimiter } from './src/middleware/rateLimit.middleware.js'
 import { errorHandler, notFoundHandler } from './src/middleware/error.middleware.js'
@@ -30,10 +29,6 @@ function isAllowedDevOrigin(origin: string): boolean {
     return false
   }
 }
-
-// ── Passport (Google OAuth) ──────────────────────────────────────────────────
-initPassport()
-app.use(passport.initialize())
 
 // ── Request ID — must be first so all downstream middleware can use req.id ──
 app.use(requestId)
@@ -58,6 +53,9 @@ app.use(cors({
   },
   credentials: true
 }))
+
+// ── BetterAuth routes (must run before express.json) ───────────────────────
+app.all('/api/bauth/*', betterAuthHandler)
 
 // ── Body parsing ────────────────────────────────────────────────────────────
 app.use(express.json({ limit: '10kb' }))

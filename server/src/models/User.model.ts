@@ -8,6 +8,7 @@ export interface IUser extends Document {
   password?: string
   googleId?: string
   role: 'student' | 'career_advisor' | 'admin'
+  suspended: boolean
   createdAt: Date
   updatedAt: Date
   comparePassword(candidatePassword: string): Promise<boolean>
@@ -29,7 +30,7 @@ const userSchema = new Schema<IUser>(
       unique: true,
       lowercase: true,
       trim: true,
-      match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Please provide a valid email']
+      match: [/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/, 'Please provide a valid email address']
     },
     password: {
       type: String,
@@ -45,6 +46,10 @@ const userSchema = new Schema<IUser>(
       type: String,
       enum: ['student', 'career_advisor', 'admin'],
       default: 'student'
+    },
+    suspended: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true }

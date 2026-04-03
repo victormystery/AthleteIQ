@@ -60,9 +60,10 @@ export class CareerService {
     // Call ML microservice (with graceful fallback)
     let mlResult: MLPredictResponse
     try {
+      const mlPayload = this.toLegacyMlPayload(payload)
       const response = await axios.post<MLPredictResponse>(
         `${env.mlServiceUrl}/predict`,
-        payload,
+        mlPayload,
         { timeout: 10000 }
       )
       mlResult = response.data
@@ -168,6 +169,78 @@ export class CareerService {
   }
 
   /**
+   * Map current questionnaire labels to legacy values expected by the ML service.
+   * This keeps ML inference stable while allowing richer UX labels in the product.
+   */
+  private toLegacyMlPayload(payload: MLPredictPayload): MLPredictPayload {
+    const participationYearsMap: Record<string, string> = {
+      'Less than 1 year': '< 1',
+      '1-2 years': '1-2',
+      '3-5 years': '3-5',
+      'More than 5 years': '> 5'
+    }
+
+    const participationLevelMap: Record<string, string> = {
+      'Not active': 'Not active',
+      Recreational: 'Recreational',
+      'University/School team': 'Club',
+      'Club or academy': 'Regional',
+      'Elite/competitive pathway': 'Elite'
+    }
+
+    const motivationMap: Record<string, string> = {
+      'Competition and performance': 'Competition',
+      'Health and fitness': 'Health',
+      'Helping or coaching others': 'Coaching',
+      'Academic or career opportunity': 'Academic',
+      'Fame, media, or recognition': 'Fame'
+    }
+
+    const careerImportanceMap: Record<string, string> = {
+      'Not important': 'Work-life balance',
+      'Slightly important': 'Work-life balance',
+      'Moderately important': 'Career progression',
+      'Very important': 'Passion & purpose',
+      'My main career focus': 'Passion & purpose'
+    }
+
+    const workEnvironmentMap: Record<string, string> = {
+      'On-field / practical': 'Field',
+      'Office / management': 'Office',
+      'Laboratory / science / clinical': 'Lab',
+      'Media / creative': 'Media',
+      'A mix of environments': 'Mixed'
+    }
+
+    const biggestChallengeMap: Record<string, string> = {
+      'Academic workload': 'Academic pressure',
+      'Time management': 'Unclear goals',
+      'Financial constraints': 'Financial constraints',
+      'Injury risk or health': 'Injury & health',
+      'Lack of facilities or coaching': 'Lack of experience',
+      Motivation: 'Unclear goals'
+    }
+
+    const injuryHistoryMap: Record<string, string> = {
+      None: 'No injuries',
+      'Minor (short recovery)': 'Minor injuries',
+      'Moderate (missed competitions)': 'Significant injuries',
+      'Severe (long-term impact)': 'Career-limiting injury'
+    }
+
+    return {
+      ...payload,
+      participation_years: participationYearsMap[payload.participation_years] ?? payload.participation_years,
+      participation_level: participationLevelMap[payload.participation_level] ?? payload.participation_level,
+      motivation: motivationMap[payload.motivation] ?? payload.motivation,
+      career_importance: careerImportanceMap[payload.career_importance] ?? payload.career_importance,
+      work_environment: workEnvironmentMap[payload.work_environment] ?? payload.work_environment,
+      biggest_challenge: biggestChallengeMap[payload.biggest_challenge] ?? payload.biggest_challenge,
+      injury_history: injuryHistoryMap[payload.injury_history] ?? payload.injury_history
+    }
+  }
+
+  /**
    * Rule-based fallback when ML microservice is unavailable.
    * Uses a simple scoring approach based on key questionnaire features.
    */
@@ -196,7 +269,7 @@ export class CareerService {
     if (payload.fitness_level >= 3) scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.10
 
     // Academic level → psychology, law, science
-    if (payload.academic_level === 'Postgraduate' || payload.academic_level === 'Professional') {
+    if (payload.academic_level === 'Postgraduate') {
       scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.10
       scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.10
       scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.05
@@ -204,20 +277,20 @@ export class CareerService {
 
     // Motivation adjustments
     switch (payload.motivation) {
-      case 'Coaching': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.20; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.10; break
-      case 'Health': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.15; scores['recreational-fitness-industry'] = (scores['recreational-fitness-industry'] ?? 0.5) + 0.10; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.10; break
-      case 'Competition': scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.20; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; break
-      case 'Academic': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.20; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.10; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.05; break
-      case 'Fame': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.20; scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.05; break
+      case 'Helping or coaching others': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.20; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.10; break
+      case 'Health and fitness': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.15; scores['recreational-fitness-industry'] = (scores['recreational-fitness-industry'] ?? 0.5) + 0.10; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.10; break
+      case 'Competition and performance': scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.20; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; break
+      case 'Academic or career opportunity': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.20; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.10; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.05; break
+      case 'Fame, media, or recognition': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.20; scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.05; break
     }
 
     // Work environment
     switch (payload.work_environment) {
-      case 'Field': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.05; scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.05; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.08; break
-      case 'Lab': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.10; scores['sports-analytics'] = (scores['sports-analytics'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
-      case 'Office': scores['sports-management'] = (scores['sports-management'] ?? 0.5) + 0.10; scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.10; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; break
-      case 'Media': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.15; break
-      case 'Mixed': scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
+      case 'On-field / practical': scores['coaching-development'] = (scores['coaching-development'] ?? 0.5) + 0.05; scores['high-performance-sport'] = (scores['high-performance-sport'] ?? 0.5) + 0.05; scores['physical-education-teaching'] = (scores['physical-education-teaching'] ?? 0.5) + 0.08; break
+      case 'Laboratory / science / clinical': scores['sports-science-medicine'] = (scores['sports-science-medicine'] ?? 0.5) + 0.10; scores['sports-analytics'] = (scores['sports-analytics'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
+      case 'Office / management': scores['sports-management'] = (scores['sports-management'] ?? 0.5) + 0.10; scores['sports-law-ethics'] = (scores['sports-law-ethics'] ?? 0.5) + 0.10; scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; break
+      case 'Media / creative': scores['sports-media-journalism'] = (scores['sports-media-journalism'] ?? 0.5) + 0.15; break
+      case 'A mix of environments': scores['sports-psychology'] = (scores['sports-psychology'] ?? 0.5) + 0.05; scores['sports-nutrition'] = (scores['sports-nutrition'] ?? 0.5) + 0.05; break
     }
 
     // Sort and scale to a realistic confidence range (0.48–0.85)

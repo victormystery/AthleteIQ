@@ -35,6 +35,13 @@ export default {
   deleteUser: (id: string): Promise<AxiosResponse<ApiResponse<null>>> =>
     api.delete(`/admin/users/${id}`),
 
+  /** PATCH /api/admin/users/:id/suspend — suspend or unsuspend a user */
+  suspendUser: (
+    id: string,
+    suspended: boolean
+  ): Promise<AxiosResponse<ApiResponse<{ user: unknown }>>> =>
+    api.patch(`/admin/users/${id}/suspend`, { suspended }),
+
   /** PATCH /api/admin/users/:id/role — change a user's role */
   updateUserRole: (
     id: string,

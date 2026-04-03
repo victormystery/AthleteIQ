@@ -104,9 +104,22 @@
             >
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <UserAvatar :name="u.name" size="sm" />
+                  <div class="relative shrink-0">
+                    <UserAvatar :name="u.name" size="sm" />
+                    <div
+                      v-if="u.suspended"
+                      class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-red-500 rounded-full border-2 border-white"
+                      title="Suspended"
+                    />
+                  </div>
                   <div class="min-w-0">
-                    <p class="text-sm font-semibold text-slate-800 truncate">{{ u.name }}</p>
+                    <div class="flex items-center gap-2">
+                      <p class="text-sm font-semibold text-slate-800 truncate">{{ u.name }}</p>
+                      <span
+                        v-if="u.suspended"
+                        class="shrink-0 text-[10px] px-1.5 py-0.5 rounded-md font-semibold bg-red-100 text-red-600 border border-red-200"
+                      >Suspended</span>
+                    </div>
                     <p class="text-xs text-slate-400 truncate mt-0.5">{{ u.email }}</p>
                   </div>
                 </div>
@@ -125,9 +138,10 @@
               <td class="px-6 py-4 text-right">
                 <template v-if="u.role !== 'admin'">
                   <BaseButton
+                    tag="button"
                     variant="ghost"
                     size="sm"
-                    :disabled="!!deleting || !!updatingRole"
+                    :disabled="!!deleting || !!updatingRole || !!suspending"
                     class="mr-1"
                     @click="openRoleModal(u)"
                   >
@@ -140,10 +154,30 @@
                     Role
                   </BaseButton>
                   <BaseButton
+                    tag="button"
+                    :variant="u.suspended ? 'outline' : 'ghost'"
+                    size="sm"
+                    :loading="suspending === u._id"
+                    :disabled="!!deleting || !!updatingRole || !!suspending"
+                    class="mr-1"
+                    @click="handleSuspend(u)"
+                  >
+                    <svg v-if="u.suspended" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+                      <path d="M9 12l2 2 4-4"/>
+                      <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                    <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                    </svg>
+                    {{ u.suspended ? 'Unsuspend' : 'Suspend' }}
+                  </BaseButton>
+                  <BaseButton
+                    tag="button"
                     variant="danger"
                     size="sm"
                     :loading="deleting === u._id"
-                    :disabled="!!deleting || !!updatingRole"
+                    :disabled="!!deleting || !!updatingRole || !!suspending"
                     @click="confirmDelete(u)"
                   >
                     <svg viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
@@ -169,6 +203,7 @@
           </p>
           <div class="flex items-center gap-2">
             <BaseButton
+              tag="button"
               variant="secondary"
               size="sm"
               :disabled="pagination.page <= 1 || loading"
@@ -180,6 +215,7 @@
               Previous
             </BaseButton>
             <BaseButton
+              tag="button"
               variant="secondary"
               size="sm"
               :disabled="pagination.page >= pagination.pages || loading"
@@ -214,8 +250,8 @@
         </div>
       </div>
       <template #footer>
-        <BaseButton variant="secondary" @click="showDeleteModal = false">Cancel</BaseButton>
-        <BaseButton variant="danger" :loading="!!deleting" @click="handleDelete">Delete User</BaseButton>
+        <BaseButton tag="button" variant="secondary" @click="showDeleteModal = false">Cancel</BaseButton>
+        <BaseButton tag="button" variant="danger" :loading="!!deleting" @click="handleDelete">Delete User</BaseButton>
       </template>
     </BaseModal>
 
@@ -250,8 +286,9 @@
         </p>
       </div>
       <template #footer>
-        <BaseButton variant="secondary" @click="showRoleModal = false">Cancel</BaseButton>
+        <BaseButton tag="button" variant="secondary" @click="showRoleModal = false">Cancel</BaseButton>
         <BaseButton
+          tag="button"
           :loading="!!updatingRole"
           :disabled="!selectedRole || selectedRole === roleChangeUser?.role"
           @click="handleRoleChange"
@@ -283,6 +320,7 @@ const { users, pagination, loading, error } = storeToRefs(adminStore)
 const showDeleteModal = ref(false)
 const userToDelete = ref<User | null>(null)
 const deleting = ref<string | null>(null)
+const suspending = ref<string | null>(null)
 const searchQuery = ref('')
 const roleFilter = ref<'all' | 'student' | 'career_advisor' | 'admin'>('all')
 
@@ -363,6 +401,19 @@ async function handleDelete() {
   } finally {
     deleting.value = null
     userToDelete.value = null
+  }
+}
+
+async function handleSuspend(user: User) {
+  suspending.value = user._id
+  const isSuspended = !!user.suspended
+  try {
+    await adminStore.suspendUser(user._id, !isSuspended)
+    toast.success(isSuspended ? `${user.name} has been unsuspended.` : `${user.name} has been suspended.`)
+  } catch {
+    toast.error('Failed to update suspension status. Please try again.')
+  } finally {
+    suspending.value = null
   }
 }
 

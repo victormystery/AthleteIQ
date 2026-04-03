@@ -3,6 +3,7 @@ export interface User {
   name: string
   email: string
   role: 'student' | 'career_advisor' | 'admin'
+  suspended?: boolean
   createdAt: string
   updatedAt: string
 }
@@ -78,6 +79,7 @@ export interface QuestionnaireResponseData {
   biggest_challenge?: string
   injury_history?: string
   career_interests?: string[]
+  education_training_level?: string
   createdAt?: string
 }
 

@@ -384,20 +384,20 @@ function toggleAssessment(id: string) {
 
 function getAssessmentFields(q: QuestionnaireResponseData) {
   return [
-    { label: 'Sport', value: q.primary_sport ?? '—' },
-    { label: 'Academic Level', value: q.academic_level ?? '—' },
-    { label: 'Years Active', value: q.participation_years ? `${q.participation_years} years` : '—' },
-    { label: 'Level', value: q.participation_level ?? '—' },
+    { label: 'What is your primary sport of interest?', value: q.primary_sport ?? '—' },
+    { label: 'What is your current academic level?', value: q.academic_level ?? '—' },
+    { label: 'How long have you actively participated in this sport?', value: q.participation_years ?? '—' },
+    { label: 'What best describes your current participation level?', value: q.participation_level ?? '—' },
     { label: 'Fitness', value: q.fitness_level != null ? `${q.fitness_level}/5` : '—' },
     { label: 'Technical Skill', value: q.technical_skill != null ? `${q.technical_skill}/5` : '—' },
     { label: 'Leadership', value: q.leadership != null ? `${q.leadership}/5` : '—' },
     { label: 'Data Comfort', value: q.data_comfort != null ? `${q.data_comfort}/5` : '—' },
-    { label: 'Motivation', value: q.motivation ?? '—' },
-    { label: 'Career Priority', value: q.career_importance ?? '—' },
-    { label: 'Work Environment', value: q.work_environment ?? '—' },
-    { label: 'Challenge', value: q.biggest_challenge ?? '—' },
-    { label: 'Injury History', value: q.injury_history ?? '—' },
-    { label: 'Interests', value: q.career_interests?.join(', ') ?? '—' },
+    { label: 'What is your PRIMARY motivation for participating in sport?', value: q.motivation ?? '—' },
+    { label: 'How important is sport to your future career plans?', value: q.career_importance ?? '—' },
+    { label: 'Which work environment do you prefer most?', value: q.work_environment ?? '—' },
+    { label: 'What is your BIGGEST challenge in pursuing sport seriously?', value: q.biggest_challenge ?? '—' },
+    { label: 'Have you experienced any significant sports-related injury in the past 2 years?', value: q.injury_history ?? '—' },
+    { label: 'Which THREE sports career paths interest you the most? (Select up to three)', value: q.career_interests?.join(', ') ?? '—' },
   ]
 }
 

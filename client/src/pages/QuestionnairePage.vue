@@ -1,6 +1,10 @@
 <template>
   <div class="max-w-3xl mx-auto">
 
+    <BaseAlert type="info" :show="true" class="mb-6">
+      This questionnaire explores students' sports participation, skills, motivations, and career interests. Responses will be used to recommend suitable sports career pathways and educational programs. All responses are confidential and for academic research purposes only.
+    </BaseAlert>
+
     <!-- ── Step Indicator ───────────────────────────────────────────────── -->
     <div class="mb-8 px-1">
       <div class="flex items-center">
@@ -63,16 +67,33 @@
         <!-- ── Step 1: Athletic Background ─────────────────────────────── -->
         <div v-if="currentStep === 1" class="flex flex-col gap-7">
 
-          <!-- Sport input -->
+          <!-- Primary sport -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Primary Sport <span class="text-red-500">*</span>
+              What is your primary sport of interest? <span class="text-red-500">*</span>
             </label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <button
+                v-for="opt in primarySportOptions" :key="opt"
+                type="button"
+                :class="[
+                  'relative px-3 py-2.5 rounded-xl border text-sm font-medium transition-all text-center',
+                  form.primary_sport === opt
+                    ? 'border-primary-400 bg-primary-50 text-primary-700 shadow-sm'
+                    : 'border-slate-200 text-slate-600 hover:border-primary-200 hover:bg-slate-50'
+                ]"
+                @click="form.primary_sport = opt"
+              >
+                <span v-if="form.primary_sport === opt" class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-400" />
+                {{ opt }}
+              </button>
+            </div>
             <input
-              v-model="form.primary_sport"
+              v-if="form.primary_sport === 'Other'"
+              v-model="otherSport"
               type="text"
-              placeholder="e.g. Football, Basketball, Athletics…"
-              class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-shadow"
+              placeholder="Please specify your sport"
+              class="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-shadow"
             />
             <p v-if="errors.primary_sport" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -83,7 +104,7 @@
           <!-- Academic level -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Academic Level <span class="text-red-500">*</span>
+              What is your current academic level? <span class="text-red-500">*</span>
             </label>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
               <button
@@ -107,23 +128,23 @@
             </p>
           </div>
 
-          <!-- Years of participation -->
+          <!-- How long have you actively participated in this sport? -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Years of Participation <span class="text-red-500">*</span>
+              How long have you actively participated in this sport? <span class="text-red-500">*</span>
             </label>
             <div class="flex gap-2">
               <button
-                v-for="opt in participationYears" :key="opt"
+                v-for="opt in participationYearOptions" :key="opt.value"
                 type="button"
                 :class="[
                   'flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-all',
-                  form.participation_years === opt
+                  form.participation_years === opt.value
                     ? 'border-primary-400 bg-primary-500 text-white shadow-sm'
                     : 'border-slate-200 text-slate-600 hover:border-primary-200 hover:bg-slate-50'
                 ]"
-                @click="form.participation_years = opt"
-              >{{ opt }}y</button>
+                @click="form.participation_years = opt.value"
+              >{{ opt.label }}</button>
             </div>
             <p v-if="errors.participation_years" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -131,10 +152,10 @@
             </p>
           </div>
 
-          <!-- Participation level -->
+          <!-- What best describes your current participation level? -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Participation Level <span class="text-red-500">*</span>
+              What best describes your current participation level? <span class="text-red-500">*</span>
             </label>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
               <button
@@ -165,7 +186,7 @@
             <div class="flex items-start justify-between gap-2">
               <div>
                 <p class="text-sm font-semibold text-slate-700">{{ skill.label }}</p>
-                <p class="text-xs text-slate-400 mt-0.5">{{ skill.hint }}</p>
+                <p v-if="skill.hint" class="text-xs text-slate-400 mt-0.5">{{ skill.hint }}</p>
               </div>
               <div :class="[
                 'shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold transition-colors',
@@ -201,7 +222,7 @@
           <!-- Motivation -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Primary Motivation <span class="text-red-500">*</span>
+              What is your PRIMARY motivation for participating in sport? <span class="text-red-500">*</span>
             </label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
@@ -232,7 +253,7 @@
           <!-- Career importance -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              What matters most in your career? <span class="text-red-500">*</span>
+              How important is sport to your future career plans? <span class="text-red-500">*</span>
             </label>
             <div class="flex flex-col gap-2">
               <button
@@ -262,7 +283,7 @@
           <!-- Work environment -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Preferred Work Environment <span class="text-red-500">*</span>
+              Which work environment do you prefer most? <span class="text-red-500">*</span>
             </label>
             <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
               <button
@@ -285,6 +306,7 @@
               {{ errors.work_environment }}
             </p>
           </div>
+
         </div>
 
         <!-- ── Step 4: Context & Interests ─────────────────────────────── -->
@@ -293,7 +315,7 @@
           <!-- Biggest challenge -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Biggest Challenge <span class="text-red-500">*</span>
+              What is your BIGGEST challenge in pursuing sport seriously? <span class="text-red-500">*</span>
             </label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
@@ -321,7 +343,7 @@
           <!-- Injury history -->
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-2.5">
-              Injury History <span class="text-red-500">*</span>
+              Have you experienced any significant sports-related injury in the past 2 years? <span class="text-red-500">*</span>
             </label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
@@ -350,7 +372,7 @@
           <div>
             <div class="flex items-baseline justify-between mb-2.5">
               <label class="text-sm font-semibold text-slate-700">
-                Career Interests <span class="text-red-500">*</span>
+                Which THREE sports career paths interest you the most? (Select up to three) <span class="text-red-500">*</span>
               </label>
               <span class="text-xs text-slate-400 font-medium">
                 {{ form.career_interests.length }}/3 selected
@@ -391,6 +413,35 @@
               {{ errors.career_interests }}
             </p>
           </div>
+
+          <!-- Education/training willingness -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2.5">
+              What level of education or training are you realistically willing to pursue in the next 3-5 years? <span class="text-red-500">*</span>
+            </label>
+            <div class="flex flex-col gap-2">
+              <button
+                v-for="opt in educationTrainingLevels" :key="opt"
+                type="button"
+                :class="[
+                  'relative flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all',
+                  form.education_training_level === opt
+                    ? 'border-primary-400 bg-primary-50 shadow-sm'
+                    : 'border-slate-200 hover:border-primary-200 hover:bg-slate-50'
+                ]"
+                @click="form.education_training_level = opt"
+              >
+                <span :class="['text-sm font-medium', form.education_training_level === opt ? 'text-primary-700' : 'text-slate-700']">{{ opt }}</span>
+                <span v-if="form.education_training_level === opt" class="ml-auto shrink-0 w-5 h-5 rounded-full bg-primary-500 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" class="w-3 h-3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </button>
+            </div>
+            <p v-if="errors.education_training_level" class="mt-1.5 flex items-center gap-1 text-xs text-red-500">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              {{ errors.education_training_level }}
+            </p>
+          </div>
         </div>
 
         <!-- ── Step 5: Review & Submit ───────────────────────────────────── -->
@@ -400,11 +451,11 @@
           <div>
             <div class="flex items-center justify-between mb-3">
               <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Background</p>
-              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="currentStep = 1">Edit</button>
+              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="goToStep(1)">Edit</button>
             </div>
             <div class="bg-slate-50 rounded-xl border border-slate-100 divide-y divide-slate-100">
               <div v-for="item in reviewSections.background" :key="item.label" class="flex items-center justify-between px-4 py-2.5 gap-4">
-                <span class="text-xs font-semibold text-slate-500 w-32 shrink-0">{{ item.label }}</span>
+                <span class="text-xs font-semibold text-slate-500 w-56 shrink-0 leading-snug">{{ item.label }}</span>
                 <span class="text-sm text-slate-800 text-right font-medium">{{ item.value }}</span>
               </div>
             </div>
@@ -414,7 +465,7 @@
           <div>
             <div class="flex items-center justify-between mb-3">
               <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Skills</p>
-              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="currentStep = 2">Edit</button>
+              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="goToStep(2)">Edit</button>
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div
@@ -437,11 +488,11 @@
           <div>
             <div class="flex items-center justify-between mb-3">
               <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Aspirations</p>
-              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="currentStep = 3">Edit</button>
+              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="goToStep(3)">Edit</button>
             </div>
             <div class="bg-slate-50 rounded-xl border border-slate-100 divide-y divide-slate-100">
               <div v-for="item in reviewSections.aspirations" :key="item.label" class="flex items-center justify-between px-4 py-2.5 gap-4">
-                <span class="text-xs font-semibold text-slate-500 w-32 shrink-0">{{ item.label }}</span>
+                <span class="text-xs font-semibold text-slate-500 w-56 shrink-0 leading-snug">{{ item.label }}</span>
                 <span class="text-sm text-slate-800 text-right font-medium">{{ item.value }}</span>
               </div>
             </div>
@@ -451,11 +502,11 @@
           <div>
             <div class="flex items-center justify-between mb-3">
               <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Context</p>
-              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="currentStep = 4">Edit</button>
+              <button type="button" class="text-xs font-semibold text-primary-500 hover:text-primary-700 transition-colors" @click="goToStep(4)">Edit</button>
             </div>
             <div class="bg-slate-50 rounded-xl border border-slate-100 divide-y divide-slate-100">
               <div v-for="item in reviewSections.context" :key="item.label" class="flex items-center justify-between px-4 py-2.5 gap-4">
-                <span class="text-xs font-semibold text-slate-500 w-32 shrink-0">{{ item.label }}</span>
+                <span class="text-xs font-semibold text-slate-500 w-56 shrink-0 leading-snug">{{ item.label }}</span>
                 <span class="text-sm text-slate-800 text-right font-medium">{{ item.value }}</span>
               </div>
             </div>
@@ -472,7 +523,7 @@
           v-if="currentStep > 1"
           type="button"
           class="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 border border-slate-200 bg-white hover:bg-slate-50 transition-colors"
-          @click="currentStep--"
+          @click="goToStep(currentStep - 1)"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
             <polyline points="15 18 9 12 15 6"/>
@@ -529,6 +580,7 @@ const totalSteps = 5
 const currentStep = ref(1)
 const submitting = ref(false)
 const submitError = ref('')
+const otherSport = ref('')
 
 const stepTitles = [
   'Athletic Background',
@@ -543,7 +595,7 @@ const stepIcons = ['🏅', '📊', '🎯', '🔍', '✅']
 const stepDescriptions = [
   'Tell us about your sport and experience level.',
   'Rate yourself honestly — this helps us match you accurately.',
-  'What drives you and what kind of work do you want to do?',
+  'What drives you, your career focus, and preferred work environment.',
   'Help us understand your situation and specific interests.',
   'Everything look right? Submit to get your personalised recommendations.'
 ]
@@ -561,6 +613,7 @@ const form = reactive({
   motivation: '',
   career_importance: '',
   work_environment: '',
+  education_training_level: '',
   biggest_challenge: '',
   injury_history: '',
   career_interests: [] as string[]
@@ -569,68 +622,82 @@ const form = reactive({
 const errors = reactive<Record<string, string>>({})
 
 // ── Options ────────────────────────────────────────────────────────────────
-const academicLevels = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate', 'Professional']
-const participationYears = ['< 1', '1-2', '3-5', '> 5']
-const participationLevels = ['Not active', 'Recreational', 'Club', 'Regional', 'National', 'Elite']
+const academicLevels = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate']
+const primarySportOptions = ['Football (Soccer)', 'Basketball', 'Athletics / Track & Field', 'Volleyball', 'Rugby', 'Other']
+const participationYearOptions = [
+  { value: 'Less than 1 year', label: 'Less than 1 year' },
+  { value: '1-2 years', label: '1-2 years' },
+  { value: '3-5 years', label: '3-5 years' },
+  { value: 'More than 5 years', label: 'More than 5 years' }
+]
+const participationLevels = ['Not active', 'Recreational', 'University/School team', 'Club or academy', 'Elite/competitive pathway']
 
 const skillFields = [
-  { key: 'fitness_level', label: 'Fitness Level', hint: 'Your overall physical conditioning and endurance.', minLabel: 'Very low', maxLabel: 'Elite' },
-  { key: 'technical_skill', label: 'Technical Skill', hint: 'Your mastery of sport-specific techniques and tactics.', minLabel: 'Beginner', maxLabel: 'Elite' },
-  { key: 'leadership', label: 'Leadership', hint: 'Your ability to lead, motivate and mentor others.', minLabel: 'Prefer to follow', maxLabel: 'Natural leader' },
-  { key: 'data_comfort', label: 'Data & Analytics Comfort', hint: 'How comfortable you are working with numbers and data.', minLabel: 'Avoid data', maxLabel: 'Love data' }
+  { key: 'fitness_level', label: 'Rate your physical fitness and conditioning level (1 = Very Low, 5 = Very High)', hint: '', minLabel: 'Very low', maxLabel: 'Very high' },
+  { key: 'technical_skill', label: 'Rate your technical skill in your chosen sport (1 = Very Low, 5 = Very High)', hint: '', minLabel: 'Very low', maxLabel: 'Very high' },
+  { key: 'leadership', label: 'Rate your leadership and teamwork ability (1 = Very Low, 5 = Very High)', hint: '', minLabel: 'Very low', maxLabel: 'Very high' },
+  { key: 'data_comfort', label: 'Rate your comfort with data, analysis, or statistics (1 = Very Low, 5 = Very High)', hint: '', minLabel: 'Very low', maxLabel: 'Very high' }
 ]
 
 const motivations = [
-  { value: 'Coaching', label: 'Coaching others', icon: '🏋️', description: 'Helping athletes reach their potential' },
-  { value: 'Health', label: 'Health & wellbeing', icon: '💚', description: 'Improving physical and mental health' },
-  { value: 'Competition', label: 'High performance', icon: '🥇', description: 'Pushing limits in elite environments' },
-  { value: 'Academic', label: 'Research & science', icon: '🔬', description: 'Advancing sports science knowledge' },
-  { value: 'Fame', label: 'Media & visibility', icon: '🎙️', description: 'Communicating sport to the world' }
+  { value: 'Competition and performance', label: 'Competition and performance', icon: '🥇', description: 'Chasing results and high-level outcomes' },
+  { value: 'Health and fitness', label: 'Health and fitness', icon: '💚', description: 'Building lifelong physical wellbeing' },
+  { value: 'Helping or coaching others', label: 'Helping or coaching others', icon: '🏋️', description: 'Supporting athlete development' },
+  { value: 'Academic or career opportunity', label: 'Academic or career opportunity', icon: '🎓', description: 'Using sport as a career pathway' },
+  { value: 'Fame, media, or recognition', label: 'Fame, media, or recognition', icon: '🎙️', description: 'Visibility, influence, and public impact' }
 ]
 
 const careerImportance = [
-  { value: 'Financial security', label: 'Financial security', icon: '💰' },
-  { value: 'Passion & purpose', label: 'Passion & purpose', icon: '🔥' },
-  { value: 'Work-life balance', label: 'Work-life balance', icon: '⚖️' },
-  { value: 'Career progression', label: 'Career progression', icon: '📈' },
-  { value: 'Social impact', label: 'Social impact', icon: '🌍' }
+  { value: 'Not important', label: 'Not important', icon: '▫️' },
+  { value: 'Slightly important', label: 'Slightly important', icon: '◽' },
+  { value: 'Moderately important', label: 'Moderately important', icon: '◻️' },
+  { value: 'Very important', label: 'Very important', icon: '🔷' },
+  { value: 'My main career focus', label: 'My main career focus', icon: '🎯' }
 ]
 
 const workEnvironments = [
-  { value: 'Field', label: 'Field', icon: '⚽' },
-  { value: 'Office', label: 'Office', icon: '💼' },
-  { value: 'Lab', label: 'Lab', icon: '🔬' },
-  { value: 'Media', label: 'Media', icon: '🎬' },
-  { value: 'Mixed', label: 'Mixed', icon: '🔄' }
+  { value: 'On-field / practical', label: 'On-field / practical', icon: '⚽' },
+  { value: 'Office / management', label: 'Office / management', icon: '💼' },
+  { value: 'Laboratory / science / clinical', label: 'Laboratory / science / clinical', icon: '🔬' },
+  { value: 'Media / creative', label: 'Media / creative', icon: '🎬' },
+  { value: 'A mix of environments', label: 'A mix of environments', icon: '🔄' }
+]
+
+const educationTrainingLevels = [
+  'Short courses or certifications only',
+  'Diploma',
+  "Bachelor's degree or add-on program",
+  "Master's degree",
+  'Medical/clinical or doctoral pathway'
 ]
 
 const biggestChallenges = [
-  { value: 'Lack of experience', label: 'Lack of experience', icon: '📋' },
-  { value: 'Academic pressure', label: 'Academic pressure', icon: '📚' },
+  { value: 'Academic workload', label: 'Academic workload', icon: '📚' },
+  { value: 'Time management', label: 'Time management', icon: '⏱️' },
   { value: 'Financial constraints', label: 'Financial constraints', icon: '💸' },
-  { value: 'Injury & health', label: 'Injury & health', icon: '🩹' },
-  { value: 'Networking gaps', label: 'Networking gaps', icon: '🤝' },
-  { value: 'Unclear goals', label: 'Unclear goals', icon: '🧭' }
+  { value: 'Injury risk or health', label: 'Injury risk or health', icon: '🩹' },
+  { value: 'Lack of facilities or coaching', label: 'Lack of facilities or coaching', icon: '🏟️' },
+  { value: 'Motivation', label: 'Motivation', icon: '🧭' }
 ]
 
 const injuryOptions = [
-  { value: 'No injuries', label: 'No injuries', icon: '✅' },
-  { value: 'Minor injuries', label: 'Minor injuries', icon: '🟡' },
-  { value: 'Significant injuries', label: 'Significant injuries', icon: '🟠' },
-  { value: 'Career-limiting injury', label: 'Career-limiting injury', icon: '🔴' }
+  { value: 'None', label: 'None', icon: '✅' },
+  { value: 'Minor (short recovery)', label: 'Minor (short recovery)', icon: '🟡' },
+  { value: 'Moderate (missed competitions)', label: 'Moderate (missed competitions)', icon: '🟠' },
+  { value: 'Severe (long-term impact)', label: 'Severe (long-term impact)', icon: '🔴' }
 ]
 
 const careerInterestOptions = [
-  'Coaching & Mentoring',
-  'Sports Management',
-  'Data & Analytics',
-  'Health & Science',
-  'Media & Communication',
-  'Fitness & Training',
-  'Education & Teaching',
-  'Nutrition',
-  'Psychology',
-  'Law & Governance'
+  'Professional athlete',
+  'Coach / Coaching education',
+  'Strength & conditioning / Fitness coach',
+  'Sports science / Performance science',
+  'Sports physiotherapy / Rehabilitation',
+  'Sports analytics / Performance analysis',
+  'Sports management / Administration',
+  'Sports media / Journalism / Content creation',
+  'Officiating / Refereeing',
+  'Community sports development'
 ]
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -648,22 +715,53 @@ function validateStep(step: number): boolean {
   Object.keys(errors).forEach(k => delete errors[k])
 
   if (step === 1) {
-    if (!form.primary_sport.trim() || form.primary_sport.trim().length < 2) errors.primary_sport = 'Please enter your primary sport'
+    if (!form.primary_sport) {
+      errors.primary_sport = 'Please select your primary sport'
+    } else if (form.primary_sport === 'Other' && (!otherSport.value.trim() || otherSport.value.trim().length < 2)) {
+      errors.primary_sport = 'Please specify your sport'
+    }
     if (!form.academic_level) errors.academic_level = 'Please select your academic level'
-    if (!form.participation_years) errors.participation_years = 'Please select years of participation'
+    if (!form.participation_years) errors.participation_years = 'Please select how long you have actively participated in this sport'
     if (!form.participation_level) errors.participation_level = 'Please select your participation level'
+  }
+
+  if (step === 2) {
+    // Rating fields always have defaults (1-5), no validation needed
   }
 
   if (step === 3) {
     if (!form.motivation) errors.motivation = 'Please select your motivation'
-    if (!form.career_importance) errors.career_importance = 'Please select what matters most'
+    if (!form.career_importance) errors.career_importance = 'Please select career importance'
     if (!form.work_environment) errors.work_environment = 'Please select a work environment'
   }
 
   if (step === 4) {
     if (!form.biggest_challenge) errors.biggest_challenge = 'Please select your biggest challenge'
+    else if (!biggestChallenges.some((c: any) => c.value === form.biggest_challenge)) {
+      errors.biggest_challenge = 'Invalid biggest challenge selection'
+    }
+    
     if (!form.injury_history) errors.injury_history = 'Please select your injury history'
+    else if (!injuryOptions.some((c: any) => c.value === form.injury_history)) {
+      errors.injury_history = 'Invalid injury history selection'
+    }
+    
     if (form.career_interests.length === 0) errors.career_interests = 'Please select at least one career interest'
+    else if (!form.career_interests.every((c: string) => careerInterestOptions.includes(c))) {
+      errors.career_interests = 'One or more career interests are invalid'
+    }
+    
+    if (!form.education_training_level) errors.education_training_level = 'Please select your education/training level'
+    else if (!educationTrainingLevels.includes(form.education_training_level)) {
+      errors.education_training_level = 'Invalid education/training level selection'
+    }
+  }
+
+  if (step === 5) {
+    // Validate all steps before final submission
+    for (let s = 1; s <= 4; s++) {
+      if (!validateStep(s)) return false
+    }
   }
 
   return Object.keys(errors).length === 0
@@ -675,29 +773,43 @@ function nextStep() {
   }
 }
 
+function goToStep(step: number) {
+  // Direct navigation should validate progression
+  if (step < currentStep.value) {
+    // Going backwards is always allowed
+    currentStep.value = step
+  } else if (step > currentStep.value) {
+    // Going forward must validate current step first
+    if (validateStep(currentStep.value)) {
+      currentStep.value = step
+    }
+  }
+}
+
 // ── Review summary ─────────────────────────────────────────────────────────
 const reviewSections = computed(() => ({
   background: [
-    { label: 'Sport', value: form.primary_sport },
-    { label: 'Academic Level', value: form.academic_level },
-    { label: 'Years Active', value: `${form.participation_years} years` },
-    { label: 'Level', value: form.participation_level }
+    { label: 'What is your primary sport of interest?', value: form.primary_sport === 'Other' ? otherSport.value : form.primary_sport },
+    { label: 'What is your current academic level?', value: form.academic_level },
+    { label: 'How long have you actively participated in this sport?', value: form.participation_years },
+    { label: 'What best describes your current participation level?', value: form.participation_level }
   ],
   skills: [
-    { label: 'Fitness', value: `${form.fitness_level}/5`, numValue: form.fitness_level },
-    { label: 'Technical Skill', value: `${form.technical_skill}/5`, numValue: form.technical_skill },
-    { label: 'Leadership', value: `${form.leadership}/5`, numValue: form.leadership },
-    { label: 'Data Comfort', value: `${form.data_comfort}/5`, numValue: form.data_comfort }
+    { label: 'Rate your physical fitness and conditioning level (1 = Very Low, 5 = Very High)', value: `${form.fitness_level}/5`, numValue: form.fitness_level },
+    { label: 'Rate your technical skill in your chosen sport (1 = Very Low, 5 = Very High)', value: `${form.technical_skill}/5`, numValue: form.technical_skill },
+    { label: 'Rate your leadership and teamwork ability (1 = Very Low, 5 = Very High)', value: `${form.leadership}/5`, numValue: form.leadership },
+    { label: 'Rate your comfort with data, analysis, or statistics (1 = Very Low, 5 = Very High)', value: `${form.data_comfort}/5`, numValue: form.data_comfort }
   ],
   aspirations: [
-    { label: 'Motivation', value: form.motivation },
-    { label: 'Career Priority', value: form.career_importance },
-    { label: 'Work Environment', value: form.work_environment }
+    { label: 'What is your PRIMARY motivation for participating in sport?', value: form.motivation },
+    { label: 'How important is sport to your future career plans?', value: form.career_importance },
+    { label: 'Which work environment do you prefer most?', value: form.work_environment }
   ],
   context: [
-    { label: 'Biggest Challenge', value: form.biggest_challenge },
-    { label: 'Injury History', value: form.injury_history },
-    { label: 'Interests', value: form.career_interests.join(', ') }
+    { label: 'What is your BIGGEST challenge in pursuing sport seriously?', value: form.biggest_challenge },
+    { label: 'Have you experienced any significant sports-related injury in the past 2 years?', value: form.injury_history },
+    { label: 'Which THREE sports career paths interest you the most? (Select up to three)', value: form.career_interests.join(', ') },
+    { label: 'What level of education or training are you realistically willing to pursue in the next 3-5 years?', value: form.education_training_level }
   ]
 }))
 
@@ -718,9 +830,13 @@ async function handleSubmit() {
       motivation: form.motivation,
       career_importance: form.career_importance,
       work_environment: form.work_environment,
+      education_training_level: form.education_training_level,
       biggest_challenge: form.biggest_challenge,
       injury_history: form.injury_history,
       career_interests: form.career_interests
+    }
+    if (payload.primary_sport === 'Other') {
+      payload.primary_sport = otherSport.value.trim()
     }
     const { data } = await questionnaireService.submit(payload)
     router.push({ name: 'Results', state: { recommendation: JSON.stringify(data.data.recommendation) } })

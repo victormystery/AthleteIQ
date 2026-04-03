@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { getMe, updateMe } from '../controllers/user.controller.js'
 import { authenticate } from '../middleware/auth.middleware.js'
+import { validate } from '../middleware/validate.middleware.js'
+import { updateUserSchema } from '../validators/user.validator.js'
 
 const router = Router()
 
@@ -95,6 +97,6 @@ router.get('/me', getMe)
  *             schema:
  *               $ref: '#/components/schemas/ApiErrorResponse'
  */
-router.put('/me', updateMe)
+router.put('/me', validate(updateUserSchema), updateMe)
 
 export default router

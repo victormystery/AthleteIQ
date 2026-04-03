@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import userService from '@/services/user.service'
+import { useAuthStore } from '@/stores/authStore'
 import type { User } from '@/types'
 
 export const useUserStore = defineStore('user', () => {
@@ -20,6 +21,9 @@ export const useUserStore = defineStore('user', () => {
   async function updateProfile(updates: Partial<Pick<User, 'name'>>): Promise<User> {
     const { data } = await userService.updateProfile(updates)
     profile.value = data.data
+    // Keep authStore in sync so the sidebar/header name updates immediately
+    const authStore = useAuthStore()
+    authStore.user = data.data
     return data.data
   }
 

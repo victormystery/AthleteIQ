@@ -1,9 +1,12 @@
 import app from '../app.js'
 import { env } from './config/env.js'
 import { connectDB } from './config/db.js'
+import { initBetterAuth } from './config/betterAuth.js'
+import { googleSheetsService } from './services/googleSheets.service.js'
 import { logger } from './utils/logger.js'
 import { CareerPathway, User } from './models/index.js'
 import { careerPathwaysSeedData } from './data/career_pathways.js'
+import mongoose from 'mongoose'
 
 // ── Process-level exception handlers ───────────────────────────────────────
 // These catch errors that escape Express (e.g. async code outside a route
@@ -53,6 +56,11 @@ async function autoSeed(): Promise<void> {
 // ── Startup ─────────────────────────────────────────────────────────────────
 async function start(): Promise<void> {
   await connectDB()
+  if (!mongoose.connection.db) {
+    throw new Error('MongoDB connection is not ready for BetterAuth initialization')
+  }
+  initBetterAuth(mongoose.connection.db)
+  googleSheetsService.validateConfig()
   await autoSeed()
 
   const server = app.listen(env.port, () => {

@@ -395,7 +395,7 @@ export class CareerAnalysisService {
           insights.push(
             `Your strong leadership rating (${leadership}/5) indicates you are well-suited to guiding athletes through development phases.`
           )
-        if (yearsExp === '> 5')
+        if (yearsExp === 'More than 5 years')
           insights.push(
             'Over 5 years of participation means you bring experiential knowledge that benefits coaching positions.'
           )
@@ -420,16 +420,82 @@ export class CareerAnalysisService {
 
       case 'sports-science-medicine':
         insights.push(
-          `Your personal experience with athletic training in ${sport} provides unique perspective as a practitioner.`
+          `Your personal experience with athletic training and ${
+            response.injury_history !== 'None' ? 'injury' : 'injury prevention'
+          } in ${sport} gives you a unique empathetic perspective as a practitioner.`
         )
         if (response.data_comfort >= 3 || response.dataComfort >= 3)
           insights.push('Your comfort with data is an asset in evidence-driven sport science.')
         break
 
       case 'recreational-fitness-industry':
-        if (motivation === 'Health')
-          insights.push('Your health-oriented motivation aligns with helping people improve fitness.')
-        insights.push(`Your ${level}-level training experience provides comprehensive fitness progression knowledge.`)
+        if (motivation === 'Health and fitness')
+          insights.push(
+            "Your health-oriented motivation aligns perfectly with helping everyday people improve their quality of life through fitness."
+          )
+        insights.push(
+          `Your ${level}-level training experience gives you a comprehensive understanding of fitness progression that will inspire your future clients.`
+        )
+        break
+
+      case 'sports-analytics':
+        if (response.data_comfort >= 4)
+          insights.push(
+            `Your strong data comfort (${response.data_comfort}/5) combined with hands-on ${sport} knowledge is the ideal pairing for a sports analytics role.`
+          )
+        insights.push(
+          `Understanding the game from the inside — as a ${level}-level ${sport} participant — allows you to ask better analytical questions than a pure data scientist.`
+        )
+        break
+
+      case 'sports-media-journalism':
+        insights.push(
+          `Your experience as a ${level}-level ${sport} athlete gives you genuine insider stories and technical credibility that sets you apart from non-athlete journalists.`
+        )
+        if (motivation === 'Fame, media, or recognition')
+          insights.push(
+            'Your motivation aligns with building a public profile — a media career rewards those who can communicate and connect with large audiences.'
+          )
+        break
+
+      case 'sports-nutrition':
+        insights.push(
+          `Your personal experience fuelling performance in ${sport} gives you first-hand understanding of how nutrition affects training and competition outcomes.`
+        )
+        if (fitnessLevel >= 4)
+          insights.push(
+            `A high fitness awareness (${fitnessLevel}/5) means you already practice the principles you would eventually teach — an immediate advantage with athlete clients.`
+          )
+        break
+
+      case 'physical-education-teaching':
+        if (leadership >= 4)
+          insights.push(
+            `Your leadership rating (${leadership}/5) reflects the communication and motivational skills central to inspiring students in a physical education setting.`
+          )
+        insights.push(
+          `Your ${level}-level participation in ${sport} gives you the practical competence and passion to make PE meaningful for the next generation.`
+        )
+        break
+
+      case 'sports-psychology':
+        if (yearsExp === 'More than 5 years')
+          insights.push(
+            'Over 5 years of competitive experience means you have lived the psychological pressures of sport — giving you authentic empathy that textbooks cannot teach.'
+          )
+        insights.push(
+          `Your background in ${sport} at ${level} level equips you to build trust quickly with athletes, because they know you understand the demands from the inside.`
+        )
+        break
+
+      case 'sports-law-ethics':
+        if (response.data_comfort >= 4)
+          insights.push(
+            `Your comfort with data and analytical thinking (${response.data_comfort}/5) translates directly to case research, contract analysis, and evidence-based legal reasoning in sport.`
+          )
+        insights.push(
+          `Navigating the rules, governance, and disputes in ${sport} at ${level} level has given you practical insight into the legal and ethical landscape of organised sport.`
+        )
         break
 
       default:
@@ -438,109 +504,64 @@ export class CareerAnalysisService {
         )
     }
 
-    return insights.slice(0, 3)
+    // Work environment alignment
+    if (
+      (pathway.slug === 'sports-science-medicine' && response.work_environment === 'Laboratory / science / clinical') ||
+      (pathway.slug === 'sports-nutrition' && response.work_environment === 'Laboratory / science / clinical') ||
+      (pathway.slug === 'sports-management' && response.work_environment === 'Office / management') ||
+      (pathway.slug === 'sports-law-ethics' && response.work_environment === 'Office / management') ||
+      (pathway.slug === 'sports-psychology' && response.work_environment === 'Office / management') ||
+      (pathway.slug === 'coaching-development' && response.work_environment === 'On-field / practical') ||
+      (pathway.slug === 'physical-education-teaching' && response.work_environment === 'On-field / practical') ||
+      (pathway.slug === 'sports-media-journalism' && response.work_environment === 'Media / creative')
+    ) {
+      insights.push(
+        `Your preferred work environment (${response.work_environment}) aligns well with the typical setting for ${pathway.title} professionals.`
+      )
+    }
+
+    return insights.slice(0, 3) // Return max 3 insights per pathway
   }
 
   /**
-   * Generate feature importance analysis (stub for future ML model)
-   * Mirrors Python ml_service.get_feature_importance()
+   * Generate the motivation-based recommendation pathway.
    */
-  getFeatureImportance(): FeatureImportance {
-    // TODO: Extract from actual trained Random Forest model when available
-    if (!this.mlModelLoaded) {
-      return {}
-    }
-
-    // Placeholder importance scores
-    return {
-      primary_sport: 0.18,
-      participation_level: 0.15,
-      leadership: 0.12,
-      primary_motivation: 0.11,
-      technical_skill: 0.1,
-      fitness: 0.09,
-      data_comfort: 0.08,
-      experience_years: 0.07,
-      academic_level: 0.06,
-      work_environment: 0.04
-    }
-  }
-
-  /**
-   * Generate rule-based fallback recommendations (existing logic)
-   */
-  generateFallbackRecommendations(studentData: any): FallbackRecommendations {
-    logger.info('Generating fallback recommendations based on rules')
-
-    const careerScores: CareerScore = {
-      'Coaching & Development': 0,
-      'Sports Management': 0,
-      'High Performance Sport': 0,
-      'Sports Science / Medicine': 0,
-      'Recreational / Fitness Industry': 0
-    }
-
-    const careerInterests = studentData.career_interests || studentData.careerInterests || []
-    if (Array.isArray(careerInterests)) {
-      for (const interest of careerInterests) {
-        const lowerInterest = interest.toLowerCase()
-        if (lowerInterest.includes('coach')) careerScores['Coaching & Development'] += 40
-        if (lowerInterest.includes('manage') || lowerInterest.includes('business'))
-          careerScores['Sports Management'] += 40
-        if (lowerInterest.includes('athlete') || lowerInterest.includes('player'))
-          careerScores['High Performance Sport'] += 40
-        if (lowerInterest.includes('science') || lowerInterest.includes('research'))
-          careerScores['Sports Science / Medicine'] += 40
-        if (lowerInterest.includes('fitness') || lowerInterest.includes('health'))
-          careerScores['Recreational / Fitness Industry'] += 40
+  getMotivationRecommendation(
+    motivation: string,
+    availablePathways: Pick<ICareerPathway, 'slug' | 'title'>[]
+  ): { pathwaySlug: string; pathwayName: string; reason: string } {
+    const motivationMap: Record<string, { slug: string; reason: string }> = {
+      'Helping or coaching others': {
+        slug: 'coaching-development',
+        reason:
+          'Your primary motivation to coach aligns directly with a career in Coaching & Development, where you can have daily impact on athletes at all levels.'
+      },
+      'Health and fitness': {
+        slug: 'sports-science-medicine',
+        reason:
+          'Your motivation around health and wellbeing makes Sports Science & Medicine an ideal pathway, combining scientific rigour with athlete welfare.'
+      },
+      'Competition and performance': {
+        slug: 'high-performance-sport',
+        reason:
+          'Your competitive drive makes you well-suited to high-performance environments where marginal gains and winning culture are paramount.'
+      },
+      'Academic or career opportunity': {
+        slug: 'sports-science-medicine',
+        reason:
+          'Your academic motivation aligns with research-driven roles in Sports Science & Medicine, where evidence and intellectual rigour are central.'
+      },
+      'Fame, media, or recognition': {
+        slug: 'sports-media-journalism',
+        reason:
+          'Your aspiration for visibility and public impact makes Sports Media & Journalism a natural pathway to build a recognisable personal brand.'
       }
     }
 
-    const motivation = String(studentData.motivation || '').toLowerCase()
-    if (motivation.includes('coaching') || motivation.includes('helping'))
-      careerScores['Coaching & Development'] += 30
-    if (motivation.includes('competition') || motivation.includes('performance'))
-      careerScores['High Performance Sport'] += 30
-    if (motivation.includes('academic') || motivation.includes('career'))
-      careerScores['Sports Science / Medicine'] += 25
+    const match = motivationMap[motivation]
+    const pathway = availablePathways.find((p) => p.slug === match?.slug)
 
-    const leadership = studentData.leadership || 3
-    if (leadership >= 4) {
-      careerScores['Coaching & Development'] += 15
-      careerScores['Sports Management'] += 15
-    }
-
-    const dataComfort = studentData.data_comfort || studentData.dataComfort || 3
-    if (dataComfort >= 4) careerScores['Sports Science / Medicine'] += 15
-
-    const fitnessLevel = studentData.fitness_level || studentData.fitnessLevel || 3
-    const technicalSkill = studentData.technical_skill || studentData.technicalSkill || 3
-    if (fitnessLevel >= 4 && technicalSkill >= 4) careerScores['High Performance Sport'] += 20
-
-    const sortedCareers = Object.entries(careerScores).sort(([, a], [, b]) => b - a)
-
-    const recommendations: RecommendationResult[] = sortedCareers.map(([career, score], i) => ({
-      rank: i + 1,
-      career,
-      confidence: Math.min(score, 95),
-      reason: 'Based on your interests, skills, and preferences'
-    }))
-
-    return {
-      primaryPrediction: recommendations[0]?.career || 'Coaching & Development',
-      allRecommendations: recommendations.slice(0, 6),
-      probabilities: recommendations.slice(0, 6).map((r) => r.confidence),
-      classes: recommendations.slice(0, 6).map((r) => r.career)
-    }
-  }
-
-  /**
-   * Get sport-specific insights
-   */
-  getInsightsForSport(sport: string): any {
-    const sportData = this.sportCareerData[sport]
-
-    if (!sportData) {
+    if (match && pathway) {
       return {
         hasSportData: false,
         sport,

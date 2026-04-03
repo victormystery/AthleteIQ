@@ -1,10 +1,8 @@
-import { Router, type Request, type Response, type NextFunction } from 'express'
-import passport from 'passport'
-import { register, login, googleCallback } from '../controllers/auth.controller.js'
+import { Router } from 'express'
+import { register, login, startGoogleAuth, completeGoogleAuth, exchangeGoogleCode } from '../controllers/auth.controller.js'
 import { validate } from '../middleware/validate.middleware.js'
 import { registerSchema, loginSchema } from '../validators/auth.validator.js'
 import { authLimiter } from '../middleware/rateLimit.middleware.js'
-import { env } from '../config/env.js'
 
 const router = Router()
 
@@ -121,7 +119,7 @@ router.post('/login', authLimiter, validate(loginSchema), login)
  */
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'], session: false })
+  startGoogleAuth
 )
 
 /**
@@ -137,16 +135,9 @@ router.get(
  */
 router.get(
   '/google/callback',
-  (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('google', { session: false }, (err: Error | null, user: Express.User | false) => {
-      if (err || !user) {
-        return res.redirect(`${env.clientUrl}/auth/login?error=google_failed`)
-      }
-      req.user = user
-      next()
-    })(req, res, next)
-  },
-  googleCallback
+  completeGoogleAuth
 )
+
+router.post('/google/exchange', authLimiter, exchangeGoogleCode)
 
 export default router

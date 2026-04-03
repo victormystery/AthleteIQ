@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 import { QuestionnaireResponse, type IQuestionnaireResponse } from '../models/index.js'
 import { careerService } from './career.service.js'
 import { googleSheetsService } from './googleSheets.service.js'
-import { logger } from '../utils/logger.js'
 
 export interface QuestionnairePayload {
   academic_level: string
@@ -19,6 +18,7 @@ export interface QuestionnairePayload {
   biggest_challenge: string
   injury_history: string
   career_interests: string[]
+  education_training_level: string
 }
 
 export class QuestionnaireService {
@@ -35,10 +35,8 @@ export class QuestionnaireService {
     // 2. Get ML recommendation
     const recommendation = await careerService.predict(userId, qResponse._id, payload)
 
-    // 3. Export to Google Sheets (non-blocking)
-    googleSheetsService.exportSubmission(qResponse, recommendation).catch((err) => {
-      logger.warn('Google Sheets export error', { error: (err as Error).message })
-    })
+    // 3. Export to Google Sheets (best-effort; internal failures are non-blocking)
+    await googleSheetsService.exportSubmission(qResponse, recommendation)
 
     return { questionnaireResponse: qResponse, recommendation }
   }

@@ -1,110 +1,148 @@
 <template>
-  <div>
-    <!-- Page header -->
-    <div class="mb-8">
-      <h1 class="text-2xl font-bold text-slate-800">My Profile</h1>
-      <p class="mt-0.5 text-sm text-slate-500">Manage your personal information and account settings.</p>
-    </div>
-
+  <div class="flex flex-col gap-6">
     <!-- Loading -->
     <div v-if="loading && !profile" class="flex justify-center py-20">
       <AppSpinner size="lg" />
     </div>
 
-    <div v-else class="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-6 items-start">
-      <!-- Profile card (left) -->
-      <div class="flex flex-col gap-4">
-        <BaseCard>
-          <div class="flex flex-col items-center text-center pt-2 pb-5 border-b border-slate-100 mb-4">
-            <div class="relative mb-4">
-              <UserAvatar :name="form.name || user?.name || ''" size="xl" />
-              <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-400 rounded-full border-2 border-white" title="Active" />
+    <template v-else>
+      <!-- ── Hero card ──────────────────────────────────── -->
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <!-- Gradient banner -->
+        <div class="h-24 bg-gradient-to-br from-primary-700 via-primary-500 to-orange-400 relative">
+          <div
+            class="absolute inset-0 opacity-[0.07]"
+            style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size: 14px 14px;"
+          />
+        </div>
+
+        <div class="px-6 pb-6">
+          <!-- Avatar + identity -->
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 -mt-10">
+            <div class="flex items-end gap-4">
+              <div class="relative">
+                <div class="rounded-2xl ring-4 ring-white shadow-lg overflow-hidden">
+                  <UserAvatar :name="form.name || user?.name || ''" size="xl" />
+                </div>
+                <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white" title="Active" />
+              </div>
+              <div class="mb-1">
+                <h2 class="text-xl font-bold text-slate-800 leading-tight">
+                  {{ profile?.name ?? user?.name ?? 'Athlete' }}
+                </h2>
+                <p class="text-sm text-slate-500 mt-0.5">{{ profile?.email ?? user?.email ?? '' }}</p>
+              </div>
             </div>
-            <h2 class="text-lg font-bold text-slate-800">{{ profile?.name ?? user?.name ?? 'Athlete' }}</h2>
-            <p class="text-sm text-slate-400 mt-0.5">{{ profile?.email ?? user?.email ?? '' }}</p>
-            <span :class="roleBadgeClass(profile?.role ?? user?.role ?? '')" class="inline-flex items-center mt-3 text-xs px-3 py-1 rounded-full font-semibold capitalize border">
+            <span
+              :class="roleBadgeClass(profile?.role ?? user?.role ?? '')"
+              class="inline-flex items-center self-start sm:self-auto mb-1 text-xs px-3 py-1.5 rounded-full font-semibold capitalize border"
+            >
               {{ formatRole(profile?.role ?? user?.role ?? '') }}
             </span>
           </div>
 
-          <div class="space-y-3">
-            <div class="flex justify-between items-center">
-              <span class="text-xs text-slate-500">Member since</span>
-              <span class="text-xs font-semibold text-slate-700">{{ memberSince }}</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-xs text-slate-500">Account type</span>
-              <span class="text-xs font-semibold text-slate-700 capitalize">{{ formatRole(profile?.role ?? user?.role ?? '') }}</span>
-            </div>
-          </div>
-        </BaseCard>
-
-        <!-- Tips card -->
-        <div class="bg-primary-50 border border-primary-100 rounded-xl p-4">
-          <div class="flex items-start gap-2.5">
-            <div class="w-7 h-7 rounded-lg bg-primary-100 flex items-center justify-center shrink-0 mt-0.5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" class="w-4 h-4">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 8v4M12 16h.01"/>
-              </svg>
+          <!-- Stats row -->
+          <div class="mt-5 pt-5 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-4 gap-5">
+            <div>
+              <p class="text-xs text-slate-400 mb-0.5">Member since</p>
+              <p class="text-sm font-semibold text-slate-700">{{ memberSince }}</p>
             </div>
             <div>
-              <p class="text-xs font-semibold text-primary-800">Profile tip</p>
-              <p class="text-xs text-primary-700/80 mt-0.5 leading-relaxed">Keep your profile up to date to get more accurate career recommendations.</p>
+              <p class="text-xs text-slate-400 mb-0.5">Sport</p>
+              <p class="text-sm font-semibold text-slate-700">{{ extProfile?.primarySport || '—' }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 mb-0.5">Year of study</p>
+              <p class="text-sm font-semibold text-slate-700">{{ extProfile?.yearOfStudy || '—' }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 mb-1">Profile completion</p>
+              <div class="flex items-center gap-2">
+                <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-primary-500 rounded-full transition-all duration-500"
+                    :style="{ width: profileCompletion + '%' }"
+                  />
+                </div>
+                <span class="text-xs font-semibold text-slate-600 shrink-0">{{ profileCompletion }}%</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Right column -->
-      <div class="flex flex-col gap-5">
-        <!-- Personal Information -->
-        <BaseCard title="Personal Information" subtitle="Update your display name and account details.">
+      <!-- ── Forms row ──────────────────────────────────── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Account settings -->
+        <BaseCard>
+          <template #header>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-slate-800">Account</h3>
+                <p class="text-sm text-slate-500">Your display name and login details.</p>
+              </div>
+            </div>
+          </template>
+
           <form @submit.prevent="handleSave" class="flex flex-col gap-4" novalidate>
             <BaseAlert v-if="saveError" type="error" :show="!!saveError" dismissible @dismiss="saveError = ''">
               {{ saveError }}
             </BaseAlert>
             <BaseAlert v-if="saveSuccess" type="success" :show="saveSuccess" dismissible @dismiss="saveSuccess = false">
-              Your profile has been updated successfully.
+              Profile updated successfully.
             </BaseAlert>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <BaseInput
-                v-model="form.name"
-                label="Full name"
-                placeholder="Your full name"
-                :error="errors.name"
-                required
-                @blur="validateName"
-              />
-              <BaseInput
-                :model-value="profile?.email ?? user?.email ?? ''"
-                label="Email address"
-                type="email"
-                :disabled="true"
-                hint="Email address cannot be changed"
-              />
-            </div>
+            <BaseInput
+              v-model="form.name"
+              label="Full name"
+              placeholder="Your full name"
+              :error="errors.name"
+              required
+              @blur="validateName"
+            />
+            <BaseInput
+              :model-value="profile?.email ?? user?.email ?? ''"
+              label="Email address"
+              type="email"
+              :disabled="true"
+              hint="Email address cannot be changed"
+            />
 
-            <div class="flex justify-end gap-3 pt-1 border-t border-slate-100 mt-1">
-              <BaseButton variant="secondary" type="button" @click="resetForm">
-                Discard changes
-              </BaseButton>
-              <BaseButton type="submit" :loading="saving">
-                Save changes
-              </BaseButton>
+            <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+              <BaseButton tag="button" variant="secondary" size="sm" type="button" @click="resetForm">Discard</BaseButton>
+              <BaseButton tag="button" size="sm" type="submit" :loading="saving">Save changes</BaseButton>
             </div>
           </form>
         </BaseCard>
 
-        <!-- Athletic Profile -->
-        <BaseCard title="Athletic Profile" subtitle="Your sport background and academic details used for career matching.">
+        <!-- Athletic details -->
+        <BaseCard>
+          <template #header>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 18 17.94 6M17.94 6H9M17.94 6V14" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-slate-800">Athletic Profile</h3>
+                <p class="text-sm text-slate-500">Sport background and academic details.</p>
+              </div>
+            </div>
+          </template>
+
           <form @submit.prevent="handleSaveExtended" class="flex flex-col gap-4" novalidate>
             <BaseAlert v-if="extSaveError" type="error" :show="!!extSaveError" dismissible @dismiss="extSaveError = ''">
               {{ extSaveError }}
             </BaseAlert>
             <BaseAlert v-if="extSaveSuccess" type="success" :show="extSaveSuccess" dismissible @dismiss="extSaveSuccess = false">
-              Athletic profile updated successfully.
+              Athletic profile updated!
             </BaseAlert>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -113,11 +151,11 @@
                 label="Primary sport"
                 placeholder="e.g. Basketball"
               />
-              <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1.5">Year of study</label>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-slate-700">Year of study</label>
                 <select
                   v-model="extForm.yearOfStudy"
-                  class="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400 bg-white"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-800 bg-white outline-none transition-all duration-150 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
                 >
                   <option value="">Select year…</option>
                   <option value="Year 1">Year 1</option>
@@ -140,48 +178,54 @@
               />
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-1.5">Bio <span class="text-slate-400 font-normal">(optional)</span></label>
-              <textarea
-                v-model="extForm.bio"
-                rows="3"
-                maxlength="500"
-                placeholder="Tell us a bit about yourself and your athletic background…"
-                class="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400 resize-none"
-              />
-              <p class="text-xs text-slate-400 text-right mt-1">{{ extForm.bio?.length ?? 0 }}/500</p>
-            </div>
-
-            <div class="flex justify-end gap-3 pt-1 border-t border-slate-100 mt-1">
-              <BaseButton variant="secondary" type="button" @click="resetExtForm">
-                Discard changes
-              </BaseButton>
-              <BaseButton type="submit" :loading="savingExt">
-                Save profile
-              </BaseButton>
+            <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+              <BaseButton tag="button" variant="secondary" size="sm" type="button" @click="resetExtForm">Discard</BaseButton>
+              <BaseButton tag="button" size="sm" type="submit" :loading="savingExt">Save profile</BaseButton>
             </div>
           </form>
         </BaseCard>
-
-        <!-- Danger Zone -->
-        <BaseCard>
-          <div class="flex items-start justify-between gap-4 flex-wrap">
-            <div>
-              <h3 class="text-sm font-semibold text-red-700">Danger Zone</h3>
-              <p class="text-sm text-slate-500 mt-1 max-w-sm">
-                Permanently delete your account and all associated data. This action is irreversible.
-              </p>
-            </div>
-            <BaseButton variant="danger" size="sm" class="shrink-0" @click="showDeleteModal = true">
-              <svg viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
-                <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.519.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5z" clip-rule="evenodd"/>
-              </svg>
-              Delete account
-            </BaseButton>
-          </div>
-        </BaseCard>
       </div>
-    </div>
+
+      <!-- ── Bio card ───────────────────────────────────── -->
+      <BaseCard>
+        <template #header>
+          <div>
+            <h3 class="text-base font-semibold text-slate-800">Bio</h3>
+            <p class="text-sm text-slate-500">Tell us about your athletic journey and goals.</p>
+          </div>
+        </template>
+
+        <form @submit.prevent="handleSaveExtended" class="flex flex-col gap-3" novalidate>
+          <textarea
+            v-model="extForm.bio"
+            rows="4"
+            maxlength="500"
+            placeholder="A short bio about your athletic journey, goals, or achievements…"
+            class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm text-slate-800 placeholder-slate-400 outline-none resize-none transition-all duration-150 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+          />
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-400">{{ extForm.bio?.length ?? 0 }} / 500 characters</span>
+            <BaseButton tag="button" size="sm" type="submit" :loading="savingExt">Save bio</BaseButton>
+          </div>
+        </form>
+      </BaseCard>
+
+      <!-- ── Danger zone ────────────────────────────────── -->
+      <div class="bg-red-50 border border-red-100 rounded-xl p-5 flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <h3 class="text-sm font-semibold text-red-700">Danger Zone</h3>
+          <p class="text-sm text-slate-500 mt-1 max-w-sm">
+            Permanently delete your account and all associated data. This action is irreversible.
+          </p>
+        </div>
+        <BaseButton tag="button" variant="danger" size="sm" class="shrink-0" @click="showDeleteModal = true">
+          <svg viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
+            <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.519.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5z" clip-rule="evenodd" />
+          </svg>
+          Delete account
+        </BaseButton>
+      </div>
+    </template>
 
     <!-- Delete confirmation modal -->
     <BaseModal v-model="showDeleteModal" title="Delete Account" :persistent="true">
@@ -195,8 +239,8 @@
         <BaseInput v-model="deleteConfirm" placeholder="DELETE" />
       </div>
       <template #footer>
-        <BaseButton variant="secondary" @click="showDeleteModal = false">Cancel</BaseButton>
-        <BaseButton variant="danger" :disabled="deleteConfirm !== 'DELETE'" @click="handleDelete">
+        <BaseButton tag="button" variant="secondary" @click="showDeleteModal = false">Cancel</BaseButton>
+        <BaseButton tag="button" variant="danger" :disabled="deleteConfirm !== 'DELETE'" @click="handleDelete">
           Delete permanently
         </BaseButton>
       </template>
@@ -250,6 +294,19 @@ const extSaveError = ref('')
 const extSaveSuccess = ref(false)
 
 const memberSince = computed(() => formatDate(profile.value?.createdAt ?? null))
+
+const profileCompletion = computed(() => {
+  const fields = [
+    profile.value?.name || user.value?.name,
+    extProfile.value?.primarySport,
+    extProfile.value?.yearOfStudy,
+    extProfile.value?.university,
+    extProfile.value?.programOfStudy,
+    extProfile.value?.bio
+  ]
+  const filled = fields.filter(Boolean).length
+  return Math.round((filled / fields.length) * 100)
+})
 
 function formatRole(role: string): string {
   const labels: Record<string, string> = {
@@ -305,11 +362,11 @@ async function handleSaveExtended() {
   extSaveSuccess.value = false
   try {
     const res = await profileService.updateProfile({
-      primarySport: extForm.primarySport || undefined,
-      yearOfStudy: extForm.yearOfStudy || undefined,
-      university: extForm.university || undefined,
-      programOfStudy: extForm.programOfStudy || undefined,
-      bio: extForm.bio || undefined
+      primarySport: extForm.primarySport,
+      yearOfStudy: extForm.yearOfStudy,
+      university: extForm.university,
+      programOfStudy: extForm.programOfStudy,
+      bio: extForm.bio
     })
     extProfile.value = res.data.data.profile
     extSaveSuccess.value = true

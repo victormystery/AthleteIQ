@@ -60,6 +60,12 @@ export const useAuthStore = defineStore('auth', () => {
     await initialize()
   }
 
+  async function loginWithGoogleCode(code: string): Promise<void> {
+    const { data } = await authService.exchangeGoogleCode(code)
+    setToken(data.data.token)
+    user.value = data.data.user
+  }
+
   function logout() {
     setToken(null)
     user.value = null
@@ -74,6 +80,7 @@ export const useAuthStore = defineStore('auth', () => {
     initialize,
     login,
     loginWithToken,
+    loginWithGoogleCode,
     register,
     logout
   }

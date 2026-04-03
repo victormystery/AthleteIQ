@@ -13,10 +13,35 @@ interface RegisterResult {
   user: IUser
 }
 
-function signToken(userId: string): string {
+export function signToken(userId: string): string {
   return jwt.sign({ sub: userId }, env.jwtSecret, {
     expiresIn: env.jwtExpiresIn as jwt.SignOptions['expiresIn']
   })
+}
+
+export async function upsertGoogleUser(payload: {
+  email: string
+  name?: string | null
+  providerUserId: string
+}): Promise<IUser> {
+  const email = payload.email.trim().toLowerCase()
+  let user = await User.findOne({ email })
+
+  if (!user) {
+    user = await User.create({
+      name: payload.name?.trim() || email.split('@')[0],
+      email,
+      googleId: payload.providerUserId
+    })
+    return user
+  }
+
+  if (!user.googleId) {
+    user.googleId = payload.providerUserId
+    await user.save()
+  }
+
+  return user
 }
 
 export async function register(name: string, email: string, password: string): Promise<RegisterResult> {
@@ -31,6 +56,9 @@ export async function login(email: string, password: string): Promise<AuthResult
   const user = await User.findOne({ email }).select('+password')
   if (!user || !(await user.comparePassword(password))) {
     throw new UnauthorizedError('Invalid email or password')
+  }
+  if (user.suspended) {
+    throw new AppError('Your account has been suspended. Please contact support.', 403)
   }
   const token = signToken(user._id.toString())
   // password is excluded by toJSON() on the User model

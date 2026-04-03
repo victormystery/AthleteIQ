@@ -18,17 +18,23 @@ const toast = useToast()
 
 onMounted(async () => {
   const params = new URLSearchParams(window.location.search)
+  const code = params.get('code')
   const token = params.get('token')
   const error = params.get('error')
 
-  if (error || !token) {
+  if (error || (!code && !token)) {
     toast.error('Google sign-in failed. Please try again.')
     router.replace({ name: 'Login' })
     return
   }
 
   try {
-    await authStore.loginWithToken(token)
+    if (code) {
+      await authStore.loginWithGoogleCode(code)
+    } else if (token) {
+      // Backward compatibility with older callback URLs.
+      await authStore.loginWithToken(token)
+    }
     toast.success('Signed in with Google!')
     router.replace({ name: authStore.isAdmin ? 'AdminDashboard' : 'Dashboard' })
   } catch {

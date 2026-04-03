@@ -1,9 +1,9 @@
 import Joi from 'joi'
 
 export const updateProfileSchema = Joi.object({
-  university: Joi.string().trim().max(200).optional(),
-  programOfStudy: Joi.string().trim().max(200).optional(),
-  primarySport: Joi.string().trim().max(100).optional(),
+  university: Joi.string().trim().max(200).optional().allow(''),
+  programOfStudy: Joi.string().trim().max(200).optional().allow(''),
+  primarySport: Joi.string().trim().max(100).optional().allow(''),
   yearOfStudy: Joi.string()
     .valid('Year 1', 'Year 2', 'Year 3', 'Year 4', 'Postgraduate', 'Professional', '')
     .optional(),
