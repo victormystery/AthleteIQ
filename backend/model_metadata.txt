@@ -1,0 +1,39 @@
+================================================================================
+SPORTS CAREER PATHWAY PREDICTION MODEL
+================================================================================
+
+Model Saved: 2026-03-09 08:27:25
+
+Performance Metrics:
+  - Accuracy: 32.00%
+  - Precision: 45.00%
+  - Recall: 32.00%
+  - F1-Score: 30.48%
+
+Training Data:
+  - Total Samples: 100
+  - Training Set: 75
+  - Test Set: 25
+  - Features: 14
+  - Career Paths: 8
+
+Model Components:
+  - Preprocessor: OneHotEncoder
+  - Algorithm: RandomForestClassifier (300 trees)
+  - Class Weight: Balanced
+
+Features Used:
+  1. academic_level
+  2. primary_sport
+  3. experience_years
+  4. participation_level
+  5. fitness
+  6. technical_skill
+  7. leadership
+  8. data_comfort
+  9. primary_motivation
+  10. career_importance
+  11. work_environment
+  12. biggest_challenge
+  13. injury_history
+  14. education_commitment

@@ -7,3 +7,9 @@ dist/
 .env.*.local
 *.log
 .DS_Store
+
+# Credentials & Secrets
+backend/credentials/
+*.json.key
+*.pem
+.env.local

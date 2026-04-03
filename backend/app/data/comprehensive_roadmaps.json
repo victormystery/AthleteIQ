@@ -1,0 +1,1209 @@
+{
+  "roadmaps": {
+    "professional-athlete": {
+      "pathway_slug": "professional-athlete",
+      "pathway_title": "Professional Athlete",
+      "time_to_entry": "Immediate if qualified",
+      "cost_level": "Low",
+      "steps": [
+        {
+          "id": "pa-1",
+          "title": "Join a Youth Academy or Development Programme",
+          "description": "Enroll in a professional club's youth academy or grassroots development programme to receive structured training.",
+          "type": "experience",
+          "duration": "2-4 years",
+          "cost": "Free - £2,000/year",
+          "priority": "required",
+          "details": [
+            "Attend trials at local professional club academies",
+            "Register with grassroots football clubs for competitive experience",
+            "Focus on technical skill development and game understanding",
+            "Maintain peak physical fitness through structured training"
+          ],
+          "resources": [
+            {"name": "FA Talent Pathway", "url": "https://www.thefa.com", "type": "article"},
+            {"name": "Club Academy Trials", "type": "article"}
+          ]
+        },
+        {
+          "id": "pa-2",
+          "title": "Complete BTEC or A-Level in Sport",
+          "description": "Pursue academic qualifications in sport as a backup plan while developing your athletic career.",
+          "type": "academic",
+          "duration": "2 years",
+          "cost": "Free (college)",
+          "priority": "recommended",
+          "details": [
+            "BTEC Level 3 Extended Diploma in Sport",
+            "A-Level Physical Education",
+            "Provides foundation knowledge in sports science",
+            "Valuable backup if professional career doesn't materialize"
+          ],
+          "resources": [
+            {"name": "Local Colleges", "type": "article"},
+            {"name": "Sports Academies", "type": "article"}
+          ]
+        },
+        {
+          "id": "pa-3",
+          "title": "Anti-Doping Education Certification",
+          "description": "Complete mandatory anti-doping education required for all professional athletes.",
+          "type": "certification",
+          "duration": "1 day",
+          "cost": "Free",
+          "priority": "required",
+          "details": [
+            "UKAD Clean Sport education modules",
+            "Understanding prohibited substances and methods",
+            "Therapeutic Use Exemptions (TUE) knowledge",
+            "Whereabouts requirements for elite athletes"
+          ],
+          "resources": [
+            {"name": "UKAD Education", "url": "https://www.ukad.org.uk", "type": "course"},
+            {"name": "WADA Courses", "url": "https://www.wada-ama.org", "type": "course"}
+          ]
+        },
+        {
+          "id": "pa-4",
+          "title": "Sports Psychology & Mental Performance Course",
+          "description": "Develop mental resilience and performance psychology skills essential for elite competition.",
+          "type": "course",
+          "duration": "6-12 weeks",
+          "cost": "£200-£500",
+          "priority": "recommended",
+          "details": [
+            "Goal setting and visualization techniques",
+            "Managing performance anxiety and pressure",
+            "Building mental resilience and focus",
+            "Recovery and mindset after setbacks"
+          ],
+          "resources": [
+            {"name": "The Sport Psychology Hub", "url": "https://www.sportpsychologyhub.com", "type": "course"},
+            {"name": "Mindflick", "url": "https://www.mindflick.com", "type": "course"}
+          ]
+        },
+        {
+          "id": "pa-5",
+          "title": "Performance Nutrition Course",
+          "description": "Learn evidence-based nutrition strategies to fuel elite athletic performance.",
+          "type": "course",
+          "duration": "4-8 weeks",
+          "cost": "£150-£400",
+          "priority": "recommended",
+          "details": [
+            "Macronutrient timing for performance",
+            "Hydration strategies for competition",
+            "Recovery nutrition protocols",
+            "Supplement education and safety"
+          ],
+          "resources": [
+            {"name": "BASES Sport Nutrition", "url": "https://www.bases.org.uk", "type": "course"},
+            {"name": "IOC Nutrition Course", "url": "https://www.olympic.org", "type": "course"}
+          ]
+        },
+        {
+          "id": "pa-6",
+          "title": "Plan Career Transition Strategy",
+          "description": "Prepare for life after competitive sport with education and alternative career planning.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "cost": "Free",
+          "priority": "recommended",
+          "details": [
+            "Complete dual career programmes alongside sport",
+            "Obtain coaching qualifications as backup",
+            "Network with sports industry professionals",
+            "Plan financial management for variable income"
+          ],
+          "resources": [
+            {"name": "TASS Dual Career Support", "url": "https://www.tass.gov.uk", "type": "article"},
+            {"name": "PFA Career Transition", "url": "https://www.thepfa.com", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "coaching": {
+      "pathway_slug": "coaching",
+      "pathway_title": "Coach / Coaching Education",
+      "time_to_entry": "6-12 months",
+      "cost_level": "Medium",
+      "steps": [
+        {
+          "id": "co-1",
+          "title": "Complete FA Level 1 Coaching Certificate",
+          "description": "Entry-level coaching qualification covering fundamental coaching skills and session planning.",
+          "type": "certification",
+          "duration": "2-3 days",
+          "cost": "£150-£200",
+          "priority": "required",
+          "details": [
+            "Introduction to coaching methodology",
+            "Session planning and delivery",
+            "Safeguarding and child protection",
+            "Basic first aid requirements"
+          ],
+          "resources": [
+            {"name": "FA Coaching Courses", "url": "https://www.thefa.com/coaching", "type": "course"},
+            {"name": "Local County FA", "type": "article"}
+          ]
+        },
+        {
+          "id": "co-2",
+          "title": "BSc Sports Coaching or Physical Education",
+          "description": "Academic foundation providing theoretical knowledge in coaching science and pedagogy.",
+          "type": "academic",
+          "duration": "3 years",
+          "cost": "£9,250/year",
+          "priority": "recommended",
+          "details": [
+            "Sports coaching theory and practice",
+            "Anatomy and physiology",
+            "Sports psychology and pedagogy",
+            "Research methods in sport"
+          ],
+          "resources": [
+            {"name": "UCAS", "url": "https://www.ucas.com", "type": "article"},
+            {"name": "University Sports Programmes", "type": "article"}
+          ]
+        },
+        {
+          "id": "co-3",
+          "title": "FA Level 2 (UEFA C) Coaching Certificate",
+          "description": "Develop ability to plan and deliver coaching sessions for players of all ages.",
+          "type": "certification",
+          "duration": "5-7 days",
+          "cost": "£300-£400",
+          "priority": "required",
+          "details": [
+            "Technical and tactical coaching",
+            "Age-appropriate session design",
+            "Player development principles",
+            "Match analysis basics"
+          ],
+          "resources": [
+            {"name": "FA Learning", "url": "https://www.thefa.com", "type": "course"},
+            {"name": "County FA Courses", "type": "article"}
+          ]
+        },
+        {
+          "id": "co-4",
+          "title": "Sports First Aid Certification",
+          "description": "Essential first aid qualification for working with athletes in training and match environments.",
+          "type": "certification",
+          "duration": "1-2 days",
+          "cost": "£80-£150",
+          "priority": "required",
+          "details": [
+            "Emergency action planning",
+            "Common sports injuries management",
+            "CPR and AED training",
+            "Head injury protocols"
+          ],
+          "resources": [
+            {"name": "St John Ambulance", "url": "https://www.sja.org.uk", "type": "course"},
+            {"name": "FA First Aid", "url": "https://www.thefa.com", "type": "course"}
+          ]
+        },
+        {
+          "id": "co-5",
+          "title": "UEFA B Coaching License",
+          "description": "Professional-level qualification required for coaching at semi-professional and professional levels.",
+          "type": "certification",
+          "duration": "18+ months",
+          "cost": "£1,000-£2,000",
+          "priority": "recommended",
+          "details": [
+            "Advanced tactical periodization",
+            "Leadership and team management",
+            "Video analysis integration",
+            "Creating playing philosophies"
+          ],
+          "resources": [
+            {"name": "FA Advanced Coaching", "url": "https://www.thefa.com", "type": "course"},
+            {"name": "UEFA Courses", "url": "https://www.uefa.com", "type": "course"}
+          ]
+        },
+        {
+          "id": "co-6",
+          "title": "Gain Practical Coaching Experience",
+          "description": "Build coaching hours and experience across different age groups and competitive levels.",
+          "type": "experience",
+          "duration": "1-3 years",
+          "cost": "Free (voluntary)",
+          "priority": "required",
+          "details": [
+            "Volunteer at grassroots club teams",
+            "Assist at academy or development centres",
+            "Log coaching hours for accreditation",
+            "Seek mentorship from experienced coaches"
+          ],
+          "resources": [
+            {"name": "FA Coaching Hub", "url": "https://www.thefa.com", "type": "article"},
+            {"name": "Local Sports Clubs", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "sports-science": {
+      "pathway_slug": "sports-science",
+      "pathway_title": "Sports Science / Performance Science",
+      "time_to_entry": "3-4 years",
+      "cost_level": "High",
+      "steps": [
+        {
+          "id": "ss-1",
+          "title": "A-Levels in Sciences",
+          "description": "Foundation in biology, chemistry, or physics required for sports science degree entry.",
+          "type": "academic",
+          "duration": "2 years",
+          "cost": "Free (college)",
+          "priority": "required",
+          "details": [
+            "Biology A-Level (essential)",
+            "PE, Chemistry or Mathematics recommended",
+            "Minimum 3 A-Levels at grade B or above",
+            "Consider BTEC Applied Science as alternative"
+          ],
+          "resources": [
+            {"name": "Local Sixth Form", "type": "article"},
+            {"name": "College Courses", "type": "article"}
+          ]
+        },
+        {
+          "id": "ss-2",
+          "title": "BSc Sports Science / Exercise Science",
+          "description": "Core undergraduate degree providing comprehensive knowledge of human performance and sports physiology.",
+          "type": "academic",
+          "duration": "3 years",
+          "cost": "£9,250/year",
+          "priority": "required",
+          "details": [
+            "Human anatomy and physiology",
+            "Biomechanics and motor control",
+            "Exercise physiology and nutrition",
+            "Research methods and statistics"
+          ],
+          "resources": [
+            {"name": "UCAS", "url": "https://www.ucas.com", "type": "article"},
+            {"name": "BASES Accredited Degrees", "url": "https://www.bases.org.uk", "type": "article"}
+          ]
+        },
+        {
+          "id": "ss-3",
+          "title": "Laboratory Testing Skills Course",
+          "description": "Practical training in conducting physiological assessments and laboratory testing protocols.",
+          "type": "course",
+          "duration": "1-2 weeks",
+          "cost": "£500-£1,000",
+          "priority": "recommended",
+          "details": [
+            "VO2max and lactate testing",
+            "Body composition analysis",
+            "Strength and power assessment",
+            "Data collection and reporting"
+          ],
+          "resources": [
+            {"name": "BASES Workshops", "url": "https://www.bases.org.uk", "type": "course"},
+            {"name": "University Labs", "type": "article"}
+          ]
+        },
+        {
+          "id": "ss-4",
+          "title": "MSc Performance Science / Applied Sports Science",
+          "description": "Advanced degree for specialization and enhanced career prospects in professional sport.",
+          "type": "academic",
+          "duration": "1-2 years",
+          "cost": "£10,000-£15,000/year",
+          "priority": "recommended",
+          "details": [
+            "Advanced research methods",
+            "Specialization in chosen area",
+            "Industry placement opportunities",
+            "Dissertation project with club/organization"
+          ],
+          "resources": [
+            {"name": "BASES", "url": "https://www.bases.org.uk", "type": "article"},
+            {"name": "Postgraduate Courses", "type": "article"}
+          ]
+        },
+        {
+          "id": "ss-5",
+          "title": "BASES Accreditation",
+          "description": "Professional accreditation demonstrating competence as a sports scientist.",
+          "type": "certification",
+          "duration": "2-3 years experience",
+          "cost": "£200-£300",
+          "priority": "required",
+          "details": [
+            "Supervised experience requirements",
+            "Portfolio of evidence submission",
+            "Peer review process",
+            "Continuing professional development"
+          ],
+          "resources": [
+            {"name": "BASES", "url": "https://www.bases.org.uk", "type": "article"},
+            {"name": "Accreditation Pathway", "type": "article"}
+          ]
+        },
+        {
+          "id": "ss-6",
+          "title": "Gain Applied Experience in Sport",
+          "description": "Work with athletes and teams to apply sports science knowledge in real-world settings.",
+          "type": "experience",
+          "duration": "1-2 years",
+          "cost": "Internship/Entry position",
+          "priority": "required",
+          "details": [
+            "Internships at professional clubs",
+            "Work with university sports teams",
+            "Conduct performance testing programmes",
+            "Develop data analysis and reporting skills"
+          ],
+          "resources": [
+            {"name": "BASES Jobs Board", "url": "https://www.bases.org.uk", "type": "article"},
+            {"name": "Club Opportunities", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "strength-conditioning": {
+      "pathway_slug": "strength-conditioning",
+      "pathway_title": "Strength & Conditioning Coach",
+      "time_to_entry": "1-2 years",
+      "cost_level": "Medium",
+      "steps": [
+        {
+          "id": "sc-1",
+          "title": "BSc Sport & Exercise Science or related degree",
+          "description": "Foundation degree covering exercise physiology, biomechanics, and strength training principles.",
+          "type": "academic",
+          "duration": "3 years",
+          "cost": "£9,250/year",
+          "priority": "required",
+          "details": [
+            "Exercise physiology and anatomy",
+            "Biomechanics and movement analysis",
+            "Strength and conditioning principles",
+            "Nutrition for performance"
+          ],
+          "resources": [
+            {"name": "UCAS", "url": "https://www.ucas.com", "type": "article"},
+            {"name": "UKSCA Approved Degrees", "url": "https://www.uksca.org.uk", "type": "article"}
+          ]
+        },
+        {
+          "id": "sc-2",
+          "title": "UKSCA Foundation Course",
+          "description": "Entry-level S&C qualification covering fundamental training principles and coaching skills.",
+          "type": "course",
+          "duration": "2 days",
+          "cost": "£300-£400",
+          "priority": "required",
+          "details": [
+            "Movement screening fundamentals",
+            "Exercise technique and coaching",
+            "Program design basics",
+            "Testing and monitoring"
+          ],
+          "resources": [
+            {"name": "UKSCA", "url": "https://www.uksca.org.uk", "type": "course"},
+            {"name": "Approved Course Providers", "type": "article"}
+          ]
+        },
+        {
+          "id": "sc-3",
+          "title": "NSCA-CSCS Certification",
+          "description": "Globally recognized certification demonstrating expertise in strength and conditioning.",
+          "type": "certification",
+          "duration": "3-6 months prep",
+          "cost": "£400-£500",
+          "priority": "recommended",
+          "details": [
+            "Exercise science knowledge exam",
+            "Practical/applied section",
+            "Bachelor's degree requirement",
+            "CPR/AED certification required"
+          ],
+          "resources": [
+            {"name": "NSCA", "url": "https://www.nsca.com", "type": "course"},
+            {"name": "Study Materials", "type": "article"}
+          ]
+        },
+        {
+          "id": "sc-4",
+          "title": "S&C Internship Programme",
+          "description": "Gain practical experience working with athletes under supervision of experienced coaches.",
+          "type": "experience",
+          "duration": "6-12 months",
+          "cost": "Unpaid/Low paid",
+          "priority": "required",
+          "details": [
+            "Shadow senior S&C coaches",
+            "Assist with athlete testing",
+            "Learn gym management",
+            "Build professional network"
+          ],
+          "resources": [
+            {"name": "Professional Clubs", "type": "article"},
+            {"name": "University Teams", "type": "article"}
+          ]
+        },
+        {
+          "id": "sc-5",
+          "title": "UKSCA Accreditation",
+          "description": "Professional accreditation demonstrating competence as an S&C coach in the UK.",
+          "type": "certification",
+          "duration": "2+ years experience",
+          "cost": "£500-£600",
+          "priority": "required",
+          "details": [
+            "Minimum 500 hours practical experience",
+            "Submission of evidence portfolio",
+            "Written and practical assessment",
+            "CPD requirements ongoing"
+          ],
+          "resources": [
+            {"name": "UKSCA Accreditation", "url": "https://www.uksca.org.uk", "type": "course"}
+          ]
+        },
+        {
+          "id": "sc-6",
+          "title": "Specialize in Sport-Specific Training",
+          "description": "Develop expertise in the specific demands of particular sports.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "cost": "£200-£500/year (CPD)",
+          "priority": "recommended",
+          "details": [
+            "Understand unique demands of your sport",
+            "Learn injury prevention strategies",
+            "Master sport-specific movement patterns",
+            "Network with coaches in your sport"
+          ],
+          "resources": [
+            {"name": "UKSCA CPD Events", "url": "https://www.uksca.org.uk", "type": "course"},
+            {"name": "Sport-Specific Courses", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "physiotherapy": {
+      "pathway_slug": "physiotherapy",
+      "pathway_title": "Sports Physiotherapy",
+      "time_to_entry": "3-5 years",
+      "cost_level": "High",
+      "steps": [
+        {
+          "id": "ph-1",
+          "title": "A-Levels in Sciences",
+          "description": "Strong science background required for physiotherapy degree entry.",
+          "type": "academic",
+          "duration": "2 years",
+          "cost": "Free (college)",
+          "priority": "required",
+          "details": [
+            "Biology A-Level (essential)",
+            "Chemistry, Physics or PE recommended",
+            "Work experience in healthcare settings",
+            "Volunteering with sports teams"
+          ],
+          "resources": [
+            {"name": "NHS Careers", "url": "https://www.healthcareers.nhs.uk", "type": "article"},
+            {"name": "CSP", "url": "https://www.csp.org.uk", "type": "article"}
+          ]
+        },
+        {
+          "id": "ph-2",
+          "title": "BSc Physiotherapy (HCPC Approved)",
+          "description": "Three-year degree combining academic study with clinical placements across healthcare settings.",
+          "type": "academic",
+          "duration": "3 years",
+          "cost": "£9,250/year",
+          "priority": "required",
+          "details": [
+            "Anatomy, physiology and pathology",
+            "Clinical reasoning and assessment",
+            "1,000+ hours clinical placement",
+            "HCPC registration upon graduation"
+          ],
+          "resources": [
+            {"name": "CSP Courses", "url": "https://www.csp.org.uk", "type": "article"},
+            {"name": "UCAS", "url": "https://www.ucas.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "ph-3",
+          "title": "HCPC Registration",
+          "description": "Mandatory registration with Health and Care Professions Council to practice as a physiotherapist.",
+          "type": "certification",
+          "duration": "Upon graduation",
+          "cost": "£90/year",
+          "priority": "required",
+          "details": [
+            "Complete approved degree programme",
+            "Pass registration assessment",
+            "Annual renewal required",
+            "CPD requirements ongoing"
+          ],
+          "resources": [
+            {"name": "HCPC", "url": "https://www.hcpc-uk.org", "type": "article"}
+          ]
+        },
+        {
+          "id": "ph-4",
+          "title": "Sports Physiotherapy MSc or Postgraduate Diploma",
+          "description": "Specialist qualification in sports injuries, rehabilitation and performance.",
+          "type": "academic",
+          "duration": "1-2 years",
+          "cost": "£8,000-£15,000",
+          "priority": "recommended",
+          "details": [
+            "Advanced sports injury management",
+            "Rehabilitation protocols",
+            "Performance optimization",
+            "Research and evidence-based practice"
+          ],
+          "resources": [
+            {"name": "ACPSM", "url": "https://www.acpsm.org", "type": "article"},
+            {"name": "University MSc Programmes", "type": "article"}
+          ]
+        },
+        {
+          "id": "ph-5",
+          "title": "ACPSM Membership & Specialization",
+          "description": "Join the Association of Chartered Physiotherapists in Sports and Exercise Medicine.",
+          "type": "certification",
+          "duration": "2+ years experience",
+          "cost": "£150-£200/year",
+          "priority": "recommended",
+          "details": [
+            "Demonstrate sports physio experience",
+            "Access to specialist courses",
+            "Professional networking",
+            "CPD opportunities"
+          ],
+          "resources": [
+            {"name": "ACPSM", "url": "https://www.acpsm.org", "type": "course"}
+          ]
+        },
+        {
+          "id": "ph-6",
+          "title": "Gain Sports-Specific Clinical Experience",
+          "description": "Work with athletes and sports teams to build practical expertise.",
+          "type": "experience",
+          "duration": "2-3 years",
+          "cost": "Employment income",
+          "priority": "required",
+          "details": [
+            "Work in sports injury clinics",
+            "Volunteer with local sports clubs",
+            "Pitch-side coverage at events",
+            "Build athlete rehabilitation portfolio"
+          ],
+          "resources": [
+            {"name": "CSP Jobs", "url": "https://www.csp.org.uk", "type": "article"},
+            {"name": "Sports Clubs", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "analytics": {
+      "pathway_slug": "analytics",
+      "pathway_title": "Sports Analytics / Performance Analysis",
+      "time_to_entry": "1-3 years",
+      "cost_level": "Medium",
+      "steps": [
+        {
+          "id": "an-1",
+          "title": "BSc Sports Science, Data Science or Performance Analysis",
+          "description": "Foundation degree providing analytical skills and sports knowledge.",
+          "type": "academic",
+          "duration": "3 years",
+          "cost": "£9,250/year",
+          "priority": "required",
+          "details": [
+            "Statistics and data analysis",
+            "Performance analysis modules",
+            "Sports technology",
+            "Research methods"
+          ],
+          "resources": [
+            {"name": "UCAS", "url": "https://www.ucas.com", "type": "article"},
+            {"name": "ISPAS Courses", "url": "https://www.ispas.org", "type": "article"}
+          ]
+        },
+        {
+          "id": "an-2",
+          "title": "Performance Analysis Software Training",
+          "description": "Master industry-standard software used by professional clubs and organizations.",
+          "type": "course",
+          "duration": "1-4 weeks",
+          "cost": "£200-£1,000",
+          "priority": "required",
+          "details": [
+            "Hudl Sportscode proficiency",
+            "Wyscout and InStat familiarity",
+            "StatsBomb or Opta data analysis",
+            "Video editing and tagging"
+          ],
+          "resources": [
+            {"name": "Hudl Training", "url": "https://www.hudl.com", "type": "course"},
+            {"name": "Online Courses", "type": "article"}
+          ]
+        },
+        {
+          "id": "an-3",
+          "title": "Coding & Data Visualization Skills",
+          "description": "Develop programming skills for advanced data analysis and visualization.",
+          "type": "course",
+          "duration": "3-6 months",
+          "cost": "£100-£500",
+          "priority": "recommended",
+          "details": [
+            "Python or R programming",
+            "Data visualization libraries",
+            "SQL database queries",
+            "Tableau or Power BI"
+          ],
+          "resources": [
+            {"name": "Coursera", "url": "https://www.coursera.org", "type": "course"},
+            {"name": "DataCamp", "url": "https://www.datacamp.com", "type": "course"}
+          ]
+        },
+        {
+          "id": "an-4",
+          "title": "Analysis Internship or Academy Role",
+          "description": "Gain practical experience analyzing matches and training sessions.",
+          "type": "experience",
+          "duration": "6-12 months",
+          "cost": "Unpaid/Low paid",
+          "priority": "required",
+          "details": [
+            "Live match coding and analysis",
+            "Creating coach presentations",
+            "Opposition scouting reports",
+            "Building analysis workflows"
+          ],
+          "resources": [
+            {"name": "Club Academy", "type": "article"},
+            {"name": "Semi-Pro Teams", "type": "article"}
+          ]
+        },
+        {
+          "id": "an-5",
+          "title": "ISPAS Accreditation",
+          "description": "Professional recognition from the International Society of Performance Analysis of Sport.",
+          "type": "certification",
+          "duration": "Experience-based",
+          "cost": "£150-£250",
+          "priority": "optional",
+          "details": [
+            "Demonstrate professional experience",
+            "Portfolio of analysis work",
+            "CPD requirements",
+            "Professional networking"
+          ],
+          "resources": [
+            {"name": "ISPAS", "url": "https://www.ispas.org", "type": "course"}
+          ]
+        },
+        {
+          "id": "an-6",
+          "title": "Build Advanced Analytics Portfolio",
+          "description": "Create impressive projects demonstrating your analytical capabilities.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "cost": "Free",
+          "priority": "recommended",
+          "details": [
+            "Publish analysis blogs or articles",
+            "Create data visualizations on social media",
+            "Contribute to open-source sports analytics",
+            "Present at analytics conferences"
+          ],
+          "resources": [
+            {"name": "GitHub", "url": "https://github.com", "type": "article"},
+            {"name": "StatsBomb Conferences", "url": "https://statsbomb.com", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "media": {
+      "pathway_slug": "media",
+      "pathway_title": "Sports Media / Journalism",
+      "time_to_entry": "1-3 years",
+      "cost_level": "Low",
+      "steps": [
+        {
+          "id": "me-1",
+          "title": "A-Levels or BTEC in Media/English",
+          "description": "Foundation in communication, writing and media production skills.",
+          "type": "academic",
+          "duration": "2 years",
+          "cost": "Free (college)",
+          "priority": "recommended",
+          "details": [
+            "English Language or Literature",
+            "Media Studies or Film Studies",
+            "Start a sports blog or podcast",
+            "Write for school/college publications"
+          ],
+          "resources": [
+            {"name": "Local College", "type": "article"}
+          ]
+        },
+        {
+          "id": "me-2",
+          "title": "BA Journalism / Sports Journalism",
+          "description": "Degree programme developing core journalism skills with sports focus.",
+          "type": "academic",
+          "duration": "3 years",
+          "cost": "£9,250/year",
+          "priority": "recommended",
+          "details": [
+            "News writing and reporting",
+            "Broadcast journalism",
+            "Digital media production",
+            "Media law and ethics"
+          ],
+          "resources": [
+            {"name": "UCAS", "url": "https://www.ucas.com", "type": "article"},
+            {"name": "NCTJ Accredited Courses", "url": "https://www.nctj.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "me-3",
+          "title": "NCTJ Diploma in Journalism",
+          "description": "Industry-recognized qualification essential for professional journalism roles.",
+          "type": "certification",
+          "duration": "1 year",
+          "cost": "£3,000-£6,000",
+          "priority": "required",
+          "details": [
+            "Shorthand qualification",
+            "Essential journalism law",
+            "Public affairs knowledge",
+            "Portfolio of published work"
+          ],
+          "resources": [
+            {"name": "NCTJ", "url": "https://www.nctj.com", "type": "course"},
+            {"name": "Approved Centres", "type": "article"}
+          ]
+        },
+        {
+          "id": "me-4",
+          "title": "Build Portfolio & Social Media Presence",
+          "description": "Create and maintain a strong portfolio of sports content across platforms.",
+          "type": "experience",
+          "duration": "Ongoing",
+          "cost": "Free",
+          "priority": "required",
+          "details": [
+            "Start YouTube channel or podcast",
+            "Write for blogs and online publications",
+            "Build Twitter/X following",
+            "Cover local sports matches"
+          ],
+          "resources": [
+            {"name": "Personal Branding", "type": "article"}
+          ]
+        },
+        {
+          "id": "me-5",
+          "title": "Internship at Sports Media Outlet",
+          "description": "Gain professional experience at newspapers, broadcasters or digital platforms.",
+          "type": "experience",
+          "duration": "3-6 months",
+          "cost": "Unpaid/Expenses",
+          "priority": "recommended",
+          "details": [
+            "Newsroom experience",
+            "Professional networking",
+            "Published bylines",
+            "Understanding of workflows"
+          ],
+          "resources": [
+            {"name": "BBC Sport", "url": "https://www.bbc.co.uk/sport", "type": "article"},
+            {"name": "Sky Sports", "url": "https://www.skysports.com", "type": "article"},
+            {"name": "The Athletic", "url": "https://theathletic.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "me-6",
+          "title": "Develop Multimedia Skills",
+          "description": "Master video production, podcasting, and digital storytelling.",
+          "type": "skill",
+          "duration": "6-12 months",
+          "cost": "£200-£800",
+          "priority": "recommended",
+          "details": [
+            "Video editing (Adobe Premiere, Final Cut)",
+            "Podcast production and distribution",
+            "Social media content creation",
+            "On-camera presentation skills"
+          ],
+          "resources": [
+            {"name": "LinkedIn Learning", "url": "https://www.linkedin.com/learning", "type": "course"},
+            {"name": "YouTube Tutorials", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "officiating": {
+      "pathway_slug": "officiating",
+      "pathway_title": "Officiating / Refereeing",
+      "time_to_entry": "3-6 months",
+      "cost_level": "Low",
+      "steps": [
+        {
+          "id": "of-1",
+          "title": "FA Referee Course (Level 7)",
+          "description": "Entry-level qualification covering laws of the game and basic officiating skills.",
+          "type": "certification",
+          "duration": "2 days + online",
+          "cost": "£100-£150",
+          "priority": "required",
+          "details": [
+            "Laws of the Game knowledge",
+            "Match management basics",
+            "Fitness requirements",
+            "Practical assessment"
+          ],
+          "resources": [
+            {"name": "FA Refereeing", "url": "https://www.thefa.com/referee", "type": "course"},
+            {"name": "County FA", "type": "article"}
+          ]
+        },
+        {
+          "id": "of-2",
+          "title": "Laws of the Game Mastery",
+          "description": "Deep study of the Laws of the Game and their application in match situations.",
+          "type": "course",
+          "duration": "Ongoing",
+          "cost": "Free",
+          "priority": "required",
+          "details": [
+            "IFAB Laws of the Game study",
+            "Regular laws tests and quizzes",
+            "Video analysis of decisions",
+            "Discussion forums and communities"
+          ],
+          "resources": [
+            {"name": "IFAB", "url": "https://www.theifab.com", "type": "article"},
+            {"name": "FA Learning", "url": "https://www.thefa.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "of-3",
+          "title": "Referee Fitness Programme",
+          "description": "Develop and maintain the fitness levels required for match officiating.",
+          "type": "experience",
+          "duration": "Ongoing",
+          "cost": "Gym membership",
+          "priority": "required",
+          "details": [
+            "Pass FIFA fitness tests",
+            "Interval and endurance training",
+            "Sprint work and agility",
+            "Injury prevention"
+          ],
+          "resources": [
+            {"name": "FA Referee Fitness", "url": "https://www.thefa.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "of-4",
+          "title": "Progress Through FA Levels",
+          "description": "Advance through the officiating pathway from grassroots to professional levels.",
+          "type": "certification",
+          "duration": "2-4 years per level",
+          "cost": "£50-£200 per course",
+          "priority": "required",
+          "details": [
+            "Level 6 - Adult football",
+            "Level 5 - Contributory leagues",
+            "Level 4 - National League System",
+            "Promotion based on assessments"
+          ],
+          "resources": [
+            {"name": "FA Pathway", "url": "https://www.thefa.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "of-5",
+          "title": "National List & FIFA Badge",
+          "description": "Achieve elite status as a professional referee on the national or international list.",
+          "type": "certification",
+          "duration": "8+ years total",
+          "cost": "Covered by FA",
+          "priority": "optional",
+          "details": [
+            "Selection to National List",
+            "Full-time professional referee",
+            "FIFA Badge for international matches",
+            "Ongoing elite development"
+          ],
+          "resources": [
+            {"name": "PGMOL", "url": "https://www.premierleague.com", "type": "article"},
+            {"name": "FIFA Referees", "url": "https://www.fifa.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "of-6",
+          "title": "Gain Match Experience",
+          "description": "Build officiating hours across different age groups and competitive levels.",
+          "type": "experience",
+          "duration": "Ongoing",
+          "cost": "Match fees (income)",
+          "priority": "required",
+          "details": [
+            "Officiate grassroots matches regularly",
+            "Accept observer feedback positively",
+            "Keep detailed match logs",
+            "Network with refereeing community"
+          ],
+          "resources": [
+            {"name": "County FA Match Officials", "type": "article"},
+            {"name": "RefChat Community", "url": "https://www.refchat.co.uk", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "sports-management": {
+      "pathway_slug": "sports-management",
+      "pathway_title": "Sports Management",
+      "time_to_entry": "3-4 years",
+      "cost_level": "Medium",
+      "steps": [
+        {
+          "id": "sm-1",
+          "title": "Complete Business/Sports Management Degree",
+          "description": "Obtain a relevant degree in sports management, business, or a related discipline.",
+          "type": "academic",
+          "duration": "3-4 years",
+          "cost": "£9,250/year (UK tuition)",
+          "priority": "required",
+          "details": [
+            "Enrol in BA/BSc Sports Management, Business, or Event Management",
+            "Focus on modules covering sports marketing, finance, and law",
+            "Complete industry placement or year in industry if available",
+            "Develop project management and analytical skills"
+          ],
+          "resources": [
+            {"name": "UCAS Sports Management Courses", "url": "https://www.ucas.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "sm-2",
+          "title": "Gain Event Management Experience",
+          "description": "Get hands-on experience organizing sports events at various scales.",
+          "type": "experience",
+          "duration": "6-12 months",
+          "cost": "Free (voluntary/internship)",
+          "priority": "required",
+          "details": [
+            "Volunteer at university sports events and competitions",
+            "Intern with local sports organizations or venues",
+            "Help organize community sports tournaments or charity events",
+            "Document your event portfolio with outcomes and metrics"
+          ],
+          "resources": [
+            {"name": "EventBrite Sports Jobs", "url": "https://www.eventbrite.co.uk", "type": "article"}
+          ]
+        },
+        {
+          "id": "sm-3",
+          "title": "Develop Business & Leadership Skills",
+          "description": "Build core competencies in management, strategy, and communication.",
+          "type": "skill",
+          "duration": "Ongoing",
+          "cost": "£100-£500 (courses)",
+          "priority": "required",
+          "details": [
+            "Study financial management and budgeting for sports organizations",
+            "Learn sports marketing, sponsorship, and brand management",
+            "Develop strategic planning and organizational leadership skills",
+            "Complete workshops on stakeholder management and communication"
+          ],
+          "resources": [
+            {"name": "FutureLearn Sports Business Courses", "url": "https://www.futurelearn.com", "type": "course"}
+          ]
+        },
+        {
+          "id": "sm-4",
+          "title": "Obtain Event/Sports Administration Certification",
+          "description": "Earn professional certifications to validate your expertise.",
+          "type": "certification",
+          "duration": "3-6 months",
+          "cost": "£300-£800",
+          "priority": "recommended",
+          "details": [
+            "Complete a Level 3 Event Management or Sports Administration qualification",
+            "Consider CIMSPA professional registration",
+            "Explore project management certifications (PRINCE2, Agile)",
+            "Document CPD hours for professional development"
+          ],
+          "resources": [
+            {"name": "CIMSPA Qualifications", "url": "https://www.cimspa.co.uk", "type": "course"}
+          ]
+        },
+        {
+          "id": "sm-5",
+          "title": "Build Industry Network & Secure Role",
+          "description": "Leverage your qualifications and experience to enter the sports management field.",
+          "type": "networking",
+          "duration": "3-6 months",
+          "cost": "£50-£200 (memberships/events)",
+          "priority": "recommended",
+          "details": [
+            "Join professional bodies (Sport & Recreation Alliance, ISRM)",
+            "Attend sports industry conferences and networking events",
+            "Apply for graduate schemes at sports organizations",
+            "Consider MSc Sports Business or MBA for career advancement"
+          ],
+          "resources": [
+            {"name": "Sport & Recreation Alliance", "url": "https://www.sportandrecreation.org.uk", "type": "article"}
+          ]
+        },
+        {
+          "id": "sm-6",
+          "title": "Specialize in a Management Area",
+          "description": "Develop expertise in a specific area of sports management.",
+          "type": "skill",
+          "duration": "1-2 years",
+          "cost": "Variable",
+          "priority": "recommended",
+          "details": [
+            "Choose focus: marketing, operations, finance, or facilities",
+            "Gain specialist certifications in chosen area",
+            "Build case studies and success stories",
+            "Develop thought leadership through articles/presentations"
+          ],
+          "resources": [
+            {"name": "Specialist Courses", "type": "article"},
+            {"name": "Professional Development", "type": "article"}
+          ]
+        }
+      ]
+    },
+    "recreational-fitness": {
+      "pathway_slug": "recreational-fitness",
+      "pathway_title": "Recreational / Fitness Industry",
+      "time_to_entry": "6-12 months",
+      "cost_level": "Low",
+      "steps": [
+        {
+          "id": "rf-1",
+          "title": "Obtain Level 2 Fitness Instructor Qualification",
+          "description": "Earn your entry-level fitness industry qualification to work in gyms and leisure centres.",
+          "type": "certification",
+          "duration": "6-12 weeks",
+          "cost": "£400-£800",
+          "priority": "required",
+          "details": [
+            "Complete a CIMSPA-endorsed Level 2 Gym Instructor course",
+            "Learn anatomy, physiology, and exercise programming fundamentals",
+            "Pass practical assessments in exercise technique and instruction",
+            "Obtain first aid and safeguarding certifications"
+          ],
+          "resources": [
+            {"name": "CIMSPA Endorsed Courses", "url": "https://www.cimspa.co.uk", "type": "course"},
+            {"name": "Active IQ Qualifications", "url": "https://www.activeiq.co.uk", "type": "course"}
+          ]
+        },
+        {
+          "id": "rf-2",
+          "title": "Progress to Level 3 Personal Training",
+          "description": "Advance to personal training qualification to work independently with clients.",
+          "type": "certification",
+          "duration": "3-6 months",
+          "cost": "£1,000-£2,500",
+          "priority": "required",
+          "details": [
+            "Complete Level 3 Personal Training diploma or certificate",
+            "Develop skills in programme design and client consultation",
+            "Learn nutrition fundamentals and behaviour change techniques",
+            "Build a portfolio of training programmes and case studies"
+          ],
+          "resources": [
+            {"name": "REPs Register", "url": "https://www.exerciseregister.org", "type": "article"}
+          ]
+        },
+        {
+          "id": "rf-3",
+          "title": "Gain Practical Industry Experience",
+          "description": "Build your client base and practical skills in real gym environments.",
+          "type": "experience",
+          "duration": "6-12 months",
+          "cost": "Free (employment)",
+          "priority": "required",
+          "details": [
+            "Work in a gym or leisure centre to develop floor experience",
+            "Build a client base through gym floor interactions and referrals",
+            "Practice programming for diverse client populations",
+            "Collect client testimonials and track outcomes"
+          ],
+          "resources": [
+            {"name": "ukactive Job Board", "url": "https://www.ukactive.com", "type": "article"}
+          ]
+        },
+        {
+          "id": "rf-4",
+          "title": "Specialize with Additional Qualifications",
+          "description": "Differentiate yourself with specialist skills in high-demand areas.",
+          "type": "course",
+          "duration": "2-8 weeks per course",
+          "cost": "£200-£600 per course",
+          "priority": "recommended",
+          "details": [
+            "Choose specializations: strength & conditioning, yoga, Pilates, or group exercise",
+            "Complete sport-specific conditioning qualifications",
+            "Obtain nutrition advice certification (Level 3 Nutrition)",
+            "Consider pre/post-natal or older adult exercise qualifications"
+          ],
+          "resources": [
+            {"name": "CIMSPA CPD Hub", "url": "https://www.cimspa.co.uk", "type": "course"}
+          ]
+        },
+        {
+          "id": "rf-5",
+          "title": "Build Your Brand & Online Presence",
+          "description": "Establish yourself as a trusted fitness professional in your community and online.",
+          "type": "networking",
+          "duration": "Ongoing",
+          "cost": "£50-£300 (marketing/tools)",
+          "priority": "recommended",
+          "details": [
+            "Create social media profiles showcasing your expertise",
+            "Develop a website or booking platform for client management",
+            "Offer free workshops or online content to build credibility",
+            "Join CIMSPA as a registered professional"
+          ],
+          "resources": [
+            {"name": "Canva for Marketing", "url": "https://www.canva.com", "type": "article"},
+            {"name": "CIMSPA Registration", "url": "https://www.cimspa.co.uk", "type": "article"}
+          ]
+        },
+        {
+          "id": "rf-6",
+          "title": "Develop Business Skills for Self-Employment",
+          "description": "Learn to manage your fitness business effectively.",
+          "type": "skill",
+          "duration": "3-6 months",
+          "cost": "£100-£500",
+          "priority": "recommended",
+          "details": [
+            "Understand self-employment and taxation",
+            "Learn client management and retention strategies",
+            "Master pricing and package development",
+            "Develop marketing and sales skills"
+          ],
+          "resources": [
+            {"name": "Business Skills Courses", "type": "article"},
+            {"name": "HMRC Self-Employment", "url": "https://www.gov.uk/self-employed", "type": "article"}
+          ]
+        }
+      ]
+    }
+  }
+}
